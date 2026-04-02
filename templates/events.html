@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>INMBA Foundation</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:#f6f8f4;
+}
+
+/* NAVBAR */
+.navbar{
+  background:#ffffff;
+  box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.navbar-brand{
+  font-weight:800;
+  color:#556b2f;
+}
+
+/* HERO */
+
+/* ANIMATED BACKGROUND */
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+
+  background: linear-gradient(270deg,#e6efe4,#dfe9da,#e6efe4);
+  background-size:400% 400%;
+  animation:bgMove 12s ease infinite;
+}
+
+@keyframes bgMove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* FLOATING CIRCLES */
+.hero::before,
+.hero::after{
+  content:"";
+  position:absolute;
+  width:350px;
+  height:350px;
+  background:rgba(85,107,47,0.2);
+  border-radius:50%;
+  filter:blur(80px);
+  animation:float 8s infinite alternate;
+}
+
+.hero::before{
+  top:-80px;
+  left:-80px;
+}
+
+.hero::after{
+  bottom:-80px;
+  right:-80px;
+}
+
+@keyframes float{
+  from{transform:translateY(0);}
+  to{transform:translateY(40px);}
+}
+
+/* PARTICLES EFFECT */
+.particles{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background-image:radial-gradient(#556b2f 1px, transparent 1px);
+  background-size:40px 40px;
+  opacity:0.2;
+  animation:particlesMove 20s linear infinite;
+}
+
+@keyframes particlesMove{
+  from{background-position:0 0;}
+  to{background-position:100px 100px;}
+}
+
+/* HERO BOX */
+.hero-box{
+  background:rgba(255,255,255,0.65);
+  backdrop-filter:blur(12px);
+  padding:60px;
+  border-radius:25px;
+  box-shadow:0 25px 60px rgba(0,0,0,0.15);
+}
+
+/* TEXT ANIMATION */
+.title{
+  font-size:3rem;
+  font-weight:800;
+  color:#2f3e1f;
+  animation:fadeUp 1.5s ease;
+}
+
+.title span{
+  color:#6b8e23;
+}
+
+.hero p{
+  margin-top:20px;
+  color:#555;
+  animation:fadeUp 2s ease;
+}
+
+/* BUTTON ANIMATION */
+.btn-main{
+  transition:0.3s;
+}
+
+.btn-main:hover{
+  transform:scale(1.05);
+  background:#6b8e23;
+}
+
+/* FADE ANIMATION */
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* SECTION */
+section{
+  padding:80px 0;
+}
+
+h2{
+  text-align:center;
+  font-weight:800;
+  margin-bottom:40px;
+  color:#2f3e1f;
+}
+
+
+/* SECTION STYLE */
+.events-section{
+  padding:80px 0;
+}
+
+.section-title{
+  text-align:center;
+  font-weight:800;
+  margin-bottom:50px;
+  color:#0f4d0f;
+  position:relative;
+}
+
+/* underline animation */
+.section-title::after{
+  content:"";
+  width:80px;
+  height:4px;
+  background:#0f4d0f;
+  display:block;
+  margin:10px auto;
+  border-radius:10px;
+  animation:lineGrow 2s ease;
+}
+
+@keyframes lineGrow{
+  from{width:0;}
+  to{width:80px;}
+}
+
+/* CARD */
+.event-card{
+  background:#ffffff;
+  padding:35px;
+  border-radius:20px;
+  text-align:center;
+  transition:0.4s;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* ICON */
+.event-card i{
+  font-size:35px;
+  color:#0f4d0f;
+  margin-bottom:15px;
+  transition:0.3s;
+}
+
+/* HOVER EFFECT */
+.event-card:hover{
+  transform:translateY(-12px) scale(1.03);
+  background:#0f4d0f;
+  color:#fff;
+  box-shadow:0 20px 50px rgba(0,0,0,0.2);
+}
+
+.event-card:hover i{
+  color:#fff;
+  transform:rotate(10deg) scale(1.2);
+}
+
+/* GLOW BORDER EFFECT */
+.event-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
+  transition:0.5s;
+}
+
+.event-card:hover::before{
+  left:100%;
+}
+
+/* SCROLL ANIMATION */
+.event-card{
+  opacity:0;
+  transform:translateY(50px);
+  animation:fadeUpCard 1s ease forwards;
+}
+
+/* delay for each card */
+.event-card:nth-child(1){animation-delay:0.2s;}
+.event-card:nth-child(2){animation-delay:0.4s;}
+.event-card:nth-child(3){animation-delay:0.6s;}
+.event-card:nth-child(4){animation-delay:0.8s;}
+
+@keyframes fadeUpCard{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+/* STATS */
+
+/* SECTION */
+
+
+/* SECTION */
+.impact-pro{
+  padding:110px 0;
+  background:#ffffff;
+}
+
+/* LEFT */
+.left-content{
+  animation:fadeLeft 1s ease;
+}
+
+.impact-pro h2{
+  font-size:42px;
+  font-weight:800;
+  color:#0f4d0f;
+  position:relative;
+}
+
+/* underline accent */
+.impact-pro h2::after{
+  content:"";
+  width:60px;
+  height:4px;
+  background:#0f4d0f;
+  display:block;
+  margin-top:10px;
+  border-radius:10px;
+}
+
+.impact-pro p{
+  margin:25px 0;
+  color:#555;
+  font-size:17px;
+  line-height:1.7;
+}
+
+/* BUTTON */
+.btn-main{
+  display:inline-block;
+  padding:12px 30px;
+  background:#0f4d0f;
+  color:#fff;
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.btn-main:hover{
+  background:#0c3a0c;
+  transform:translateY(-2px);
+}
+
+/* RIGHT SIDE */
+.stat-line{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:22px 0;
+  border-bottom:1px solid #eee;
+  transition:0.3s;
+  position:relative;
+}
+
+/* hover highlight */
+.stat-line:hover{
+  background:#f7f9f6;
+  padding-left:10px;
+}
+
+/* left small dot */
+.stat-line::before{
+  content:"";
+  width:8px;
+  height:8px;
+  background:#0f4d0f;
+  border-radius:50%;
+  position:absolute;
+  left:-15px;
+}
+
+/* TEXT */
+.stat-line span{
+  color:#777;
+  font-size:16px;
+}
+
+.stat-line h3{
+  font-size:30px;
+  font-weight:800;
+  color:#0f4d0f;
+}
+
+/* ANIMATION */
+@keyframes fadeLeft{
+  from{
+    opacity:0;
+    transform:translateX(-40px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+/* ===== GLOBAL IMPROVEMENT ===== */
+body{
+  font-family:'Poppins',sans-serif;
+  background:#f6f8f4;
+  overflow-x:hidden;
+}
+
+/* smooth scroll */
+html{
+  scroll-behavior:smooth;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+  background:#ffffff;
+  box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.nav-link{
+  position:relative;
+  font-weight:500;
+}
+
+/* underline hover */
+.nav-link::after{
+  content:"";
+  position:absolute;
+  width:0%;
+  height:2px;
+  background:#6b8e23;
+  left:0;
+  bottom:0;
+  transition:0.3s;
+}
+
+.nav-link:hover::after{
+  width:100%;
+}
+
+/* ===== HERO RESPONSIVE ===== */
+.hero{
+  padding:20px;
+}
+
+.hero-box{
+  padding:50px;
+}
+
+/* mobile fix */
+@media(max-width:768px){
+
+  .hero{
+    height:auto;
+    padding:80px 20px;
+  }
+
+  .hero-box{
+    padding:30px;
+  }
+
+  .title{
+    font-size:2rem;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+}
+
+/* ===== EVENTS ===== */
+
+/* hover glow */
+.event-card{
+  cursor:pointer;
+}
+
+.event-card:hover{
+  transform:translateY(-12px) scale(1.03);
+}
+
+/* mobile grid fix */
+@media(max-width:768px){
+  .event-card{
+    padding:25px;
+  }
+}
+
+/* ===== IMPACT SECTION ===== */
+
+@media(max-width:768px){
+
+  .impact-pro{
+    padding:80px 20px;
+  }
+
+  .impact-pro h2{
+    font-size:28px;
+  }
+
+  .stat-line{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:5px;
+  }
+
+  .stat-line h3{
+    font-size:24px;
+  }
+}
+
+/* ===== EXTRA PREMIUM TOUCH ===== */
+
+/* scroll reveal */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:all 1s ease;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* button glow */
+.btn-main{
+  box-shadow:0 5px 20px rgba(15,77,15,0.3);
+}
+
+/* subtle section divider */
+section{
+  position:relative;
+}
+
+section::after{
+  content:"";
+  width:60px;
+  height:3px;
+  background:#e0e5dc;
+  display:block;
+  margin:60px auto 0;
+  border-radius:10px;
+}
+/* ===== IMPACT RESPONSIVE FIX ===== */
+
+@media(max-width:768px){
+
+  .impact-pro{
+    padding:60px 15px;
+  }
+
+  /* stack properly */
+  .impact-pro .row{
+    flex-direction:column;
+  }
+
+  /* left content center */
+  .left-content{
+    text-align:center;
+    margin-bottom:40px;
+  }
+
+  .impact-pro h2{
+    font-size:26px;
+  }
+
+  .impact-pro h2::after{
+    margin:10px auto; /* center underline */
+  }
+
+  .impact-pro p{
+    font-size:15px;
+  }
+
+  /* button center */
+  .btn-main{
+    display:inline-block;
+    margin-top:10px;
+  }
+
+  /* RIGHT SIDE FIX */
+  .stat-line{
+    flex-direction:row;
+    justify-content:space-between;
+    padding:15px 0;
+  }
+
+  .stat-line span{
+    font-size:14px;
+  }
+
+  .stat-line h3{
+    font-size:22px;
+  }
+
+  /* remove dot overflow issue */
+  .stat-line::before{
+    display:none;
+  }
+}
+/* ===== DESKTOP IMPROVEMENT ===== */
+
+@media(min-width:992px){
+
+  .impact-pro .row{
+    align-items:center;
+  }
+
+  /* LEFT SIDE */
+  .left-content{
+    padding-right:40px;
+  }
+
+  /* RIGHT SIDE WRAPPER */
+  .impact-pro .col-md-6:last-child{
+    padding-left:40px;
+  }
+
+  /* STAT LINE FIX */
+  .stat-line{
+    max-width:420px;   /* 👈 main fix */
+    margin-left:auto;  /* align right neatly */
+  }
+
+}
+/* ===== DESKTOP IMPROVEMENT ===== */
+
+@media(min-width:992px){
+
+  .impact-pro .row{
+    align-items:center;
+  }
+
+  /* LEFT SIDE */
+  .left-content{
+    padding-right:40px;
+  }
+
+  /* RIGHT SIDE WRAPPER */
+  .impact-pro .col-md-6:last-child{
+    padding-left:40px;
+  }
+
+  /* STAT LINE FIX */
+  .stat-line{
+    max-width:420px;   /* 👈 main fix */
+    margin-left:auto;  /* align right neatly */
+  }
+
+}
+/* ===== FIX LEFT CONTENT ALIGNMENT ===== */
+
+.left-content{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+/* FIX HEADING */
+.left-content h2{
+  font-size:40px;
+  font-weight:800;
+  color:#0f4d0f;
+  margin-bottom:15px;
+}
+
+/* PERFECT UNDERLINE ALIGN */
+.left-content h2::after{
+  content:"";
+  width:50px;
+  height:4px;
+  background:#0f4d0f;
+  display:block;
+  margin-top:8px;   /* 👈 முக்கியம் */
+  border-radius:5px;
+}
+
+/* FIX PARAGRAPH */
+.left-content p{
+  margin:20px 0;
+  max-width:500px;   /* 👈 text width control */
+}
+
+/* FIX BUTTON */
+.left-content .btn-main{
+  width:max-content;   /* 👈 button shrink */
+  margin-top:10px;
+  align-self:flex-start;  /* 👈 LEFT PERFECT ALIGN */
+}
+/* ===== FOOTER ===== */
+footer{
+  font-size:14px;
+}
+  .navbar-custom {
+  background: #0f4d0f, #a2daa2; /* Semi-transparent dark blue */
+  backdrop-filter: blur(10px); /* Blur behind navbar */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 0.8rem 1rem;
+  border-radius: 0 0 15px 15px; /* Slight rounded bottom corners */
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+/* Brand Name */
+.navbar-custom .brand-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+/* Nav links hover animation */
+.navbar-custom .nav-link {
+  color: #fff;
+  position: relative;
+  margin-right: 1rem;
+  transition: color 0.3s;
+}
+
+.navbar-custom .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #ffc107; /* Yellow underline */
+  transition: 0.3s;
+}
+
+.navbar-custom .nav-link:hover::after {
+  width: 100%;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #ffc107;
+}
+
+/* Join Now Button */
+.navbar-custom .btn-warning {
+  border-radius: 50px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.navbar-custom .btn-warning:hover {
+  background-color: #e6b800;
+  transform: translateY(-2px);
+}
+
+/* Navbar sticky effect on scroll */
+.navbar-custom.scrolled {
+  background:#0f4d0f, #a2daa2;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+        .carousel-item img {
+  transition: transform 8s ease;
+}
+
+.carousel-item.active img {
+  transform: scale(1.05) translateX(10px);
+}
+.carousel-caption{
+    margin-bottom: 100px;
+ 
+}
+/* Make brand image responsive */
+.navbar-brand img {
+  width: 50px;
+  height: 50px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Adjust navbar padding for smaller screens */
+@media (max-width: 767px) {
+  .navbar-custom {
+    padding: 0.5rem 1rem;
+    border-radius: 0;
+  }
+  .navbar-custom .brand-name {
+    font-size: 0.9rem;
+  }
+  .navbar-custom .nav-link {
+    margin-right: 0.5rem;
+  }
+  .navbar-custom .btn-warning {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+/* Keep everything in one line */
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Prevent brand from wrapping */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Reduce logo size on mobile */
+@media (max-width: 576px) {
+  .navbar-brand img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .navbar-custom .brand-name {
+    font-size: 0.8rem;
+  }
+}
+.navbar-custom {
+  background-color: #0f4d0f; /* Semi-transparent dark blue */
+  backdrop-filter: blur(10px); /* Blur behind navbar */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 0.8rem 1rem;
+  border-radius: 0 0 15px 15px; /* Slight rounded bottom corners */
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+/* Brand Name */
+.navbar-custom .brand-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+/* Nav links hover animation */
+.navbar-custom .nav-link {
+  color: #fff;
+  position: relative;
+  margin-right: 1rem;
+  transition: color 0.3s;
+}
+
+.navbar-custom .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #ffc107; /* Yellow underline */
+  transition: 0.3s;
+}
+
+.navbar-custom .nav-link:hover::after {
+  width: 100%;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #ffc107;
+}
+
+/* Join Now Button */
+.navbar-custom .btn-warning {
+  border-radius: 50px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.navbar-custom .btn-warning:hover {
+  background-color: #e6b800;
+  transform: translateY(-2px);
+}
+
+/* Navbar sticky effect on scroll */
+.navbar-custom.scrolled {
+  background:  #0f4d0f;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+        .carousel-item img {
+  transition: transform 8s ease;
+}
+
+.carousel-item.active img {
+  transform: scale(1.05) translateX(10px);
+}
+.carousel-caption{
+    margin-bottom: 100px;
+ 
+}
+/* Make brand image responsive */
+.navbar-brand img {
+  width: 50px;
+  height: 50px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Adjust navbar padding for smaller screens */
+@media (max-width: 767px) {
+  .navbar-custom {
+    padding: 0.5rem 1rem;
+    border-radius: 0;
+  }
+  .navbar-custom .brand-name {
+    font-size: 0.9rem;
+  }
+  .navbar-custom .nav-link {
+    margin-right: 0.5rem;
+  }
+  .navbar-custom .btn-warning {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+/* 
+/* FOOTER */
+footer{
+  background:#1e2813;
+  color:#ccc;
+  text-align:center;
+  padding:20px;
+}
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #2f3e1f;
+  animation: fadeUp 1.5s ease;
+  line-height: 1.2;
+}
+@media(max-width:768px){
+  .title {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+}
+.hero p {
+  margin-top: 20px;
+  color: #555;
+  animation: fadeUp 2s ease;
+  font-size: 16px;
+  line-height: 1.5;
+}
+@media(max-width:768px){
+  .hero p {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-custom py-2">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}">
+      <!-- Navbar logo -->
+      <img src="{{ url_for('static', filename='images/inmba_logo.jpg') }}" 
+           class="rounded-circle img-fluid me-3" alt="INMBA Logo" style="width:50px; height:50px;">
+      <span class="brand-name">INMBA</span>
+    </a>
+
+    <!-- Mobile toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Nav links -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+        
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('programs') }}">Programs</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('events') }}">Events</a></li>
+       <li class="nav-item"><a class="nav-link" href="{{ url_for('membership') }}">Membership</a></li>
+
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+               <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
+      </ul>
+      <a href="{{ url_for('membership') }}" class="btn btn-warning ms-3">Join Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="particles"></div>
+
+  <div class="container text-center">
+    <div class="hero-box">
+
+      <h1 class="title">
+        EXPAND YOUR NETWORK <br>
+        <span>EXPAND YOUR NET WORTH</span>
+      </h1>
+
+      <p>
+        International Network Management and Business Association (INMBA) <br>
+        A Global Non-Profit Organization Connecting Leaders & Innovators
+      </p>
+
+      <div class="mt-4">
+        <a href="{{ url_for('membership') }}" class="btn btn-main me-2">Join Now</a>
+    
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<section class="container events-section">
+<h2 class="section-title">Our Global Events</h2>
+
+<div class="row g-4">
+
+<div class="col-md-3">
+<div class="event-card">
+<i class="fas fa-globe"></i>
+<h5>Global Business Summit</h5>
+<p>Connect with global leaders and explore opportunities.</p>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="event-card">
+<i class="fas fa-rocket"></i>
+<h5>Startup Connect</h5>
+<p>Empowering startups with mentorship and funding.</p>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="event-card">
+<i class="fas fa-user-tie"></i>
+<h5>Leadership Workshop</h5>
+<p>Develop leadership skills through expert sessions.</p>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="event-card">
+<i class="fas fa-handshake"></i>
+<h5>Networking Meetups</h5>
+<p>Expand your professional network globally.</p>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- STATS -->
+<section class="impact-pro">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <!-- LEFT -->
+      <div class="col-md-6 left-content">
+        <h2>Our Global Presence</h2>
+        <p>
+          INMBA connects professionals, entrepreneurs, and leaders across the globe,
+          creating opportunities for collaboration, innovation, and growth.
+        </p>
+
+        <a href="#" class="btn-main">Explore Network</a>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="col-md-6">
+
+        <div class="stat-line">
+          <span>Members</span>
+          <h3 class="count">5000+</h3>
+        </div>
+
+        <div class="stat-line">
+          <span>Events Conducted</span>
+          <h3 class="count">120+</h3>
+        </div>
+
+        <div class="stat-line">
+          <span>Countries Reached</span>
+          <h3 class="count">30+</h3>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer class="footer-section">
+  <div class="container">
+    
+    <h2 class="footer-title">CONTACT</h2>
+
+    <div class="footer-content">
+
+      <!-- LEFT -->
+      <div class="footer-left">
+
+        <p>
+          <a href="tel:+918940369361">
+            <i class="fas fa-phone"></i> +91 8940 369 361
+          </a>
+        </p>
+
+        <p>
+          <a href="https://www.inmba.org" target="_blank">
+            <i class="fas fa-globe"></i> www.inmba.org
+          </a>
+        </p>
+
+        <p>
+          <a href="mailto:admin@inmba.org">
+            <i class="fas fa-envelope"></i> admin@inmba.org
+          </a>
+        </p>
+
+        <p>
+          <a href="https://linktr.ee/inmba" target="_blank">
+            <i class="fas fa-link"></i> linktr.ee/inmba
+          </a>
+        </p>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="footer-right">
+        <a href="https://linktr.ee/inmba" target="_blank">
+          <img src="{{ url_for('static', filename='images/qr.png') }}" alt="QR Code">
+        </a>
+      </div>
+
+    </div>
+
+    <p class="copyright">© 2026 INMBA</p>
+
+  </div>
+</footer>
+<style>
+.footer-section {
+  background: #111;
+  color: white;
+  padding: 60px 20px;
+}
+
+.footer-title {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* allows items to wrap on small screens */
+}
+
+.footer-left p {
+  margin: 10px 0;
+}
+
+.footer-left a {
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-left a:hover {
+  color: #ffc107;
+  transform: translateX(5px);
+}
+
+.footer-left i {
+  margin-right: 10px;
+  color: #ffc107;
+}
+
+.footer-right img {
+  width: 120px;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column; /* stack left and right vertically */
+    align-items: center; /* center content */
+    text-align: center;
+  }
+  
+  .footer-left, .footer-right {
+    margin-bottom: 20px; /* spacing between sections */
+  }
+
+  .footer-right img {
+    width: 100px; /* smaller QR code on mobile */
+  }
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 30px;
+  opacity: 0.7;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

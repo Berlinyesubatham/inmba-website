@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Details</title>
+    <style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+
+body {
+  min-height: 100vh;
+  padding: 10px;
+  background: linear-gradient(-45deg, #dcedc1, #0f4d0f, #f0f4e3, #0f4d0f);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position:0% 50%; }
+  50% { background-position:100% 50%; }
+  100% { background-position:0% 50%; }
+}
+
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  background: rgba(255,255,255,0.95);
+  border-radius: 20px;
+  padding: 20px;
+  color: #333;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  margin-top: 50px;
+}
+
+.input-box {
+  margin-bottom: 15px;
+}
+
+.input-box input {
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  background:#f0f4e3;
+}
+
+button {
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:#0f4d0f;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2 style="text-align:center; margin-bottom:20px;">Enter Bank Details</h2>
+
+    <form method="POST" action="/bank_submit/{{token}}">
+        
+        <div class="input-box">
+            <input type="text" name="bank_name" placeholder="Bank Name" required>
+        </div>
+
+        <div class="input-box">
+            <input type="text" name="account_number" placeholder="Account Number" required>
+        </div>
+
+        <div class="input-box">
+            <input type="text" name="ifsc" placeholder="IFSC Code" required>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>

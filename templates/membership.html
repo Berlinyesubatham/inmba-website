@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full KYC Membership Form</title>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+/* Reset & font */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+
+/* Animated gradient background */
+body {
+  min-height: 100vh;
+  display: block; /* remove center flex */
+  padding: 10px;
+
+  align-items: center;
+  background: linear-gradient(-45deg, #dcedc1, #0f4d0f, #f0f4e3, #0f4d0f);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  position: relative;
+}
+
+@keyframes gradientBG {
+  0% { background-position:0% 50%; }
+  50% { background-position:100% 50%; }
+  100% { background-position:0% 50%; }
+}
+
+/* Floating circles animation */
+body::before {
+  pointer-events: none;
+}
+@keyframes floatCircles {
+  0% { transform: translate(0,0);}
+  50% { transform: translate(50px,50px);}
+  100% { transform: translate(0,0);}
+}
+
+/* Container */
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  background: rgba(255,255,255,0.95);
+  border-radius: 20px;
+  padding: 20px;
+  color: #333;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+
+  /* IMPORTANT 👇 */
+  max-height: none;   /* remove height restriction */
+  overflow: visible;  /* allow full content */
+}
+@keyframes fadeIn {
+  0% { opacity:0; transform:scale(0.95); }
+  100% { opacity:1; transform:scale(1); }
+}
+
+/* Headings */
+h1 { text-align:center; margin-bottom:10px; color:#556b2f; }
+p.subtitle { text-align:center; margin-bottom:20px; color:#6b8e23; font-size:14px; }
+
+/* Input boxes */
+.input-box { position: relative; margin-bottom:15px; }
+.input-box input,
+.input-box select {
+  width:100%;
+  padding:12px 12px 12px 40px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  outline:none;
+  font-size:14px;
+  background:#f0f4e3;
+  color:#333;
+  transition:0.3s;
+}
+.input-box input::placeholder { color:#777; }
+.input-box input:focus,
+.input-box select:focus {
+  background:#e6eed6;
+  border-color:#0f4d0f;
+  box-shadow:0 0 10px #0f4d0f;
+}
+
+/* Icons */
+.input-box i {
+  position:absolute;
+  top:50%;
+  left:12px;
+  transform:translateY(-50%);
+  color:#0f4d0f;
+  font-size:16px;
+  pointer-events:none;
+}
+
+/* Buttons */
+.step-buttons button {
+  width:100%;
+}
+
+/* Navbar button fix */
+.navbar .btn {
+  width: auto;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+.btn:hover, .step-buttons button:hover {
+  background:#0f4d0f;
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Step navigation */
+.step-buttons { display:flex; justify-content:space-between; margin-top:10px; }
+.step-buttons button { width:48%; }
+
+/* File notes */
+.file-note { font-size:12px; color:#777; margin-top:-10px; margin-bottom:10px; }
+
+/* Step animation */
+.step {
+  display:none;
+  opacity:0;
+  transform:translateX(50px);
+  transition: all 0.5s ease;
+}
+.step.active {
+  display:block;
+  opacity:1;
+  transform:translateX(0);
+}
+/* 📱 Mobile Responsive */
+@media (max-width: 768px) {
+
+  body {
+    padding: 15px;
+    align-items: flex-start; /* better scroll */
+  }
+
+  .form-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .input-box input,
+  .input-box select {
+    padding: 12px 12px 12px 38px;
+    font-size: 14px;
+  }
+
+  .input-box i {
+    left: 10px;
+    font-size: 14px;
+  }
+
+  .step-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .step-buttons button {
+    width: 100%;
+  }
+
+  .btn {
+    font-size: 15px;
+    padding: 12px;
+  }
+}
+
+/* 📱 Extra small devices */
+@media (max-width: 400px) {
+  h1 {
+    font-size: 18px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+}/* 📱 MOBILE FIRST REDESIGN */
+@media (max-width: 768px) {
+
+  body {
+    display: block; /* remove center alignment */
+    padding: 0;
+  }
+
+  .form-container {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    border-radius: 0; /* remove card feel */
+    box-shadow: none;
+    padding: 20px 15px;
+  }
+
+  h1 {
+    font-size: 22px;
+    margin-bottom: 5px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    margin-bottom: 15px;
+  }
+
+  .input-box {
+    margin-bottom: 18px;
+  }
+
+  .input-box input,
+  .input-box select {
+    font-size: 15px;
+    padding: 14px 12px 14px 40px;
+    border-radius: 10px;
+  }
+
+  /* Bigger touch icons */
+  .input-box i {
+    font-size: 15px;
+  }
+
+  /* Step animation smoother */
+  .step {
+    transform: translateX(20px);
+  }
+
+  /* Buttons like mobile apps */
+  .step-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.step-buttons button {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+  .step-buttons button {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  /* Add slight top spacing */
+  form {
+    padding-bottom: 20px;
+  }
+}
+@media (max-width:768px){
+
+  .step-buttons {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .step-buttons button {
+    width: 100%;
+  }
+}
+
+  .navbar-custom {
+  background: #0f4d0f, #a2daa2; /* Semi-transparent dark blue */
+  backdrop-filter: blur(10px); /* Blur behind navbar */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 0.8rem 1rem;
+  border-radius: 0 0 15px 15px; /* Slight rounded bottom corners */
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+/* Brand Name */
+.navbar-custom .brand-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+/* Nav links hover animation */
+.navbar-custom .nav-link {
+  color: #fff;
+  position: relative;
+  margin-right: 1rem;
+  transition: color 0.3s;
+}
+
+.navbar-custom .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #ffc107; /* Yellow underline */
+  transition: 0.3s;
+}
+
+.navbar-custom .nav-link:hover::after {
+  width: 100%;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #ffc107;
+}
+
+/* Join Now Button */
+.navbar-custom .btn-warning {
+  border-radius: 50px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.navbar-custom .btn-warning:hover {
+  background-color: #e6b800;
+  transform: translateY(-2px);
+}
+
+/* Navbar sticky effect on scroll */
+.navbar-custom.scrolled {
+  background:#0f4d0f, #a2daa2;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+        .carousel-item img {
+  transition: transform 8s ease;
+}
+
+.carousel-item.active img {
+  transform: scale(1.05) translateX(10px);
+}
+.carousel-caption{
+    margin-bottom: 100px;
+ 
+}
+/* Make brand image responsive */
+.navbar-brand img {
+  width: 50px;
+  height: 50px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Adjust navbar padding for smaller screens */
+@media (max-width: 767px) {
+  .navbar-custom {
+    padding: 0.5rem 1rem;
+    border-radius: 0;
+  }
+  .navbar-custom .brand-name {
+    font-size: 0.9rem;
+  }
+  .navbar-custom .nav-link {
+    margin-right: 0.5rem;
+  }
+  .navbar-custom .btn-warning {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+/* Keep everything in one line */
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Prevent brand from wrapping */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Reduce logo size on mobile */
+@media (max-width: 576px) {
+  .navbar-brand img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .navbar-custom .brand-name {
+    font-size: 0.8rem;
+  }
+}
+.navbar-custom {
+  background-color: #0f4d0f; /* Semi-transparent dark blue */
+  backdrop-filter: blur(10px); /* Blur behind navbar */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 0.8rem 1rem;
+  border-radius: 0 0 15px 15px; /* Slight rounded bottom corners */
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+/* Brand Name */
+.navbar-custom .brand-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+/* Nav links hover animation */
+.navbar-custom .nav-link {
+  color: #fff;
+  position: relative;
+  margin-right: 1rem;
+  transition: color 0.3s;
+}
+
+.navbar-custom .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #ffc107; /* Yellow underline */
+  transition: 0.3s;
+}
+
+.navbar-custom .nav-link:hover::after {
+  width: 100%;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #ffc107;
+}
+
+/* Join Now Button */
+.navbar-custom .btn-warning {
+  border-radius: 50px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.navbar-custom .btn-warning:hover {
+  background-color: #e6b800;
+  transform: translateY(-2px);
+}
+
+/* Navbar sticky effect on scroll */
+.navbar-custom.scrolled {
+  background:  #0f4d0f;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+        .carousel-item img {
+  transition: transform 8s ease;
+}
+
+.carousel-item.active img {
+  transform: scale(1.05) translateX(10px);
+}
+.carousel-caption{
+    margin-bottom: 100px;
+ 
+}
+/* Make brand image responsive */
+.navbar-brand img {
+  width: 50px;
+  height: 50px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Adjust navbar padding for smaller screens */
+@media (max-width: 767px) {
+  .navbar-custom {
+    padding: 0.5rem 1rem;
+    border-radius: 0;
+  }
+  .navbar-custom .brand-name {
+    font-size: 0.9rem;
+  }
+  .navbar-custom .nav-link {
+    margin-right: 0.5rem;
+  }
+  .navbar-custom .btn-warning {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+.step-buttons button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #0f4d0f;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+.step-buttons button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg fixed-top navbar-custom py-2">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}">
+      <!-- Navbar logo -->
+      <img src="{{ url_for('static', filename='images/inmba_logo.jpg') }}" 
+           class="rounded-circle img-fluid me-3" alt="INMBA Logo" style="width:50px; height:50px;">
+      <span class="brand-name">INMBA</span>
+    </a>
+
+    <!-- Mobile toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Nav links -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+        
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('programs') }}">Programs</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('events') }}">Events</a></li>
+       <li class="nav-item"><a class="nav-link" href="{{ url_for('membership') }}">Membership</a></li>
+
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+               <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
+      </ul>
+      <a href="{{ url_for('membership') }}" class="btn btn-warning ms-3">Join Now</a>
+    </div>
+  </div>
+</nav>
+<br>
+<br>
+<br>
+<div class="form-container">
+<h1>Membership KYC Form</h1>
+<p class="subtitle">Fill all details step by step</p>
+<form id="kycForm" method="POST" action="/register" enctype="multipart/form-data">
+  <!-- Step 1: Account Info -->
+  <div class="step active">
+    <div class="input-box"><i class="fas fa-user"></i><input type="text" placeholder="First Name" required name="first_name"></div>
+    <div class="input-box"><i class="fas fa-user"></i><input type="text" placeholder="Last Name (optional)" name="last_name"></div>
+    <div class="input-box"><i class="fas fa-calendar"></i><input type="date" placeholder="Date of Birth" required name="dob"></div>
+    <div class="input-box"><i class="fas fa-envelope"></i><input type="email" placeholder="Email" required name="email"></div>
+<div class="input-box d-flex">
+  
+  <!-- Country Code Dropdown -->
+  <select name="country_code" style="width:30%; margin-right:5px;" required>
+    <option value="+91">🇮🇳 +91</option>
+    <option value="+1">🇺🇸 +1</option>
+    <option value="+44">🇬🇧 +44</option>
+    <option value="+61">🇦🇺 +61</option>
+  </select>
+
+  <!-- Phone Number -->
+  <input type="tel" name="phone" 
+         placeholder="Enter 10 digit number"
+         pattern="[0-9]{10}"
+         maxlength="10"
+         required>
+</div>
+    <div class="input-box"><i class="fas fa-key"></i><input type="password" placeholder="Password" required  name="password"></div>
+    <div class="input-box"><i class="fas fa-key"></i><input type="password" placeholder="Confirm Password" required  name="confirm_password"></div>
+  
+ 
+  <div class="input-box">
+    <i class="fas fa-flag"></i>
+    <input type="text" placeholder="State" required  name="state">
+  </div>
+
+  <div class="input-box">
+    <i class="fas fa-city"></i>
+    <input type="text" placeholder="District" required name="district">
+  </div>
+
+  <div class="input-box">
+    <i class="fas fa-city"></i>
+    <input type="text" placeholder="City" required  name="city">
+  </div>
+
+  <div class="input-box">
+    <i class="fas fa-mail-bulk"></i>
+    <input type="number" placeholder="Pincode" required  name="pincode">
+  </div>
+    <div class="input-box"><i class="fas fa-gift"></i><input type="text" placeholder="Referral Token (Optional)" name="referral"></div>
+  </div>
+
+  <!-- Step 2: Personal Info -->
+  <div class="step">
+    <div class="input-box"><i class="fas fa-venus-mars"></i>
+      <select required  name="gender">
+        <option value="">Select Gender</option><option>Male</option><option>Female</option><option>Other</option>
+      </select>
+    </div>
+    <div class="input-box"><i class="fas fa-heart"></i>
+      <select required name="marital_status">
+        <option value="">Marital Status</option><option>Single</option><option>Married</option><option>Other</option>
+      </select>
+    </div>
+    <div class="input-box"><i class="fas fa-globe"></i><input type="text" placeholder="Nationality" required name="nationality"></div>
+    <div class="input-box"><i class="fas fa-briefcase"></i><input type="text" placeholder="Occupation" required name="occupation"></div>
+    <div class="input-box"><i class="fas fa-graduation-cap"></i><input type="text" placeholder="Education Qualification" required  name="education"></div>
+    
+  </div>
+
+
+
+ 
+
+
+
+  <!-- Step 6: Membership -->
+  <div class="step">
+    <div class="input-box"><i class="fas fa-user-check"></i>
+      <select required  name="membership_type">
+        <option value="">Select Membership Category</option>
+        <option>Student</option><option>Volunteer</option><option>Donor</option>
+        <option>Professional</option><option>Corporate</option><option>Life</option><option>Advisory</option>
+      </select>
+    </div>
+    <div class="input-box"><i class="fas fa-check"></i><input type="checkbox" required  name="agree"> I agree to organization rules & privacy policy</div>
+  </div>
+
+  <!-- Step navigation -->
+  <div class="step-buttons">
+    <button type="button" id="prevBtn" onclick="nextPrev(-1)" style="display:none;">Previous</button>
+    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+  </div>
+
+</form>
+</div>
+
+<script>
+let currentStep = 0;
+const steps = document.querySelectorAll(".step");
+
+function showStep(n){
+  steps.forEach(s => s.classList.remove("active"));
+  steps[n].classList.add("active");
+  document.getElementById("prevBtn").style.display = n===0?'none':'inline';
+  document.getElementById("nextBtn").innerText = n===steps.length-1?'Submit':'Next';
+}
+
+function nextPrev(n){
+  if(n===1){
+    const inputs = steps[currentStep].querySelectorAll("input,select");
+    for(let inp of inputs){
+      if(!inp.checkValidity()){ inp.reportValidity(); return; }
+    }
+  }
+  currentStep+=n;
+  if(currentStep>=steps.length){ document.getElementById("kycForm").submit(); return; }
+  showStep(currentStep);
+}
+
+showStep(currentStep);
+</script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+</body>
+</html>

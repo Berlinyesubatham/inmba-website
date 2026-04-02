@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INMBA Programs</title>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f4f7fb;
+  overflow-x: hidden;
+}
+
+/* 🔥 HERO SECTION */
+.hero {
+  height: 90vh;
+  background: linear-gradient(-45deg, #0f4d0f, #1f7a1f, #0f4d0f);
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  padding: 50px;
+}
+
+@keyframes gradientMove {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.hero p {
+  margin-top: 15px;
+}
+
+/* 🔥 PROGRAM CARDS */
+.program-container {
+  padding: 80px 20px;
+}
+
+.program-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 320px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+/* 3D tilt */
+.program-card:hover {
+  transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+}
+
+.program-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* overlay */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  color: #fff;
+  transition: 0.5s;
+}
+
+/* hidden content */
+.overlay p {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.5s;
+}
+
+/* reveal on hover */
+.program-card:hover .overlay p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 🔥 FLOAT EFFECT */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+.program-card {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* 🔥 SHINE EFFECT */
+.program-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: rgba(255,255,255,0.2);
+  transform: skewX(-25deg);
+}
+
+.program-card:hover::before {
+  left: 120%;
+  transition: 0.7s;
+}
+
+/* 🔥 TAGLINE SECTION */
+.tagline-section {
+  text-align: center;
+  padding: 60px 20px;
+  background: #0f4d0f;
+  color: #fff;
+}
+
+.tagline-section h2 {
+  color: #ffc107;
+  letter-spacing: 2px;
+}
+
+/* Footer */
+footer {
+  background: #0f4d0f;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .hero {
+    text-align: center;
+    height: auto;
+  }
+}
+.hero-image-advanced {
+  position: relative;
+  height: 100vh; /* Full screen height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  background: url('https://images.unsplash.com/photo-1552664730-d307ca884978') center/cover no-repeat;
+  background-size: cover; /* ensure it always covers */
+  animation: zoomBg 20s ease-in-out infinite alternate;
+}
+
+/* 🔥 slow zoom effect */
+@keyframes zoomBg {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+/* overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+}
+
+/* content */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  padding: 40px;
+  border-radius: 20px;
+
+  /* glass effect */
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+}
+
+/* title */
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  animation: fadeUp 1s ease;
+}
+
+/* subtitle */
+.hero-content p {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+/* floating tags */
+.floating-tags span {
+  display: inline-block;
+  margin: 8px;
+  padding: 8px 16px;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.2);
+  animation: float 4s infinite;
+}
+
+/* float */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+/* text animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.trust-section {
+  background: linear-gradient(135deg, #f4f7fb, #e8f5e9);
+  padding: 100px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle background glow */
+.trust-section::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: rgba(15,77,15,0.1);
+  border-radius: 50%;
+  top: -80px;
+  left: -80px;
+  filter: blur(80px);
+}
+
+.trust-section::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: rgba(255,193,7,0.15);
+  border-radius: 50%;
+  bottom: -80px;
+  right: -80px;
+  filter: blur(80px);
+}
+
+/* GLASS CARD */
+.trust-card {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 30px;
+  transition: 0.4s;
+  border: 1px solid rgba(255,255,255,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* gradient border animation */
+.trust-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(45deg, #0f4d0f, #ffc107);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+/* hover effect */
+.trust-card:hover {
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* icon circle */
+.trust-card h5::before {
+  content: "★";
+  display: inline-block;
+  margin-right: 10px;
+  color: #ffc107;
+  font-size: 1.2rem;
+}
+
+/* quote style */
+.trust-quote {
+  background: linear-gradient(135deg, #0f4d0f, #1f7a1f);
+  color: #fff;
+  padding: 40px;
+  border-radius: 20px;
+  margin-top: 60px;
+  font-style: italic;
+  position: relative;
+}
+
+/* quote symbol */
+.trust-quote::before {
+  content: "“";
+  font-size: 60px;
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  color: rgba(255,255,255,0.3);
+}
+.trust-quote-advanced {
+  background: rgba(240,255,240,0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  padding: 60px 30px;
+  border: 1px solid rgba(15,77,15,0.2);
+}
+
+.trust-quote-advanced::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 25px;
+  background: linear-gradient(45deg, #0f4d0f, #164b2d);
+  z-index: -1;
+  filter: blur(20px);
+  opacity: 0.4;
+}
+
+.quote-text {
+  color: #0f4d0f;
+  font-size: 1.6rem;
+}.quote-rich-advanced {
+  padding: 100px 20px;
+  background: linear-gradient(to bottom, #ffffff, #f8f9fb);
+  position: relative;
+}
+
+/* MAIN TEXT */
+.quote-main {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: 1px;
+}
+
+/* 🔥 Gradient highlight word */
+.highlight {
+  background: linear-gradient(45deg, #0f4d0f, #2ecc71);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+
+/* animated underline */
+.highlight::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 3px;
+  background: #0f4d0f;
+  transition: 0.6s;
+}
+
+/* trigger on scroll */
+.quote-rich-advanced.aos-animate .highlight::after {
+  width: 100%;
+}
+
+/* SUBTEXT */
+.quote-sub {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* subtle floating particles effect */
+.quote-rich-advanced::before {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: rgba(15,77,15,0.05);
+  border-radius: 50%;
+  top: 20%;
+  left: 10%;
+  filter: blur(60px);
+}
+
+.quote-rich-advanced::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: rgba(46,204,113,0.05);
+  border-radius: 50%;
+  bottom: 10%;
+  right: 10%;
+  filter: blur(60px);
+}
+/* Glassy Trust Cards with hover animation */
+.trust-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 30px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.4s ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Gradient border effect */
+.trust-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #0f4d0f, #2ecc71);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  z-index: -1;
+}
+
+/* Hover lift & shadow */
+.trust-card:hover {
+  transform: translateY(-15px) scale(1.05);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading style with subtle icon glow */
+.trust-card h5 {
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.trust-card h5::before {
+  content: '★';
+  color: #ffc107;
+  margin-right: 10px;
+  font-size: 1.2rem;
+  display: inline-block;
+  animation: glowStar 2s infinite alternate;
+}
+
+/* Glow animation for star */
+@keyframes glowStar {
+  0% { text-shadow: 0 0 5px #ffc107; }
+  50% { text-shadow: 0 0 12px #ffd633; }
+  100% { text-shadow: 0 0 5px #ffc107; }
+}
+
+/* Paragraph animation on hover */
+.trust-card p {
+  opacity: 0.9;
+  transform: translateY(10px);
+  transition: 0.5s;
+}
+
+.trust-card:hover p {
+  transform: translateY(0);
+  opacity: 1;
+}
+.trust-section {
+  background: linear-gradient(135deg, #f4f7fb, #e8f5e9);
+  padding: 100px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle floating glow circles */
+.trust-section::before, .trust-section::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  filter: blur(90px);
+  z-index: 0;
+}
+
+.trust-section::before {
+  top: -60px;
+  left: -60px;
+  background: rgba(15,77,15,0.1);
+}
+
+.trust-section::after {
+  bottom: -60px;
+  right: -60px;
+  background: rgba(46,204,113,0.1);
+}
+/* Section background */
+.trust-section-modern {
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #f4f7fb, #e8f5e9);
+}
+
+/* Card container */
+.trust-card-modern {
+  background: linear-gradient(145deg, #ffffff, #f1f6f4);
+  border-radius: 30px;
+  padding: 50px 20px 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Card hover effect */
+.trust-card-modern:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 30px 50px rgba(0,0,0,0.15);
+}
+
+/* Icon circle at top */
+.card-icon {
+  font-size: 2.5rem;
+  background: #2ecc71;
+  color: #fff;
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  border-radius: 50%;
+  margin: -50px auto 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  transition: transform 0.5s ease;
+}
+
+/* Icon hover effect */
+.trust-card-modern:hover .card-icon {
+  transform: scale(1.2) rotate(10deg);
+}
+
+/* Card title */
+.trust-card-modern h5 {
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #0f4d0f;
+}
+
+/* Card description */
+.trust-card-modern p {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media(max-width:768px){
+  .trust-card-modern {
+    padding: 40px 15px 25px;
+  }
+  .card-icon {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 2rem;
+    margin-top: -40px;
+  }
+}
+  .navbar-custom {
+  background: #0f4d0f, #a2daa2; /* Semi-transparent dark blue */
+  backdrop-filter: blur(10px); /* Blur behind navbar */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 0.8rem 1rem;
+  border-radius: 0 0 15px 15px; /* Slight rounded bottom corners */
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+/* Brand Name */
+.navbar-custom .brand-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+/* Nav links hover animation */
+.navbar-custom .nav-link {
+  color: #fff;
+  position: relative;
+  margin-right: 1rem;
+  transition: color 0.3s;
+}
+
+.navbar-custom .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #ffc107; /* Yellow underline */
+  transition: 0.3s;
+}
+
+.navbar-custom .nav-link:hover::after {
+  width: 100%;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #ffc107;
+}
+
+/* Join Now Button */
+.navbar-custom .btn-warning {
+  border-radius: 50px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.navbar-custom .btn-warning:hover {
+  background-color: #e6b800;
+  transform: translateY(-2px);
+}
+
+/* Navbar sticky effect on scroll */
+.navbar-custom.scrolled {
+  background:#0f4d0f, #a2daa2;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+        .carousel-item img {
+  transition: transform 8s ease;
+}
+
+.carousel-item.active img {
+  transform: scale(1.05) translateX(10px);
+}
+.carousel-caption{
+    margin-bottom: 100px;
+ 
+}
+/* Make brand image responsive */
+.navbar-brand img {
+  width: 50px;
+  height: 50px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Adjust navbar padding for smaller screens */
+@media (max-width: 767px) {
+  .navbar-custom {
+    padding: 0.5rem 1rem;
+    border-radius: 0;
+  }
+  .navbar-custom .brand-name {
+    font-size: 0.9rem;
+  }
+  .navbar-custom .nav-link {
+    margin-right: 0.5rem;
+  }
+  .navbar-custom .btn-warning {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+/* Keep everything in one line */
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Prevent brand from wrapping */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Reduce logo size on mobile */
+@media (max-width: 576px) {
+  .navbar-brand img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .navbar-custom .brand-name {
+    font-size: 0.8rem;
+  }
+}
+.navbar-custom {
+  background-color: #0f4d0f; /* Semi-transparent dark blue */
+  backdrop-filter: blur(10px); /* Blur behind navbar */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 0.8rem 1rem;
+  border-radius: 0 0 15px 15px; /* Slight rounded bottom corners */
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+/* Brand Name */
+.navbar-custom .brand-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+/* Nav links hover animation */
+.navbar-custom .nav-link {
+  color: #fff;
+  position: relative;
+  margin-right: 1rem;
+  transition: color 0.3s;
+}
+
+.navbar-custom .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #ffc107; /* Yellow underline */
+  transition: 0.3s;
+}
+
+.navbar-custom .nav-link:hover::after {
+  width: 100%;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #ffc107;
+}
+
+/* Join Now Button */
+.navbar-custom .btn-warning {
+  border-radius: 50px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.navbar-custom .btn-warning:hover {
+  background-color: #e6b800;
+  transform: translateY(-2px);
+}
+
+/* Navbar sticky effect on scroll */
+.navbar-custom.scrolled {
+  background:  #0f4d0f;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+        .carousel-item img {
+  transition: transform 8s ease;
+}
+
+.carousel-item.active img {
+  transform: scale(1.05) translateX(10px);
+}
+.carousel-caption{
+    margin-bottom: 100px;
+ 
+}
+/* Make brand image responsive */
+.navbar-brand img {
+  width: 50px;
+  height: 50px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Adjust navbar padding for smaller screens */
+@media (max-width: 767px) {
+  .navbar-custom {
+    padding: 0.5rem 1rem;
+    border-radius: 0;
+  }
+  .navbar-custom .brand-name {
+    font-size: 0.9rem;
+  }
+  .navbar-custom .nav-link {
+    margin-right: 0.5rem;
+  }
+  .navbar-custom .btn-warning {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+
+</style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg fixed-top navbar-custom py-2">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}">
+      <!-- Navbar logo -->
+      <img src="{{ url_for('static', filename='images/inmba_logo.jpg') }}" 
+           class="rounded-circle img-fluid me-3" alt="INMBA Logo" style="width:50px; height:50px;">
+      <span class="brand-name">INMBA</span>
+    </a>
+
+    <!-- Mobile toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Nav links -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+        
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('programs') }}">Programs</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('events') }}">Events</a></li>
+       <li class="nav-item"><a class="nav-link" href="{{ url_for('membership') }}">Membership</a></li>
+
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+               <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
+      </ul>
+      <a href="{{ url_for('membership') }}" class="btn btn-warning ms-3">Join Now</a>
+    </div>
+  </div>
+</nav>
+<!-- 🔥 HERO -->
+<section class="hero-image-advanced">
+  <div class="overlay"></div>
+
+  <div class="hero-content text-center">
+    <h1>INMBA Programs</h1>
+    <p>Expand Your Network ; Expand Your Net Worth</p>
+
+    <div class="floating-tags">
+      <span>Leadership</span>
+      <span>Growth</span>
+      <span>Network</span>
+      <span>Business</span>
+      <span>Community</span>
+    </div>
+  </div>
+</section>
+
+<section class="trust-section-modern">
+  <div class="container text-center">
+
+    <!-- Section Title -->
+    <div class="mb-5">
+      <h2>Built on Trust. Driven by Impact.</h2>
+      <p>Real results. Real people. Real growth.</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+
+      <!-- Card 1 -->
+      <div class="col-md-4">
+        <div class="trust-card-modern">
+          <div class="card-icon">✔</div>
+          <h5>Verified Programs</h5>
+          <p>Every program is designed and reviewed by industry experts to ensure real-world value.</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-md-4">
+        <div class="trust-card-modern">
+          <div class="card-icon">👥</div>
+          <h5>Strong Community</h5>
+          <p>Connect with like-minded entrepreneurs, leaders, and professionals worldwide.</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-md-4">
+        <div class="trust-card-modern">
+          <div class="card-icon">📈</div>
+          <h5>Measurable Growth</h5>
+          <p>Track your progress with skill-based learning, mentorship, and real outcomes.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    <!-- Quote -->
+ <div class="quote-rich-advanced text-center mt-5" data-aos="fade-up">
+
+  <h2 class="quote-main">
+    Turn your ideas into 
+    <span class="highlight">impact</span>
+  </h2>
+
+  <p class="quote-sub" data-aos="fade-up" data-aos-delay="200">
+    with the power of the right network
+  </p>
+
+</div>
+
+  </div>
+</section>
+
+<!-- 🔥 PROGRAMS -->
+<div class="container program-container">
+  <div class="row g-4">
+
+    <div class="col-md-6 col-lg-3" data-aos="zoom-in">
+      <div class="program-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStBK1YGNFWfkKhWgOMW5M6ooT8MKG5tY6KQg&s">
+        <div class="overlay">
+          <h4>Youth Leadership</h4>
+          <p>Build confidence and leadership mindset.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3" data-aos="flip-left">
+      <div class="program-card">
+        <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b">
+        <div class="overlay">
+          <h4>Entrepreneurship</h4>
+          <p>Learn business and startup growth strategies.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3" data-aos="fade-up">
+      <div class="program-card">
+        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d">
+        <div class="overlay">
+          <h4>Community Development</h4>
+          <p>Empowering local communities.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3" data-aos="zoom-out">
+      <div class="program-card">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c">
+        <div class="overlay">
+          <h4>Skill Workshops</h4>
+          <p>Practical training & real-world skills.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer-section">
+  <div class="container">
+    
+    <h2 class="footer-title">CONTACT</h2>
+
+    <div class="footer-content">
+
+      <!-- LEFT -->
+      <div class="footer-left">
+
+        <p>
+          <a href="tel:+918940369361">
+            <i class="fas fa-phone"></i> +91 8940 369 361
+          </a>
+        </p>
+
+        <p>
+          <a href="https://www.inmba.org" target="_blank">
+            <i class="fas fa-globe"></i> www.inmba.org
+          </a>
+        </p>
+
+        <p>
+          <a href="mailto:admin@inmba.org">
+            <i class="fas fa-envelope"></i> admin@inmba.org
+          </a>
+        </p>
+
+        <p>
+          <a href="https://linktr.ee/inmba" target="_blank">
+            <i class="fas fa-link"></i> linktr.ee/inmba
+          </a>
+        </p>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="footer-right">
+        <a href="https://linktr.ee/inmba" target="_blank">
+          <img src="{{ url_for('static', filename='images/qr.png') }}" alt="QR Code">
+        </a>
+      </div>
+
+    </div>
+
+    <p class="copyright">© 2026 INMBA</p>
+
+  </div>
+</footer>
+<style>
+.footer-section {
+  background: #111;
+  color: white;
+  padding: 60px 20px;
+}
+
+.footer-title {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* allows items to wrap on small screens */
+}
+
+.footer-left p {
+  margin: 10px 0;
+}
+
+.footer-left a {
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-left a:hover {
+  color: #ffc107;
+  transform: translateX(5px);
+}
+
+.footer-left i {
+  margin-right: 10px;
+  color: #ffc107;
+}
+
+.footer-right img {
+  width: 120px;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column; /* stack left and right vertically */
+    align-items: center; /* center content */
+    text-align: center;
+  }
+  
+  .footer-left, .footer-right {
+    margin-bottom: 20px; /* spacing between sections */
+  }
+
+  .footer-right img {
+    width: 100px; /* smaller QR code on mobile */
+  }
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 30px;
+  opacity: 0.7;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({
+  duration: 500,
+  once: true
+});
+</script>
+
+</body>
+</html>

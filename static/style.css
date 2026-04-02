@@ -1,0 +1,30 @@
+body{
+font-family: Arial;
+}
+
+.hero{
+background-image:url("../images/hero-banner.jpg");
+background-size:cover;
+height:500px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+text-align:center;
+}
+
+.hero h1{
+font-size:60px;
+font-weight:bold;
+}
+
+.section{
+padding:60px 0;
+}
+
+footer{
+background:#222;
+color:white;
+text-align:center;
+padding:15px;
+}
