@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>INMBA Legal entity</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { box-sizing: border-box; margin:0; padding:0; }
+body { font-family:'Segoe UI',sans-serif; background:#e8f5e9; }
+.container { max-width:400px; margin:50px auto; background:white; padding:25px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+h2 { text-align:center; color:#0f4d0f; margin-bottom:15px; }
+label { display:block; margin-bottom:5px; font-weight:600; }
+input, select { width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px; }
+button { width:100%; padding:12px; background:linear-gradient(135deg,#0f4d0f,#28a745); color:white; border:none; border-radius:8px; font-size:16px; cursor:pointer; }
+button:hover { transform:scale(1.02); }
+.address-container {
+  max-width: 450px;
+  margin: 30px auto;
+  background: #f0fff4;
+  padding: 25px 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.address-container h3 {
+  text-align: center;
+  color: #0f4d0f;
+  margin-bottom: 20px;
+}
+
+.address-row {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.address-row input {
+  width: 100%;
+  padding: 12px 12px 12px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.address-row label {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  color: gray;
+  font-size: 14px;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.address-row input:focus + label,
+.address-row input:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 8px;
+  font-size: 12px;
+  color: #0f4d0f;
+  background: #f0fff4;
+  padding: 0 4px;
+}
+.upload-box{
+  margin-bottom:18px;
+}
+
+.upload-box label{
+  display:block;
+  margin-bottom:6px;
+  font-weight:600;
+  color:#0f4d0f;
+}
+
+.preview{
+  width:120px;
+  height:120px;
+  margin-top:10px;
+  display:none;
+  position:relative;
+  overflow:hidden;   /* 🔥 IMPORTANT */
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+.preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;  /* 🔥 THIS FIXES FULL SIZE ISSUE */
+  display:block;
+}
+.remove-btn{
+  position:absolute;
+  top:-8px;
+  right:-8px;
+  background:red;
+  color:white;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size:14px;
+  z-index:10;
+}
+.modern-upload{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border:1px solid #e0e0e0;
+  border-radius:10px;
+  padding:10px 12px;
+  background:#fafafa;
+  margin-bottom:15px;
+}
+
+.upload-left{
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  font-size:14px;
+  color:#0f4d0f;
+}
+
+.upload-left small{
+  font-size:11px;
+  color:gray;
+}
+
+/* hide input */
+.modern-upload input{
+  display:none;
+}
+
+/* preview */
+.preview-box{
+  width:50px;
+  height:50px;
+  display:none;
+  position:relative;
+}
+
+.preview-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:6px;
+}
+
+.preview-box span{
+  position:absolute;
+  top:-5px;
+  right:-5px;
+  background:red;
+  color:white;
+  width:16px;
+  height:16px;
+  font-size:10px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+<div>
+
+</div>
+<div class="container">
+<h2>🪪PAN Information</h2>
+
+<form action="{{ url_for('pan_submit', token=token) }}" method="POST" enctype="multipart/form-data">
+  <label>PAN Number</label>
+  <input type="text" name="pan_number" placeholder="Enter PAN number" required pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" 
+         title="Enter valid PAN number (e.g., ABCDE1234F)">
+
+  <label>Name (as on PAN card)</label>
+  <input type="text" name="pan_name" placeholder="Enter Name as per PAN card" required>
+<div class="form-group">
+  
+<div class="modern-upload">
+
+  <div class="upload-left" onclick="document.getElementById('panInput').click()">
+    📄 PAN Front
+    <small id="panFrontName">No file selected</small>
+  </div>
+
+  <input type="file" id="panInput" name="pan_front"
+    accept="image/png, image/jpeg"
+    onchange="handleImage(event,'panInput','panFrontPreview','frontBox','panFrontName')" required>
+
+  <div class="preview-box" id="frontBox">
+    <img id="panFrontPreview">
+    <span onclick="removeImage('panInput','frontBox','panFrontPreview','panFrontName')">✖</span>
+  </div>
+
+</div>
+<div class="modern-upload">
+
+  <div class="upload-left" onclick="document.getElementById('panBackInput').click()">
+    📄 PAN Back
+    <small id="panBackName">No file selected</small>
+  </div>
+
+  <input type="file" id="panBackInput" name="pan_back"
+    accept="image/png, image/jpeg"
+    onchange="handleImage(event,'panBackInput','panBackPreview','backBox','panBackName')" required>
+
+  <div class="preview-box" id="backBox">
+    <img id="panBackPreview">
+    <span onclick="removeImage('panBackInput','backBox','panBackPreview','panBackName')">✖</span>
+  </div>
+
+</div>
+</div>
+
+  <button type="submit">✅ Submit PAN Details</button>
+</form>
+</div>
+
+<script>
+
+const panForm = document.querySelector('form');
+
+panForm.addEventListener('submit', function(e) {
+    const panNum = panForm.pan_number.value.toUpperCase();
+    const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+    const panFront = panForm.pan_front.files[0];
+    const panBack = panForm.pan_back.files[0];
+    const allowedTypes = ['image/jpeg', 'image/png'];
+
+    if (!panRegex.test(panNum)) {
+        e.preventDefault();
+        alert("❌ Enter a valid PAN number (e.g., ABCDE1234F)");
+        panForm.pan_number.focus();
+        return false;
+    }
+
+    if (!panFront || !allowedTypes.includes(panFront.type)) {
+        e.preventDefault();
+        alert("❌ Upload valid PAN front image (JPG/PNG)");
+        return false;
+    }
+
+    if (!panBack || !allowedTypes.includes(panBack.type)) {
+        e.preventDefault();
+        alert("❌ Upload valid PAN back image (JPG/PNG)");
+        return false;
+    }
+});
+
+function handleImage(event,inputId,imgId,boxId){
+    const file = event.target.files[0];
+    if(!file) return;
+
+    const img = document.getElementById(imgId);
+    const box = document.getElementById(boxId);
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+        const image = new Image();
+        image.src = e.target.result;
+
+        image.onload = function(){
+
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            let w = image.width;
+            let h = image.height;
+
+            if(w > 600){
+                h = h * (600 / w);
+                w = 600;
+            }
+
+            canvas.width = w;
+            canvas.height = h;
+
+            ctx.drawImage(image,0,0,w,h);
+
+            const compressed = canvas.toDataURL("image/jpeg",0.7);
+
+            img.src = compressed;
+            box.style.display = "block";
+
+            fetch(compressed)
+            .then(res => res.blob())
+            .then(blob => {
+                const newFile = new File([blob], file.name,{type:"image/jpeg"});
+                const dt = new DataTransfer();
+                dt.items.add(newFile);
+                document.getElementById(inputId).files = dt.files;
+            });
+        }
+    }
+
+    reader.readAsDataURL(file);
+}
+
+function removeImage(inputId,boxId){
+    document.getElementById(inputId).value = "";
+    document.getElementById(boxId).style.display = "none";
+}
+function handleImage(event,inputId,imgId,boxId){
+    const file = event.target.files[0];
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+        const image = new Image();
+        image.src = e.target.result;
+
+        image.onload = function(){
+
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            let w = image.width;
+            let h = image.height;
+
+            // 🔥 compress resize logic
+            const maxWidth = 600;
+
+            if(w > maxWidth){
+                h = h * (maxWidth / w);
+                w = maxWidth;
+            }
+
+            canvas.width = w;
+            canvas.height = h;
+
+            ctx.drawImage(image,0,0,w,h);
+
+            // 🔥 compression (quality reduced)
+            const compressed = canvas.toDataURL("image/jpeg",0.6);
+
+            document.getElementById(imgId).src = compressed;
+            document.getElementById(boxId).style.display = "block";
+
+            fetch(compressed)
+            .then(res => res.blob())
+            .then(blob => {
+                const newFile = new File([blob], file.name,{type:"image/jpeg"});
+                const dt = new DataTransfer();
+                dt.items.add(newFile);
+                document.getElementById(inputId).files = dt.files;
+            });
+        }
+    }
+
+    reader.readAsDataURL(file);
+}
+
+function removeImage(inputId,boxId){
+    document.getElementById(inputId).value = "";
+    document.getElementById(boxId).style.display = "none";
+}
+function removeImage(inputId, boxId, imgId){
+    document.getElementById(inputId).value = "";
+    document.getElementById(imgId).src = "";
+    document.getElementById(boxId).style.display = "none";
+}
+function handleImage(event,inputId,imgId,boxId,nameId){
+    const file = event.target.files[0];
+    if(!file) return;
+
+    // show file name
+    document.getElementById(nameId).textContent = file.name;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+        const image = new Image();
+        image.src = e.target.result;
+
+        image.onload = function(){
+
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            let w = image.width;
+            let h = image.height;
+
+            const maxWidth = 600;
+            if(w > maxWidth){
+                h = h * (maxWidth / w);
+                w = maxWidth;
+            }
+
+            canvas.width = w;
+            canvas.height = h;
+
+            ctx.drawImage(image,0,0,w,h);
+
+            const compressed = canvas.toDataURL("image/jpeg",0.6);
+
+            document.getElementById(imgId).src = compressed;
+            document.getElementById(boxId).style.display = "block";
+
+            fetch(compressed)
+            .then(res => res.blob())
+            .then(blob => {
+                const newFile = new File([blob], file.name,{type:"image/jpeg"});
+                const dt = new DataTransfer();
+                dt.items.add(newFile);
+                document.getElementById(inputId).files = dt.files;
+            });
+        }
+    }
+
+    reader.readAsDataURL(file);
+}
+
+function removeImage(inputId, boxId, imgId, nameId){
+    document.getElementById(inputId).value = "";
+    document.getElementById(imgId).src = "";
+    document.getElementById(boxId).style.display = "none";
+    document.getElementById(nameId).textContent = "No file selected";
+}
+</script>
+
+</body>
+</html>

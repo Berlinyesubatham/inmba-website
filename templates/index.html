@@ -559,20 +559,27 @@ background: #0f4d0f;
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Nav links -->
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
-        
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('programs') }}">Programs</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('events') }}">Events</a></li>
-       <li class="nav-item"><a class="nav-link" href="{{ url_for('membership') }}">Membership</a></li>
 
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+  <ul class="navbar-nav">
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('programs') }}">Programs</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('events') }}">Events</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
                <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
-      </ul>
-      <a href="{{ url_for('membership') }}" class="btn btn-warning ms-3">Join Now</a>
-    </div>
+    {% if session.get('user') %}
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link text-danger" href="{{ url_for('logout') }}">Logout</a></li>
+    {% else %}
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('membership') }}">Membership</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+    {% endif %}
+  </ul>
+  
+  {% if not session.get('user') %}
+    <a href="{{ url_for('membership') }}" class="btn btn-warning ms-3">Join Now</a>
+  {% endif %}
+</div>
   </div>
 </nav>
 
@@ -609,7 +616,7 @@ background: #0f4d0f;
   <!-- Overlay -->
   <div class="hero-overlay text-center">
     <h1 class="typing-text"></h1>
-    <p>Empowering Communities & Leaders</p>
+    <p> International Network of Modern Business Achievers</p>
     <a href="{{ url_for('membership') }}" class="btn btn-warning">Join Now</a>
   </div>
 
@@ -1277,6 +1284,14 @@ sendMsg();
   .cta-text, .cta-img { margin-bottom: 25px; }
   .cta-text h2 { font-size: 2.2rem; }
 }
+.typing-text {
+  font-size: 48px;
+  font-weight: bold;
+  white-space: nowrap;
+  border-right: 3px solid white;
+  display: inline-block;
+  overflow: hidden;
+}
 </style>
 <!-- Footer -->
 <footer class="footer-section">
@@ -1345,16 +1360,18 @@ function typeEffect() {
   let fullText = words[i];
 
   if (isDeleting) {
-    current = fullText.substring(0, j--);
+    j--;
+    current = fullText.substring(0, j);
   } else {
-    current = fullText.substring(0, j++);
+    j++;
+    current = fullText.substring(0, j);
   }
 
   document.querySelector(".typing-text").innerHTML = current;
 
   if (!isDeleting && j === fullText.length) {
     isDeleting = true;
-    setTimeout(typeEffect, 1200); // pause before delete
+    setTimeout(typeEffect, 1200);
   } 
   else if (isDeleting && j === 0) {
     isDeleting = false;
@@ -1362,10 +1379,9 @@ function typeEffect() {
     setTimeout(typeEffect, 300);
   } 
   else {
-    setTimeout(typeEffect, isDeleting ? 50 : 100);
+    setTimeout(typeEffect, isDeleting ? 80 : 150);
   }
 }
-
 typeEffect();
 
 const cards = document.querySelectorAll(".card3d");

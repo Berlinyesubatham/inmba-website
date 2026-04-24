@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>INMBA Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+/* 🌿 BACKGROUND */
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+      background: linear-gradient(-45deg, #dcedc1,  #f0f4e3);
+
+}
+
+
+/* MAIN CARD */
+.container{
+    position:relative;
+    z-index:1;
+    width:90%;
+    max-width:420px;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.1);
+    text-align:center;
+    animation:fadeIn 1s ease;
+}
+
+/* TITLE */
+.container h2{
+    color:#0f4d0f;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#666;
+    font-size:14px;
+    margin-bottom:20px;
+    text-align:left;
+}
+
+/* LABELS */
+.container label{
+    display:block;
+    text-align:left;
+    font-weight:500;
+    margin-top:10px;
+    font-size:14px;
+    color:#333;
+}
+
+/* INPUT */
+.container input{
+    width:100%;
+    padding:14px;
+    margin-top:5px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    outline:none;
+    transition:0.3s;
+}
+
+/* FOCUS EFFECT */
+.container input:focus{
+    border-color:#0f4d0f;
+    box-shadow:0 0 10px rgba(15,157,88,0.2);
+}
+
+/* BUTTON */
+.container button{
+    width:100%;
+    padding:14px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    background: linear-gradient(135deg, #0f9d58, #34c759);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.container button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(15,157,88,0.3);
+}
+
+/* EXTRA */
+.extra{
+    margin-top:15px;
+    font-size:13px;
+}
+
+.extra a{
+    color:#0f4d0f;
+    text-decoration:none;
+}
+
+/* ANIMATION */
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>INMBA Foundation</h2>
+    <div class="subtitle">Secure Member Login</div>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <div style="color:#d32f2f;margin-bottom:16px;text-align:left;">
+        {{ messages[0] }}
+      </div>
+      {% endif %}
+    {% endwith %}
+
+    {% if error %}
+    <div style="color:#d32f2f;margin-bottom:16px;text-align:left;">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="/login">
+        <label for="login_id">Login ID</label>
+        <input type="text" id="login_id" name="login_id" placeholder="Enter your 7-digit Login ID" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+  
+</div>
+
+</body>
+</html>

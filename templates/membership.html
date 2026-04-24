@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,274 +11,151 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
 /* Reset & font */
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+/* =========================
+/* KEEP YOUR HTML SAME - ONLY REPLACE CSS WITH THIS */
 
-/* Animated gradient background */
 body {
-  min-height: 100vh;
-  display: block; /* remove center flex */
-  padding: 10px;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #e8f5e9, #ffffff);
+}
 
-  align-items: center;
-  background: linear-gradient(-45deg, #dcedc1, #0f4d0f, #f0f4e3, #0f4d0f);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+.form-container {
+  max-width: 420px;
+  margin: 40px auto;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(20px);} 
+  to {opacity:1; transform: translateY(0);} 
+}
+
+h1 {
+  text-align: center;
+  color: #0f4d0f;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 13px;
+  color: gray;
+  margin-bottom: 18px;
+}
+
+.step.active {
+  display: block; /* remove grid look */
+}
+
+.input-box {
+  margin-bottom: 18px;
   position: relative;
 }
 
-@keyframes gradientBG {
-  0% { background-position:0% 50%; }
-  50% { background-position:100% 50%; }
-  100% { background-position:0% 50%; }
-}
-
-/* Floating circles animation */
-body::before {
-  pointer-events: none;
-}
-@keyframes floatCircles {
-  0% { transform: translate(0,0);}
-  50% { transform: translate(50px,50px);}
-  100% { transform: translate(0,0);}
-}
-
-/* Container */
-.form-container {
-  width: 100%;
-  max-width: 400px;
-  margin: auto;
-  background: rgba(255,255,255,0.95);
-  border-radius: 20px;
-  padding: 20px;
-  color: #333;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-
-  /* IMPORTANT 👇 */
-  max-height: none;   /* remove height restriction */
-  overflow: visible;  /* allow full content */
-}
-@keyframes fadeIn {
-  0% { opacity:0; transform:scale(0.95); }
-  100% { opacity:1; transform:scale(1); }
-}
-
-/* Headings */
-h1 { text-align:center; margin-bottom:10px; color:#556b2f; }
-p.subtitle { text-align:center; margin-bottom:20px; color:#6b8e23; font-size:14px; }
-
-/* Input boxes */
-.input-box { position: relative; margin-bottom:15px; }
 .input-box input,
 .input-box select {
-  width:100%;
-  padding:12px 12px 12px 40px;
-  border-radius:12px;
-  border:1px solid #ccc;
-  outline:none;
-  font-size:14px;
-  background:#f0f4e3;
-  color:#333;
-  transition:0.3s;
+  width: 100%;
+  padding: 11px 12px 11px 38px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: 0.3s;
 }
-.input-box input::placeholder { color:#777; }
+
 .input-box input:focus,
 .input-box select:focus {
-  background:#e6eed6;
-  border-color:#0f4d0f;
-  box-shadow:0 0 10px #0f4d0f;
+  border-color: #0f4d0f;
+  box-shadow: 0 0 8px #0f4d0f40;
+  outline: none;
 }
 
-/* Icons */
 .input-box i {
-  position:absolute;
-  top:50%;
-  left:12px;
-  transform:translateY(-50%);
-  color:#0f4d0f;
-  font-size:16px;
-  pointer-events:none;
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #0f4d0f;
 }
 
-/* Buttons */
-.step-buttons button {
-  width:100%;
-}
-
-/* Navbar button fix */
-.navbar .btn {
-  width: auto;
-  padding: 8px 16px;
-  font-size: 14px;
-}
-.btn:hover, .step-buttons button:hover {
-  background:#0f4d0f;
-  transform:translateY(-3px);
-  box-shadow:0 8px 20px rgba(0,0,0,0.15);
-}
-
-/* Step navigation */
-.step-buttons { display:flex; justify-content:space-between; margin-top:10px; }
-.step-buttons button { width:48%; }
-
-/* File notes */
-.file-note { font-size:12px; color:#777; margin-top:-10px; margin-bottom:10px; }
-
-/* Step animation */
 .step {
-  display:none;
-  opacity:0;
-  transform:translateX(50px);
-  transition: all 0.5s ease;
-}
-.step.active {
-  display:block;
-  opacity:1;
-  transform:translateX(0);
-}
-/* 📱 Mobile Responsive */
-@media (max-width: 768px) {
-
-  body {
-    padding: 15px;
-    align-items: flex-start; /* better scroll */
-  }
-
-  .form-container {
-    width: 100%;
-    max-width: 100%;
-    padding: 20px;
-    border-radius: 15px;
-  }
-
-  h1 {
-    font-size: 20px;
-  }
-
-  .subtitle {
-    font-size: 13px;
-  }
-
-  .input-box input,
-  .input-box select {
-    padding: 12px 12px 12px 38px;
-    font-size: 14px;
-  }
-
-  .input-box i {
-    left: 10px;
-    font-size: 14px;
-  }
-
-  .step-buttons {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .step-buttons button {
-    width: 100%;
-  }
-
-  .btn {
-    font-size: 15px;
-    padding: 12px;
-  }
+  display: none;
 }
 
-/* 📱 Extra small devices */
-@media (max-width: 400px) {
-  h1 {
-    font-size: 18px;
-  }
+.section-box {
+  background: #f1f7f1;
+  padding: 12px;
+  border-left: 5px solid #0f4d0f;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
 
-  .container {
-    padding: 15px;
-  }
-}/* 📱 MOBILE FIRST REDESIGN */
-@media (max-width: 768px) {
-
-  body {
-    display: block; /* remove center alignment */
-    padding: 0;
-  }
-
-  .form-container {
-    width: 100%;
-    height: 100%;
-    min-height: 100vh;
-    border-radius: 0; /* remove card feel */
-    box-shadow: none;
-    padding: 20px 15px;
-  }
-
-  h1 {
-    font-size: 22px;
-    margin-bottom: 5px;
-  }
-
-  .subtitle {
-    font-size: 13px;
-    margin-bottom: 15px;
-  }
-
-  .input-box {
-    margin-bottom: 18px;
-  }
-
-  .input-box input,
-  .input-box select {
-    font-size: 15px;
-    padding: 14px 12px 14px 40px;
-    border-radius: 10px;
-  }
-
-  /* Bigger touch icons */
-  .input-box i {
-    font-size: 15px;
-  }
-
-  /* Step animation smoother */
-  .step {
-    transform: translateX(20px);
-  }
-
-  /* Buttons like mobile apps */
-  .step-buttons {
+.step-buttons {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
   margin-top: 20px;
 }
 
 .step-buttons button {
+  flex: 1;
+  padding: 10px; /* smaller size */
+  font-size: 14px;
+  border-radius: 8px;
+}
+.step-buttons button {
   width: 100%;
-  padding: 14px;
-  font-size: 16px;
+  padding: 13px;
+  background: linear-gradient(135deg, #0f4d0f, #28a745);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+.step-buttons button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.agree-box {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  margin: 20% auto;
   border-radius: 10px;
 }
-  .step-buttons button {
-    width: 100%;
-    padding: 14px;
-    font-size: 16px;
-    border-radius: 10px;
-  }
 
-  /* Add slight top spacing */
-  form {
-    padding-bottom: 20px;
+@media (max-width: 500px) {
+  .form-container {
+    margin: 15px;
+    padding: 18px;
   }
 }
-@media (max-width:768px){
 
-  .step-buttons {
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
-  }
-
-  .step-buttons button {
-    width: 100%;
-  }
-}
 
   .navbar-custom {
   background: #0f4d0f, #a2daa2; /* Semi-transparent dark blue */
@@ -515,6 +393,42 @@ p.subtitle { text-align:center; margin-bottom:20px; color:#6b8e23; font-size:14p
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
+.agree-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.agree-box input {
+  box-shadow: none;
+}
+.link {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  width: 60%;
+  margin: 8% auto;
+  border-radius: 10px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
 </style>
 </head>
 <body>
@@ -551,15 +465,24 @@ p.subtitle { text-align:center; margin-bottom:20px; color:#6b8e23; font-size:14p
 <br>
 <br>
 <br>
+<br>
 <div class="form-container">
 <h1>Membership KYC Form</h1>
 <p class="subtitle">Fill all details step by step</p>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div style="color:#d32f2f;margin-bottom:16px;text-align:left;">
+      {{ messages[0] }}
+    </div>
+  {% endif %}
+{% endwith %}
 <form id="kycForm" method="POST" action="/register" enctype="multipart/form-data">
   <!-- Step 1: Account Info -->
   <div class="step active">
     <div class="input-box"><i class="fas fa-user"></i><input type="text" placeholder="First Name" required name="first_name"></div>
     <div class="input-box"><i class="fas fa-user"></i><input type="text" placeholder="Last Name (optional)" name="last_name"></div>
     <div class="input-box"><i class="fas fa-calendar"></i><input type="date" placeholder="Date of Birth" required name="dob"></div>
+    <div class="input-box"><i class="fas fa-id-card"></i><input type="aadhar" placeholder="Aadhar Number(optional)" name="aadhar" pattern="[0-11]{12}" maxlength="12"></div>
     <div class="input-box"><i class="fas fa-envelope"></i><input type="email" placeholder="Email" required name="email"></div>
 <div class="input-box d-flex">
   
@@ -572,37 +495,39 @@ p.subtitle { text-align:center; margin-bottom:20px; color:#6b8e23; font-size:14p
   </select>
 
   <!-- Phone Number -->
-  <input type="tel" name="phone" 
+  <input type="tel" name="phone" id="phoneInput"
          placeholder="Enter 10 digit number"
          pattern="[0-9]{10}"
          maxlength="10"
          required>
 </div>
-    <div class="input-box"><i class="fas fa-key"></i><input type="password" placeholder="Password" required  name="password"></div>
-    <div class="input-box"><i class="fas fa-key"></i><input type="password" placeholder="Confirm Password" required  name="confirm_password"></div>
+    <div class="input-box"><i class="fas fa-key"></i><input type="password" placeholder="Password" required name="password" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}' title="At least 8 characters, including upper/lowercase, digit and special character"></div>
+    <div class="input-box"><i class="fas fa-key"></i><input type="password" placeholder="Confirm Password" required name="confirm_password"></div>
   
  
   <div class="input-box">
     <i class="fas fa-flag"></i>
-    <input type="text" placeholder="State" required  name="state">
+    <input type="text" placeholder="State"   name="state">
   </div>
 
   <div class="input-box">
     <i class="fas fa-city"></i>
-    <input type="text" placeholder="District" required name="district">
+    <input type="text" placeholder="District"  name="district">
   </div>
 
   <div class="input-box">
     <i class="fas fa-city"></i>
-    <input type="text" placeholder="City" required  name="city">
+    <input type="text" placeholder="City/Taluk"   name="city">
   </div>
 
   <div class="input-box">
     <i class="fas fa-mail-bulk"></i>
     <input type="number" placeholder="Pincode" required  name="pincode">
   </div>
-    <div class="input-box"><i class="fas fa-gift"></i><input type="text" placeholder="Referral Token (Optional)" name="referral"></div>
+    <div class="input-box"><i class="fas fa-gift"></i><input type="text" placeholder="Referral Token (Optional)" name="referral" value="{{ referral_token or '' }}"></div>
   </div>
+<br>
+
 
   <!-- Step 2: Personal Info -->
   <div class="step">
@@ -627,19 +552,39 @@ p.subtitle { text-align:center; margin-bottom:20px; color:#6b8e23; font-size:14p
  
 
 
+<br>
 
   <!-- Step 6: Membership -->
   <div class="step">
     <div class="input-box"><i class="fas fa-user-check"></i>
       <select required  name="membership_type">
         <option value="">Select Membership Category</option>
-        <option>Student</option><option>Volunteer</option><option>Donor</option>
-        <option>Professional</option><option>Corporate</option><option>Life</option><option>Advisory</option>
+        <option>Honour Member</option><option>Professional Member</option><option>Commercial Member</option>
+        <option>civilian Member</option><option>Special Member</option><option>Student Member</option>
       </select>
     </div>
-    <div class="input-box"><i class="fas fa-check"></i><input type="checkbox" required  name="agree"> I agree to organization rules & privacy policy</div>
+<div class="agree-box">
+  <input type="checkbox" id="agree" required>
+  <label>
+    I agree to the 
+    <span class="link" onclick="openPopup()">Terms & Privacy Policy</span>
+  </label>
+</div>
   </div>
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <h3>Terms & Privacy Policy</h3>
 
+    <p>1. All information provided must be accurate and valid.</p>
+    <p>2. Your personal details will be stored securely.</p>
+    <p>3. Your data will not be shared with third parties without permission.</p>
+    <p>4. Aadhar number cannot be reused within 14 days.</p>
+    <p>5. Bank details must be correct for verification.</p>
+    <p>6. Organization has the right to verify and reject invalid entries.</p>
+
+    <button onclick="closePopup()">Close</button>
+  </div>
+</div>
   <!-- Step navigation -->
   <div class="step-buttons">
     <button type="button" id="prevBtn" onclick="nextPrev(-1)" style="display:none;">Previous</button>
@@ -652,12 +597,25 @@ p.subtitle { text-align:center; margin-bottom:20px; color:#6b8e23; font-size:14p
 <script>
 let currentStep = 0;
 const steps = document.querySelectorAll(".step");
+const progressFill = document.getElementById("progressFill");
+const progressSteps = document.querySelectorAll(".progress-step");
 
 function showStep(n){
-  steps.forEach(s => s.classList.remove("active"));
-  steps[n].classList.add("active");
+  steps.forEach((s,i) => s.classList.toggle("active", i===n));
   document.getElementById("prevBtn").style.display = n===0?'none':'inline';
   document.getElementById("nextBtn").innerText = n===steps.length-1?'Submit':'Next';
+  updateProgress(n);
+}
+
+function updateProgress(stepIndex){
+  const total = steps.length-1;
+  const percent = (stepIndex/total)*100;
+  progressFill.style.width = percent+'%';
+  progressSteps.forEach((ps,idx)=>{
+    ps.classList.remove("active","completed");
+    if(idx<stepIndex) ps.classList.add("completed");
+    if(idx===stepIndex) ps.classList.add("active");
+  });
 }
 
 function nextPrev(n){
@@ -667,12 +625,42 @@ function nextPrev(n){
       if(!inp.checkValidity()){ inp.reportValidity(); return; }
     }
   }
-  currentStep+=n;
-  if(currentStep>=steps.length){ document.getElementById("kycForm").submit(); return; }
+  currentStep += n;
+  if(currentStep >= steps.length){
+    document.getElementById("kycForm").submit();
+    return;
+  }
   showStep(currentStep);
 }
 
+// Initialize first step
 showStep(currentStep);
+
+// Popup functions
+function openPopup(){ document.getElementById("popup").style.display="block"; }
+function closePopup(){ document.getElementById("popup").style.display="none"; }
+
+// Phone input validation attempts
+let phoneAttempts = 0;
+const maxAttempts = 3;
+const phoneInput = document.getElementById("phoneInput");
+
+phoneInput.addEventListener("input", ()=>{
+  if(phoneInput.value.length > 10){
+    phoneInput.value = phoneInput.value.slice(0,10);
+  }
+});
+
+phoneInput.addEventListener("blur", ()=>{
+  if(phoneInput.value.length < 10){
+    phoneAttempts++;
+    alert(`Phone number must be 10 digits. Attempts left: ${maxAttempts-phoneAttempts}`);
+    if(phoneAttempts>=maxAttempts){
+      phoneInput.disabled = true;
+      alert("Maximum attempts reached. Please refresh the page to retry.");
+    }
+  }
+});
 </script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 </body>

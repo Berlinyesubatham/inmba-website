@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,22 +27,88 @@ body {
   border-radius: 15px;
   margin-top: 20px;
 }
+
+/* Navigation */
+.admin-nav {
+  background: #343a40;
+  padding: 10px 0;
+}
+.admin-nav .nav-link {
+  color: #ffffff !important;
+}
+.admin-nav .nav-link:hover {
+  color: #22c55e !important;
+}
 </style>
 
 </head>
 <body>
 
+<!-- Admin Navigation -->
+<nav class="admin-nav">
+  <div class="container">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link active" href="/admin">👥 User Management</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin_payment">💳 Payment Management</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">🚪 Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 <div class="container mt-5">
 
   <h2 class="text-center mb-4">👨‍💼 Admin Dashboard</h2>
 
+  <div class="text-center mb-3">
+    <a href="/admin_payment" class="btn btn-info">💳 Payment Management</a>
+  </div>
+
   <!-- STATS -->
   <div class="row text-center">
-    <div class="col-md-4 mb-3">
+    <div class="col-md-3 mb-3">
       <div class="dashboard-card">
-        <h3>{{ users|length }}</h3>
+        <h3>{{ status_counts.all }}</h3>
         <p>Total Members</p>
       </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="dashboard-card" style="background: linear-gradient(45deg, #0b6b3b, #22c55e);">
+        <h3>{{ status_counts.approved }}</h3>
+        <p>Approved</p>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="dashboard-card" style="background: linear-gradient(45deg, #d97706, #facc15);">
+        <h3>{{ status_counts.pending }}</h3>
+        <p>Pending</p>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="dashboard-card" style="background: linear-gradient(45deg, #991b1b, #ef4444);">
+        <h3>{{ status_counts.rejected }}</h3>
+        <p>Rejected</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <form method="get" class="d-flex gap-2 align-items-center justify-content-end">
+        <label for="statusFilter" class="mb-0">Filter:</label>
+        <select id="statusFilter" name="status" class="form-select form-select-sm" style="max-width: 220px;">
+          <option value="all" {% if selected_status == 'all' %}selected{% endif %}>All statuses</option>
+          <option value="approved" {% if selected_status == 'approved' %}selected{% endif %}>Approved</option>
+          <option value="pending" {% if selected_status == 'pending' %}selected{% endif %}>Pending</option>
+          <option value="rejected" {% if selected_status == 'rejected' %}selected{% endif %}>Rejected</option>
+        </select>
+        <button type="submit" class="btn btn-primary btn-sm">Apply</button>
+      </form>
     </div>
   </div>
 
@@ -71,6 +138,8 @@ body {
   <th>Occupation</th>
   <th>Education</th>
   <th>Membership</th>
+  <th>Status</th>
+  <th>Network Strength</th>
   <th>Action</th>
 </tr>
 </thead>
@@ -94,29 +163,22 @@ body {
   <td>{{ user.occupation }}</td>
   <td>{{ user.education }}</td>
   <td>{{ user.membership_type }}</td>
-
+  <td>{{ user.payment_status or 'N/A' }}</td>
+  <td>{{ (user.direct_network or 0) }}:{{ (user.indirect_network or 0) }}</td>
   <td>
-    <a href="/delete/{{ user.id }}" class="btn btn-danger btn-sm">Delete</a>
+    <a href="/admin/user/{{ user.id }}" class="btn btn-primary btn-sm me-2">View Details</a>
+    <!-- BEFORE (broken) -->
+
+
+<!-- AFTER (fixed) -->
+<form action="/delete/{{ user.id }}" method="POST" style="display:inline;"
+      onsubmit="return confirm('Are you sure you want to delete {{ user.first_name }}?')">
+    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+</form>
   </td>
 </tr>
 {% endfor %}
 </tbody>
-          {% for user in users %}
-          <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.first_name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.phone }}</td>
-            <td>{{ user.membership_type }}</td>
-
-            <td>
-              <a href="/delete/{{ user.id }}" class="btn btn-danger btn-sm">
-                Delete
-              </a>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
 
       </table>
     </div>

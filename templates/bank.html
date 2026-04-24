@@ -1,82 +1,391 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Bank Details</title>
-    <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
-
-body {
-  min-height: 100vh;
-  padding: 10px;
-  background: linear-gradient(-45deg, #dcedc1, #0f4d0f, #f0f4e3, #0f4d0f);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+<meta charset="UTF-8">
+<title>INMBA Bank Details</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { box-sizing: border-box; margin:0; padding:0; }
+body { font-family:'Segoe UI',sans-serif; background:#e8f5e9; }
+.container { max-width:400px; margin:50px auto; background:white; padding:25px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+h2 { text-align:center; color:#0f4d0f; margin-bottom:15px; }
+label { display:block; margin-bottom:5px; font-weight:600; }
+input, select { width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px; }
+button { width:100%; padding:12px; background:linear-gradient(135deg,#0f4d0f,#28a745); color:white; border:none; border-radius:8px; font-size:16px; cursor:pointer; }
+button:hover { transform:scale(1.02); }
+.error { color:red; font-size:14px; margin-top:-10px; margin-bottom:10px; }
+.upload-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-@keyframes gradientBG {
-  0% { background-position:0% 50%; }
-  50% { background-position:100% 50%; }
-  100% { background-position:0% 50%; }
+/* Hide default */
+.custom-upload input{
+  display:none;
 }
 
-.form-container {
-  width: 100%;
-  max-width: 400px;
-  margin: auto;
-  background: rgba(255,255,255,0.95);
-  border-radius: 20px;
-  padding: 20px;
-  color: #333;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-  margin-top: 50px;
-}
-
-.input-box {
-  margin-bottom: 15px;
-}
-
-.input-box input {
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:1px solid #ccc;
-  background:#f0f4e3;
-}
-
-button {
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:12px;
+/* Button */
+.custom-upload{
   background:#0f4d0f;
   color:white;
-  font-size:16px;
+  padding:8px 14px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+  transition:0.3s;
+}
+
+.custom-upload:hover{
+  background:#28a745;
+}
+
+/* File name */
+#bankFileName{
+  font-size:13px;
+  color:#555;
+}
+
+/* Preview small */
+.preview-box{
+  width:50px;
+  height:50px;
+  display:none;
+  position:relative;
+}
+
+.preview-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:6px;
+}
+
+/* Remove */
+.remove-btn{
+  position:absolute;
+  top:-6px;
+  right:-6px;
+  background:red;
+  color:white;
+  width:16px;
+  height:16px;
+  font-size:10px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   cursor:pointer;
 }
-    </style>
+.modern-upload{
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  padding:12px 14px;
+  background:#f9fafb;
+  transition:0.3s;
+}
+
+.modern-upload:hover{
+  border-color:#28a745;
+  background:#f3fff6;
+}
+
+.preview-circle{
+  width:55px;
+  height:55px;
+  border-radius:10px;
+  overflow:hidden;
+  position:relative;
+  display:none;
+  border:2px solid #e5e7eb;
+}
+
+.preview-circle img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.upload-card {
+  background: #f3f4f6;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  border: 1px solid #e5e7eb;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.upload-left-content {
+  font-weight: 600;
+  color: #065f46;
+}
+
+.upload-left-content small {
+  display: block;
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* RIGHT SIDE IMAGE */
+.upload-preview {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  display: none;
+  border: 1px solid #ddd;
+}
+
+.upload-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* REMOVE BUTTON */
+.upload-preview span {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+</style>
 </head>
 <body>
 
-<div class="form-container">
-    <h2 style="text-align:center; margin-bottom:20px;">Enter Bank Details</h2>
+<div class="container">
+<h2>🏦 Enter Bank Details</h2>
 
-    <form method="POST" action="/bank_submit/{{token}}">
-        
-        <div class="input-box">
-            <input type="text" name="bank_name" placeholder="Bank Name" required>
-        </div>
+<form id="bankForm" action="{{ url_for('bank_submit', token=token) }}" method="POST" enctype="multipart/form-data">
+<label>Account Holder Name</label>
+<input type="text" name="account_holder" placeholder="Enter the name as per bank book" required>
 
-        <div class="input-box">
-            <input type="text" name="account_number" placeholder="Account Number" required>
-        </div>
 
-        <div class="input-box">
-            <input type="text" name="ifsc" placeholder="IFSC Code" required>
-        </div>
+<div class="upload-card" onclick="document.getElementById('bankInput').click()">
+  
+  <!-- LEFT TEXT -->
+  <div class="upload-left-content">
+    📄 Bank Proof
+    <small id="bankFileName">No file selected</small>
+  </div>
 
-        <button type="submit">Submit</button>
-    </form>
+  <!-- RIGHT IMAGE -->
+  <div class="upload-preview" id="bankPreviewBox">
+    <img id="bankPreviewImg">
+    <span onclick="removeBank(event)">✖</span>
+  </div>
+
 </div>
+
+<input type="file" name="bank_proof" id="bankInput"
+  accept="image/png, image/jpeg"
+  onchange="previewBank(event)" hidden required>
+<!-- With this new searchable dropdown -->
+<label>Bank Name</label>
+<input type="text" id="bankSearch" placeholder="Type to search bank..." 
+       autocomplete="off"
+       oninput="filterBanks()"
+       onfocus="showBankList()"
+       style="width:100%; padding:10px; margin-bottom:0; border:1px solid #ccc; border-radius:8px;">
+
+<!-- Hidden input that actually submits the value -->
+<input type="hidden" name="bank_name" id="bankNameValue" required>
+
+<div id="bankDropdown" style="
+    display:none;
+    max-height:200px;
+    overflow-y:auto;
+    border:1px solid #ccc;
+    border-top:none;
+    border-radius:0 0 8px 8px;
+    background:white;
+    margin-bottom:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    z-index:999;
+    position:relative;
+"></div>
+
+<label>Account Number</label>
+<input type="text" name="account_number1" placeholder="Enter Account Number" required pattern="\d{9,18}" title="Account number must be 9-18 digits">
+
+<label>Confirm Account Number</label>
+<input type="text" name="account_number2" placeholder="Confirm Account Number" required pattern="\d{9,18}" title="Account number must be 9-18 digits">
+
+<label>IFSC code</label>
+<input type="text" name="ifsc" placeholder="Enter IFSC Code" required pattern="[A-Za-z]{4}\d{7}" title="Enter valid 11-character IFSC code">
+
+<label>Branch Name</label>
+<input type="text" name="branch_name" placeholder="Enter Branch Name" required>
+
+<div class="error" id="errorMsg"></div>
+
+<button type="submit">✅ Submit Bank Details</button>
+</form>
+</div>
+
+<script>
+const bankList = [
+    "State Bank of India (SBI)",
+    "HDFC Bank",
+    "ICICI Bank",
+    "Axis Bank",
+    "Kotak Mahindra Bank",
+    "Punjab National Bank (PNB)",
+    "Bank of Baroda",
+    "Yes Bank",
+    "IndusInd Bank",
+    "RBL Bank",
+    "South Indian Bank",
+    "Federal Bank",
+    "IDFC First Bank",
+    "Bandhan Bank",
+    "City Union Bank",
+    "Tamilnad Mercantile Bank",
+    "UCO Bank",
+    "Union Bank of India",
+    "Canara Bank",
+    "Indian Bank",
+    "Central Bank of India",
+    "Bank of India",
+    "Indian Overseas Bank",
+    "Corporation Bank",
+    "Others"
+];
+
+function showBankList() {
+    filterBanks();
+}
+
+function filterBanks() {
+    const search = document.getElementById('bankSearch').value.toLowerCase();
+    const dropdown = document.getElementById('bankDropdown');
+    
+    const filtered = bankList.filter(b => b.toLowerCase().includes(search));
+    
+    if (filtered.length === 0) {
+        dropdown.style.display = 'none';
+        return;
+    }
+
+    dropdown.innerHTML = filtered.map(b => `
+        <div onclick="selectBank('${b}')" style="
+            padding:10px 14px;
+            cursor:pointer;
+            font-size:14px;
+            border-bottom:1px solid #f0f0f0;
+        " onmouseover="this.style.background='#e8f5e9'"
+           onmouseout="this.style.background='white'">
+            ${b}
+        </div>
+    `).join('');
+
+    dropdown.style.display = 'block';
+}
+
+function selectBank(name) {
+    document.getElementById('bankSearch').value = name;
+    document.getElementById('bankNameValue').value = name;
+    document.getElementById('bankDropdown').style.display = 'none';
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+    const search = document.getElementById('bankSearch');
+    const dropdown = document.getElementById('bankDropdown');
+    if (!search.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.style.display = 'none';
+    }
+});
+
+// Validate bank selected on submit
+const acc1 = document.querySelector('[name="account_number1"]');
+const acc2 = document.querySelector('[name="account_number2"]');
+const form = document.getElementById('bankForm');
+const errorMsg = document.getElementById('errorMsg');
+
+form.addEventListener('submit', function(e) {
+    errorMsg.textContent = '';
+
+    if (!document.getElementById('bankNameValue').value) {
+        e.preventDefault();
+        errorMsg.textContent = "❌ Please select a bank from the list";
+        document.getElementById('bankSearch').focus();
+        return false;
+    }
+
+    if (acc1.value !== acc2.value) {
+        e.preventDefault();
+        errorMsg.textContent = "❌ Account numbers do not match";
+        acc2.focus();
+        return false;
+    }
+
+    if (!/^\d{9,18}$/.test(acc1.value)) {
+        e.preventDefault();
+        errorMsg.textContent = "❌ Account number must be 9-18 digits";
+        acc1.focus();
+        return false;
+    }
+
+    if (!/^[A-Za-z]{4}\d{7}$/.test(document.querySelector('[name="ifsc"]').value)) {
+        e.preventDefault();
+        errorMsg.textContent = "❌ IFSC code must be 11 characters like ABCD0123456";
+        return false;
+    }
+});
+
+acc2.addEventListener('input', function() {
+    acc1.type = acc2.value.length > 0 ? "password" : "text";
+});
+
+function removeBank(event){
+    if(event) event.stopPropagation();
+    document.getElementById("bankInput").value = "";
+    document.getElementById("bankPreviewImg").src = "";
+    document.getElementById("bankPreviewBox").style.display = "none";
+    document.getElementById("bankFileName").innerText = "No file chosen";
+}
+
+function previewBank(event){
+    const file = event.target.files[0];
+    if(!file) return;
+
+    const allowed = ['image/jpeg','image/png'];
+    if(!allowed.includes(file.type)){
+        alert("Only JPG or PNG images are allowed.");
+        event.target.value = "";
+        return;
+    }
+    if(file.size > 1 * 1024 * 1024){
+        alert("Max file size is 1MB.");
+        event.target.value = "";
+        return;
+    }
+
+    document.getElementById("bankFileName").innerText = file.name;
+    const reader = new FileReader();
+    reader.onload = function(e){
+        document.getElementById("bankPreviewImg").src = e.target.result;
+        document.getElementById("bankPreviewBox").style.display = "block";
+    }
+    reader.readAsDataURL(file);
+}
+</script>
 
 </body>
 </html>

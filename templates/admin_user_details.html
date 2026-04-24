@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Details | Admin Panel</title>
+
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome 6 (free icons) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<!-- Google Fonts: Inter & Poppins for modern look -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* Navigation */
+.admin-nav {
+  background: #343a40;
+  padding: 10px 0;
+}
+.admin-nav .nav-link {
+  color: #ffffff !important;
+}
+.admin-nav .nav-link:hover {
+  color: #22c55e !important;
+}
+
+/* ----- GLOBAL RESET / MODERN THEME ----- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(145deg, #f4f7fc 0%, #e9eff5 100%);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    padding: 40px 0 60px 0;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Back button - modern glass style */
+.btn-back {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(0,0,0,0.08);
+    color: #1e293b;
+    font-weight: 500;
+    padding: 8px 20px;
+    border-radius: 40px;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+.btn-back:hover {
+    background: white;
+    border-color: #cbd5e1;
+    transform: translateX(-3px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+    color: #0f172a;
+}
+
+/* Card-box – preserved class name, only visual upgrade */
+.card-box {
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 28px 30px;
+    margin-bottom: 28px;
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0,0,0,0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s;
+    border: 1px solid rgba(226, 232, 240, 0.6);
+}
+.card-box:hover {
+    box-shadow: 0 25px 40px -14px rgba(0, 0, 0, 0.12);
+}
+
+/* Admin action special border + accent */
+.admin-box {
+    border-left: 5px solid #22c55e;
+    background: linear-gradient(105deg, #fff 0%, #fefce8 100%);
+}
+
+/* headings inside card-box */
+.card-box h4 {
+    font-size: 1.55rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #0b2f1f;
+    border-left: 5px solid #22c55e;
+    padding-left: 16px;
+}
+.card-box h4 i {
+    font-size: 1.6rem;
+    color: #2b7e3a;
+}
+
+/* paragraph and label styling */
+.card-box p {
+    font-size: 0.98rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    color: #1e2a3e;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+.card-box p b {
+    font-weight: 600;
+    color: #0f3b2c;
+    min-width: 130px;
+    display: inline-block;
+}
+
+/* image styling - modern rounded + subtle shadow */
+img {
+    border-radius: 18px;
+    margin: 8px 12px 8px 0;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    transition: all 0.2s;
+    max-width: 100%;
+    height: auto;
+}
+img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 22px rgba(0,0,0,0.1);
+    border-color: #cbd5e1;
+}
+
+/* form elements – modern inputs */
+form label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    color: #1f3b2c;
+    display: block;
+}
+.form-control, select {
+    border-radius: 18px;
+    border: 1.5px solid #e2edf2;
+    padding: 10px 18px;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    background-color: #fefefe;
+}
+.form-control:focus, select:focus {
+    border-color: #22c55e;
+    box-shadow: 0 0 0 4px rgba(34,197,94,0.15);
+    outline: none;
+}
+
+/* Buttons */
+.btn-success {
+    background: linear-gradient(105deg, #1f8a4c, #22c55e);
+    border: none;
+    border-radius: 40px;
+    padding: 8px 28px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: 0.2s;
+}
+.btn-success:hover {
+    background: linear-gradient(105deg, #166534, #16a34a);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(34,197,94,0.25);
+}
+
+.btn-danger {
+    border-radius: 40px;
+    padding: 10px 32px;
+    font-weight: 600;
+    background: #dc2626;
+    border: none;
+    transition: 0.2s;
+}
+.btn-danger:hover {
+    background: #b91c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(220,38,38,0.25);
+}
+
+/* Danger zone card - distinctive style */
+.card-box:last-of-type {
+    border: 1px solid #ffd9d9;
+    background: #fffbfb;
+    text-align: center;
+}
+.card-box:last-of-type h4 {
+    border-left-color: #dc2626;
+    color: #991b1b;
+    justify-content: center;
+}
+.card-box:last-of-type h4 i {
+    color: #dc2626;
+}
+
+/* admin action card separate layout */
+.card-box[style*="border:2px solid #22c55e"] {
+    border: 2px solid #22c55e !important;
+    background: #fefdf7;
+}
+
+/* responsive tweaks */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
+    }
+    .card-box {
+        padding: 20px;
+    }
+    .card-box p b {
+        min-width: 100%;
+        margin-bottom: 4px;
+    }
+    img {
+        width: 100%;
+        max-width: 180px;
+    }
+}
+
+/* Additional minor spacing */
+hr {
+    opacity: 0.4;
+    margin: 20px 0;
+}
+</style>
+</head>
+<body>
+
+<!-- Admin Navigation -->
+<nav class="admin-nav">
+  <div class="container">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link" href="/admin">👥 User Management</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin_payment">💳 Payment Management</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="#">👤 User Details</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">🚪 Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+    <!-- Back button (consistent with original, but styled) -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <a href="/admin" class="btn btn-back">
+            <i class="fas fa-arrow-left me-2"></i> Back to Admin
+        </a>
+        <span class="badge bg-light text-dark px-3 py-2 rounded-pill shadow-sm">
+            <i class="far fa-user-circle me-1"></i> User Management
+        </span>
+    </div>
+
+    <!-- 🔥 ADMIN ACTION (exactly same structure, class, action) -->
+    <div class="card-box" style="border:2px solid #22c55e; background: #fefef5;">
+        <h4><i class="fas fa-user-shield"></i> ⚙️ Admin Action</h4>
+        <form method="POST" action="/admin_verify/{{ user.id }}">
+            <div class="mb-3">
+                <label><b><i class="fas fa-tag"></i> Referral ID</b></label>
+                <input type="text" name="referral_id" class="form-control" placeholder="Enter Referral ID (optional)">
+            </div>
+            <div class="mb-3">
+                <label><b><i class="fas fa-flag-checkered"></i> Status</b></label>
+                <select name="status" class="form-control">
+                    <option value="approved">✅ Approve</option>
+                    <option value="pending">⏳ Pending</option>
+                    <option value="rejected">❌ Reject</option>
+                </select>
+            </div>
+            <div class="mb-3">
+               
+                <small class="text-muted">When approved, your referral link will be generated and you can view it after login</small>
+            </div>
+            <button class="btn btn-success mt-2">
+                <i class="fas fa-save me-2"></i> Save & Update
+            </button>
+        </form>
+    </div>
+
+    <!-- MAIN USER DETAILS (all original content & class names untouched) -->
+    <h2 class="text-center mb-4 fw-bold" style="color: #1e4620;">
+        <i class="fas fa-id-card me-2"></i> Full User Details
+    </h2>
+
+    <!-- PERSONAL DETAILS -->
+    <div class="card-box">
+        <h4><i class="fas fa-user-circle"></i> 🧍 Personal Details</h4>
+        <p><b>Name:</b> {{ user.first_name }} {{ user.last_name }}</p>
+        <p><b>DOB:</b> {{ user.dob }}</p>
+        <p><b>Email:</b> {{ user.email }}</p>
+        <p><b>Phone:</b> {{ user.phone }}</p>
+        <p><b>Gender:</b> {{ user.gender }}</p>
+        <p><b>Marital Status:</b> {{ user.marital_status }}</p>
+    </div>
+
+    <!-- ADDRESS -->
+    <div class="card-box">
+        <h4><i class="fas fa-map-marker-alt"></i> 📍 Address</h4>
+        <p>{{ user.city }}, {{ user.district }}, {{ user.state }} - {{ user.pincode }}</p>
+    </div>
+
+    <!-- PROFESSIONAL -->
+    <div class="card-box">
+        <h4><i class="fas fa-briefcase"></i> 🎓 Professional</h4>
+        <p><b>Education:</b> {{ user.education }}</p>
+        <p><b>Occupation:</b> {{ user.occupation }}</p>
+    </div>
+
+    <!-- PAYMENT -->
+    <div class="card-box">
+        <h4><i class="fas fa-credit-card"></i> 💳 Payment Details</h4>
+        <p><b>Method:</b> {{ user.payment_method }}</p>
+        <p><b>Transaction ID:</b> {{ user.transaction_id }}</p>
+        <p><b>Plan:</b> {{ user.subscription_year }} Year</p>
+        {% if user.payment_proof %}
+            <div><b>Payment Proof:</b></div>
+            <img src="{{ url_for('static', filename='uploads/' + user.payment_proof) }}" width="150" alt="payment proof">
+        {% endif %}
+    </div>
+
+    <!-- BANK -->
+    <div class="card-box">
+        <h4><i class="fas fa-university"></i> 🏦 Bank Details</h4>
+        <p><b>Account Holder:</b> {{ user.account_holder }}</p>
+        <p><b>Bank:</b> {{ user.bank_name }}</p>
+        <p><b>Account No:</b> {{ user.account_number }}</p>
+        <p><b>IFSC:</b> {{ user.ifsc }}</p>
+        {% if user.bank_proof %}
+            <div><b>Bank Proof:</b></div>
+            <img src="{{ url_for('static', filename='uploads/' + user.bank_proof) }}" width="150" alt="bank proof">
+        {% endif %}
+    </div>
+
+    <!-- LEGAL ENTITY DETAILS (exact original markup) -->
+    <div class="card-box">
+        <h4><i class="fas fa-building"></i> 🆔 Legal Entity Details</h4>
+        <p><b>Aadhar Number:</b> {{ user.entity_aadhar_number }}</p>
+        <hr>
+        <h5>📍 Address</h5>
+        <p>
+            {{ user.entity_house_no }},
+            {{ user.entity_street }},
+            {{ user.entity_area }},
+            {{ user.entity_city }},
+            {{ user.entity_district }},
+            {{ user.entity_state }} - {{ user.entity_pincode }}
+        </p>
+        <hr>
+        <h5>📷 Aadhar Images</h5>
+        {% if user.entity_aadhar_front %}
+            <p>Front:</p>
+            <img src="{{ url_for('static', filename='uploads/' + user.entity_aadhar_front) }}" width="150">
+        {% endif %}
+        {% if user.entity_aadhar_back %}
+            <p>Back:</p>
+            <img src="{{ url_for('static', filename='uploads/' + user.entity_aadhar_back) }}" width="150">
+        {% endif %}
+        {% if user.entity_aadhar_selfie %}
+            <p>Selfie:</p>
+            <img src="{{ url_for('static', filename='uploads/' + user.entity_aadhar_selfie) }}" width="150">
+        {% endif %}
+    </div>
+
+    <!-- PAN DETAILS -->
+    <div class="card-box">
+        <h4><i class="fas fa-id-card"></i> 🪪 PAN Details</h4>
+        <p><b>PAN:</b> {{ user.pan_number }}</p>
+        <p><b>Name:</b> {{ user.pan_name }}</p>
+        {% if user.pan_front %}
+            <img src="{{ url_for('static', filename='uploads/' + user.pan_front) }}" width="150">
+        {% endif %}
+        {% if user.pan_back %}
+            <img src="{{ url_for('static', filename='uploads/' + user.pan_back) }}" width="150">
+        {% endif %}
+    </div>
+
+    <!-- AADHAAR DETAILS (repeated as original) -->
+    <div class="card-box">
+        <h4><i class="fas fa-fingerprint"></i> 🆔 Aadhaar Details</h4>
+        <p><b>Aadhaar:</b> {{ user.entity_aadhar_number }}</p>
+        {% if user.entity_aadhar_front %}
+            <img src="{{ url_for('static', filename='uploads/' + user.entity_aadhar_front) }}" width="150">
+        {% endif %}
+        {% if user.entity_aadhar_back %}
+            <img src="{{ url_for('static', filename='uploads/' + user.entity_aadhar_back) }}" width="150">
+        {% endif %}
+        {% if user.entity_aadhar_selfie %}
+            <img src="{{ url_for('static', filename='uploads/' + user.entity_aadhar_selfie) }}" width="150">
+        {% endif %}
+    </div>
+
+    <!-- PROFILE DETAILS (original content untouched) -->
+    <div class="card-box">
+        <h4><i class="fas fa-address-card"></i> 👤 Profile Details</h4>
+        <p><b>Education:</b> {{ user.educational_qualification }}</p>
+        <p><b>Contact:</b> {{ user.contact_number }}</p>
+        <p><b>WhatsApp:</b> {{ user.whatsapp_number }}</p>
+        <p><b>Social Links:</b> {{ user.social_links }}</p>
+        
+        <h4 class="mt-4" style="font-size: 1.3rem;"><i class="fas fa-users"></i> 👨‍👩‍👧 Nominee</h4>
+<p><b>Name:</b> {{ user.nomini_name }}</p>
+        <p><b>DOB:</b> {{ user.nomini_dob }}</p>
+        <p><b>Relation:</b> {{ user.nomini_relationship }}</p>
+        <p><b>Aadhar:</b> {{ user.nomini_aadhar }}</p>
+        <h4 class="mt-4" style="font-size: 1.3rem;"><i class="fas fa-eye"></i> 🧾 Witness</h4>
+        <p><b>Name:</b> {{ user.witness_name }}</p>
+        <p><b>Phone:</b> {{ user.witness_phone }}</p>
+        <p><b>INMBA ID:</b> {{ user.witness_inmba_id }}</p>
+        
+        <h4 class="mt-4" style="font-size: 1.3rem;"><i class="fas fa-camera"></i> 📸 Profile Picture</h4>
+        {% if user.profile_pic %}
+            <img src="{{ url_for('static', filename='uploads/profile/' + user.profile_pic) }}" width="150" alt="profile">
+        {% else %}
+            <p class="text-muted">No profile picture uploaded.</p>
+        {% endif %}
+    </div>
+
+    <!-- DANGER ZONE – delete user form (preserved exactly) -->
+    <div class="card-box text-center" style="border:2px solid red;">
+        <h4 class="text-danger"><i class="fas fa-exclamation-triangle"></i> ⚠ Danger Zone</h4>
+        <p class="mb-3">This action will permanently delete the user.</p>
+        <form method="POST" action="/delete/{{ user.id }}"
+              onsubmit="return confirm('Are you sure you want to delete this user? This action cannot be undone!');">
+            <button class="btn btn-danger px-4">
+                <i class="fas fa-trash-alt me-2"></i> 🗑 Delete User
+            </button>
+        </form>
+    </div>
+
+</div> <!-- end container -->
+
+<!-- optional small script for any interactive hint (no functionality changed) -->
+<script>
+    // (just preserving original behavior, no change to any logic)
+    // all original classes, actions, and jinja template untouched.
+    console.log("Modern UI loaded — all original content and class names preserved.");
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KYC Submitted</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif;}
+body{min-height:100vh; display:flex; justify-content:center; align-items:center; 
+    background: linear-gradient(-45deg, #dcedc1,  #f0f4e3,);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  position: relative;
+}
+
+@keyframes gradientBG {
+  0% { background-position:0% 50%; }
+  50% { background-position:100% 50%; }
+  100% { background-position:0% 50%; }
+}
+
+/* Floating circles animation */
+body::before {
+  pointer-events: none;
+}
+@keyframes floatCircles {
+  0% { transform: translate(0,0);}
+  50% { transform: translate(50px,50px);}
+  100% { transform: translate(0,0);}
+}
+
+.container{background:white; padding:40px; border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,0.1); text-align:center; max-width:400px;}
+h2{color:#0f4d0f; margin-bottom:10px;}
+p{margin:10px 0; color:#333;}
+.login-id{font-weight:600; color:#0f4d0f; font-size:20px; margin:15px 0;}
+button{padding:14px 20px; border:none; border-radius:10px; background: linear-gradient(135deg, #0f4d0f, #34c759); color:white; font-weight:600; cursor:pointer; transition:0.3s;}
+button:hover{transform:translateY(-3px); box-shadow:0 10px 20px rgba(15,157,88,0.3);}
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>✅ KYC Submitted!</h2>
+    <p>Your Login ID:</p>
+    <div class="login-id">{{ login_id }}</div>
+    <form action="{{ login_link }}">
+        <button type="submit">Go to Login</button>
+    </form>
+</div>
+</body>
+</html>

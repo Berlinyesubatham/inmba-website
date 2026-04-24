@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>INMBA Admin Portal | Secure Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Fonts + Font Awesome -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* BACKGROUND - Premium gradient + abstract pattern */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0B2F1F 0%, #1A4D2E 50%, #0D2818 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated background particles/glow effect */
+body::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle at 30% 40%, rgba(34,197,94,0.15) 0%, rgba(0,0,0,0) 60%);
+    animation: slowRotate 25s infinite linear;
+    pointer-events: none;
+}
+
+@keyframes slowRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Floating orbs decoration */
+body::after {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    bottom: -200px;
+    right: -150px;
+    background: radial-gradient(circle, rgba(34,197,94,0.08) 0%, rgba(34,197,94,0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* LOGIN BOX - Enhanced glassmorphism + modern card */
+.login-box {
+    position: relative;
+    width: 420px;
+    padding: 42px 38px;
+    border-radius: 32px;
+    background: rgba(18, 28, 22, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(74, 222, 128, 0.25);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(74, 222, 128, 0.1) inset;
+    text-align: center;
+    animation: fadeSlideUp 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.login-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 30px 55px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(74, 222, 128, 0.3) inset;
+}
+
+/* TITLE with icon */
+.login-box h2 {
+    color: white;
+    margin-bottom: 28px;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #FFFFFF, #BBF7D0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.login-box h2 i {
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    color: #4ade80;
+    font-size: 28px;
+    text-shadow: none;
+}
+
+/* INPUT GROUP wrapper for better spacing */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    color: #d1fae5;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+    margin-left: 5px;
+}
+
+.input-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon i {
+    position: absolute;
+    left: 15px;
+    color: #6ee7b7;
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+/* INPUTS - modern, clean */
+.login-box input {
+    width: 100%;
+    padding: 14px 16px 14px 44px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(74, 222, 128, 0.35);
+    border-radius: 18px;
+    outline: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(4px);
+}
+
+.login-box input:focus {
+    border-color: #4ade80;
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2);
+}
+
+.login-box input::placeholder {
+    color: rgba(209, 250, 229, 0.5);
+    font-weight: 400;
+    font-size: 13px;
+}
+
+/* BUTTON - premium gradient + subtle shine */
+.login-box button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 18px;
+    border: none;
+    border-radius: 40px;
+    background: linear-gradient(105deg, #1f8a4c, #22c55e);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 20px rgba(34,197,94,0.25);
+}
+
+.login-box button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    transition: left 0.5s ease;
+}
+
+.login-box button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(105deg, #166534, #16a34a);
+    box-shadow: 0 12px 28px rgba(34,197,94,0.4);
+}
+
+.login-box button:hover::before {
+    left: 100%;
+}
+
+.login-box button:active {
+    transform: translateY(1px);
+}
+
+/* TEXT footer */
+.login-box p {
+    margin-top: 24px;
+    color: #bbf0d0;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    border-top: 1px solid rgba(74, 222, 128, 0.2);
+    padding-top: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.login-box p i {
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+/* ANIMATION */
+@keyframes fadeSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .login-box {
+        width: 90%;
+        padding: 32px 24px;
+        margin: 0 16px;
+    }
+    
+    .login-box h2 {
+        font-size: 24px;
+    }
+    
+    .login-box input {
+        padding: 12px 16px 12px 42px;
+    }
+}
+
+/* subtle decorative line */
+.deco-line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #22c55e, #a3e635);
+    margin: 8px auto 20px auto;
+    border-radius: 4px;
+    opacity: 0.7;
+}
+</style>
+</head>
+<body>
+
+<div class="login-box">
+    <h2>
+        <i class="fas fa-shield-alt"></i> 
+        Admin Login
+    </h2>
+    <div class="deco-line"></div>
+    
+    <form method="POST" action="/admin_login">
+        <div class="input-group">
+            <label><i class="fas fa-user-circle" style="margin-right: 6px;"></i> Username</label>
+            <div class="input-icon">
+                <i class="fas fa-user"></i>
+                <input type="text" name="username" placeholder="Admin Username" required>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <label><i class="fas fa-lock"></i> Password</label>
+            <div class="input-icon">
+                <i class="fas fa-key"></i>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+        </div>
+        
+        <button type="submit">
+            <i class="fas fa-arrow-right-to-bracket" style="margin-right: 8px;"></i> Login
+        </button>
+    </form>
+    
+    <p>
+        <i class="fas fa-fingerprint"></i> INMBA Admin Panel • Secure Access Only
+        <i class="fas fa-shield-heart"></i>
+    </p>
+</div>
+
+</body>
+</html>

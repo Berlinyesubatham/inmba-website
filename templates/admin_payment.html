@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+  background: #eef2f7;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(45deg,#0f4d0f,#22c55e);
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* CARD */
+.card-box {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+/* PROFILE IMAGE */
+.profile-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* STATUS BADGE */
+.status-pending {
+  background: orange;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.status-approved {
+  background: green;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+/* BUTTON */
+.btn-view {
+  background: #2563eb;
+  color: white;
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+
+.btn-view:hover {
+  background: #1d4ed8;
+}
+
+/* Navigation */
+.admin-nav {
+  background: #343a40;
+  padding: 10px 0;
+}
+.admin-nav .nav-link {
+  color: #ffffff !important;
+}
+.admin-nav .nav-link:hover {
+  color: #22c55e !important;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Admin Navigation -->
+<nav class="admin-nav">
+  <div class="container">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link" href="/admin">👥 User Management</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="/admin_payment">💳 Payment Management</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">🚪 Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="header">
+👨‍💼 Payment Management
+</div>
+
+<div class="container">
+
+  <div class="text-center mb-3">
+    <a href="/admin" class="btn btn-secondary">👥 User Management</a>
+  </div>
+
+  <!-- STATS -->
+  <!-- STATS -->
+<div class="row text-center mb-4">
+    <div class="col-md-3 mb-3">
+        <div class="card-box text-center" style="background: linear-gradient(45deg, #0f4d0f, #22c55e); color: white;">
+            <h3>{{ status_counts.all }}</h3>
+            <p>Total Members</p>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card-box text-center" style="background: linear-gradient(45deg, #0b6b3b, #22c55e); color: white;">
+            <h3>{{ status_counts.approved }}</h3>
+            <p>Approved</p>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card-box text-center" style="background: linear-gradient(45deg, #d97706, #facc15); color: black;">
+            <h3>{{ status_counts.pending }}</h3>
+            <p>Pending</p>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card-box text-center" style="background: linear-gradient(45deg, #991b1b, #ef4444); color: white;">
+            <h3>{{ status_counts.rejected }}</h3>
+            <p>Rejected</p>
+        </div>
+    </div>
+
+    <!-- ── NEW: Payment Completed / Not Completed ── -->
+    <div class="col-md-6 mb-3">
+        <div class="card-box text-center" style="background: linear-gradient(45deg, #1e40af, #3b82f6); color: white;">
+            <h3>{{ payment_done }}</h3>
+            <p>✅ Payment Completed</p>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="card-box text-center" style="background: linear-gradient(45deg, #6b21a8, #a855f7); color: white;">
+            <h3>{{ payment_not_done }}</h3>
+            <p>❌ Payment Not Completed</p>
+        </div>
+    </div>
+
+</div>
+
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <form method="get" class="d-flex gap-2 align-items-center justify-content-end">
+        <label for="statusFilter" class="mb-0">Filter:</label>
+        <select id="statusFilter" name="status" class="form-select form-select-sm" style="max-width: 220px;">
+          <option value="all" {% if selected_status == 'all' %}selected{% endif %}>All statuses</option>
+          <option value="approved" {% if selected_status == 'approved' %}selected{% endif %}>Approved</option>
+          <option value="pending" {% if selected_status == 'pending' %}selected{% endif %}>Pending</option>
+          <option value="rejected" {% if selected_status == 'rejected' %}selected{% endif %}>Rejected</option>
+        </select>
+        <button type="submit" class="btn btn-primary btn-sm">Apply</button>
+      </form>
+    </div>
+  </div>
+
+<div class="card-box">
+
+<h4 class="mb-3">📋 Members Overview</h4>
+
+<table class="table table-hover align-middle">
+
+<thead class="table-dark">
+<tr>
+<th>ID</th>
+<th>Login ID</th>
+<th>Profile</th>
+<th>Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Payment</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for user in users %}
+<tr>
+
+<td>{{ user.id }}</td>
+<td><b>{{ user.login_id }}</b></td>
+
+<td>
+{% if user.profile_pic %}
+<img src="{{ url_for('static', filename='uploads/profile/' + user.profile_pic) }}" class="profile-img">
+{% else %}
+<img src="/static/default.png" class="profile-img">
+{% endif %}
+</td>
+
+<td>{{ user.first_name }}</td>
+<td>{{ user.email }}</td>
+<td>{{ user.phone }}</td>
+
+<td>
+{% if user.payment_method == "UPI" %}
+📱 UPI
+{% elif user.payment_method == "Account" %}
+🏦 Account
+{% else %}
+📷 QR
+{% endif %}
+</td>
+
+<td>
+{% if user.payment_status == "approved" %}
+<span class="status-approved">Approved</span>
+{% else %}
+<span class="status-pending">Pending</span>
+{% endif %}
+</td>
+
+<td>
+<a href="/admin/user/{{ user.id }}" class="btn btn-view btn-sm">
+View
+</a>
+</td>
+
+</tr>
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>

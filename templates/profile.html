@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>INMBA Profile Details</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+  background: linear-gradient(135deg,#e8f5e9,#ffffff);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.container-box {
+  max-width: 400px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+h2 {
+  text-align: center;
+  color: #0f4d0f;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-weight: bold;
+  margin-top: 20px;
+  color: #0f4d0f;
+}
+
+input, select {
+  border-radius: 8px !important;
+}
+
+button {
+  width: 100%;
+  background: linear-gradient(135deg,#0f4d0f,#28a745);
+  border: none;
+  padding: 12px;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.02);
+}
+.modern-upload{
+  border:1px solid #e0e0e0;
+  border-radius:10px;
+  padding:10px 12px;
+  background:#fafafa;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container-box">
+
+<h2>👤 Profile Details</h2>
+
+<form action="/profile_picture/{{ token }}" method="POST" enctype="multipart/form-data">
+
+<!-- PROFILE -->
+<p class="section-title">📌 Basic Details</p>
+
+<div class="mb-3">
+
+  <label class="mb-2">Profile Picture</label>
+
+  <div class="modern-upload d-flex align-items-center justify-content-between">
+
+    <!-- LEFT TEXT -->
+    <div onclick="document.getElementById('profilePic').click()" style="cursor:pointer;">
+      <div style="font-weight:500;color:#0f4d0f;">📷 Upload Photo</div>
+      <small id="profileName" style="color:gray;">No file selected</small>
+    </div>
+
+    <!-- INPUT -->
+    <input type="file" name="profile_pic" id="profilePic"
+      accept="image/png, image/jpeg"
+      onchange="previewProfile(event)" hidden>
+
+    <!-- PREVIEW -->
+    <div id="profileBox" style="width:50px;height:50px;display:none;position:relative;">
+      <img id="profilePreview" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+      <span onclick="removeProfile()" style="
+        position:absolute;
+        top:-6px;
+        right:-6px;
+        background:red;
+        color:white;
+        width:18px;
+        height:18px;
+        font-size:11px;
+        border-radius:50%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        cursor:pointer;">✖</span>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="mb-3">
+  <label>Education</label>
+  <select name="educational_qualification" class="form-control" required>
+    <option value="">Select</option>
+    <option>10th</option>
+    <option>12th</option>
+    <option>Graduate</option>
+    <option>Post Graduate</option>
+  </select>
+</div>
+
+<div class="mb-3">
+  <label>Contact Number</label>
+  <input type="text" name="contact_number" class="form-control" required>
+</div>
+
+<div class="mb-3">
+  <label>Whatsapp Number</label>
+  <input type="text" name="whatsapp_number" class="form-control" required>
+</div>
+
+<!-- SOCIAL -->
+<p class="section-title">🌐 Social Links</p>
+
+<div class="mb-3">
+  <select name="social_link_type" class="form-control">
+    <option value="">Select Platform</option>
+    <option value="youtube">YouTube</option>
+    <option value="instagram">Instagram</option>
+    <option value="twitter">Twitter</option>
+    <option value="linkedin">LinkedIn</option>
+  </select>
+</div>
+
+<div id="linkContainer">
+  <input type="url" name="social_link[]" class="form-control mb-2" placeholder="Enter link">
+</div>
+
+<button type="button" class="btn btn-sm btn-success mb-3" onclick="addLink()">+ Add More</button>
+
+<!-- NOMINEE -->
+<!-- NOMINEE -->
+<p class="section-title">👨‍👩‍👧 Nominee Details</p>
+
+<input type="text" name="nomini_name"         class="form-control mb-2" placeholder="Nominee Name" required>
+<input type="date" name="nomini_dob"           class="form-control mb-2" required>
+<input type="text" name="nomini_relationship"  class="form-control mb-2" placeholder="Relationship" required>
+<input type="text" name="nomini_aadhar"        class="form-control mb-3" placeholder="Aadhar Number" required>
+
+<!-- WITNESS -->
+<p class="section-title">🧾 Witness Details</p>
+
+<input type="text" name="witness_name"     class="form-control mb-2" placeholder="Name" required>
+<input type="text" name="witness_phone"    class="form-control mb-2" placeholder="Phone Number" required>
+<input type="text" name="witness_inmba_id" class="form-control mb-3" placeholder="INMBA ID (Optional)">
+<!-- DECLARATION -->
+<div class="form-check mb-3">
+  <input type="checkbox" name="declaration" class="form-check-input" required>
+  <label class="form-check-label">
+    I confirm that all details are correct
+  </label>
+</div>
+
+<button type="submit">✅ Submit</button>
+
+</form>
+
+</div>
+
+<script>
+function addLink() {
+  let container = document.getElementById("linkContainer");
+
+  let input = document.createElement("input");
+  input.type = "url";
+  input.name = "social_link[]";
+  input.className = "form-control mb-2";
+  input.placeholder = "Enter link";
+
+  container.appendChild(input);
+}
+function previewProfile(event){
+    const file = event.target.files[0];
+    if(!file) return;
+
+    // show file name
+    document.getElementById("profileName").textContent = file.name;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+        document.getElementById("profilePreview").src = e.target.result;
+        document.getElementById("profileBox").style.display = "block";
+    }
+
+    reader.readAsDataURL(file);
+}
+
+function removeProfile(){
+    document.getElementById("profilePic").value = "";
+    document.getElementById("profilePreview").src = "";
+    document.getElementById("profileBox").style.display = "none";
+    document.getElementById("profileName").textContent = "No file selected";
+}
+</script>
+
+</body>
+</html>
