@@ -143,6 +143,8 @@ button:hover {
     <option value="instagram">Instagram</option>
     <option value="twitter">Twitter</option>
     <option value="linkedin">LinkedIn</option>
+      <option value="facebook">Facebook</option>
+
   </select>
 </div>
 
@@ -158,8 +160,20 @@ button:hover {
 
 <input type="text" name="nomini_name"         class="form-control mb-2" placeholder="Nominee Name" required>
 <input type="date" name="nomini_dob"           class="form-control mb-2" required>
-<input type="text" name="nomini_relationship"  class="form-control mb-2" placeholder="Relationship" required>
-<input type="text" name="nomini_aadhar"        class="form-control mb-3" placeholder="Aadhar Number" required>
+<select name="nomini_relationship" class="form-control mb-2">
+  <option value="">Select Relationship</option>
+  <option value="Father">Father</option>
+  <option value="Mother">Mother</option>
+  <option value="Spouse">Spouse</option>
+  <option value="Son">Son</option>
+  <option value="Daughter">Daughter</option>
+  <option value="Brother">Brother</option>
+  <option value="Sister">Sister</option>
+  <option value="Grandfather">Grandfather</option>
+  <option value="Grandmother">Grandmother</option>
+  <option value="Other">Other</option>
+</select>
+<input type="text" name="nomini_aadhar"     class="form-control mb-3" placeholder="Aadhar Number">
 
 <!-- WITNESS -->
 <p class="section-title">🧾 Witness Details</p>
@@ -169,12 +183,12 @@ button:hover {
 <input type="text" name="witness_inmba_id" class="form-control mb-3" placeholder="INMBA ID (Optional)">
 <!-- DECLARATION -->
 <div class="form-check mb-3">
-  <input type="checkbox" name="declaration" class="form-check-input" required>
-  <label class="form-check-label">
+  <input type="checkbox" name="declaration" id="declaration" 
+         required style="width:16px;height:16px;accent-color:#0f4d0f;cursor:pointer;">
+  <label for="declaration" style="margin-left:6px;font-weight:600;color:#0f4d0f;">
     I confirm that all details are correct
   </label>
 </div>
-
 <button type="submit">✅ Submit</button>
 
 </form>
@@ -215,6 +229,37 @@ function removeProfile(){
     document.getElementById("profilePreview").src = "";
     document.getElementById("profileBox").style.display = "none";
     document.getElementById("profileName").textContent = "No file selected";
+}
+function previewProfile(event){
+    const file = event.target.files[0];
+    if(!file) return;
+
+    // ✅ File type validation
+    const allowed = ['image/jpeg','image/png'];
+    if(!allowed.includes(file.type)){
+        alert("Only JPG or PNG images are allowed.");
+        event.target.value = "";
+        return;
+    }
+
+    // ✅ File size validation (2MB)
+    if(file.size > 2 * 1024 * 1024){
+        alert("Profile photo must be less than 2MB.");
+        event.target.value = "";
+        return;
+    }
+
+    // show file name
+    document.getElementById("profileName").textContent = file.name;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+        document.getElementById("profilePreview").src = e.target.result;
+        document.getElementById("profileBox").style.display = "block";
+    }
+
+    reader.readAsDataURL(file);
 }
 </script>
 

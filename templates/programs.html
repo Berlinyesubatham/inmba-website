@@ -136,12 +136,6 @@ body {
 }
 
 /* Footer */
-footer {
-  background: #0f4d0f;
-  color: #fff;
-  text-align: center;
-  padding: 20px;
-}
 
 /* Responsive */
 @media(max-width:768px){
@@ -800,7 +794,9 @@ footer {
     font-size: 0.85rem;
   }
 }
-
+html, body {
+  overflow-x: hidden;
+}
 </style>
 </head>
 
@@ -811,7 +807,7 @@ footer {
       <!-- Navbar logo -->
       <img src="{{ url_for('static', filename='images/inmba_logo.jpg') }}" 
            class="rounded-circle img-fluid me-3" alt="INMBA Logo" style="width:50px; height:50px;">
-      <span class="brand-name">INMBA</span>
+      <span class="brand-name">INMBA.org</span>
     </a>
 
     <!-- Mobile toggle -->
@@ -961,126 +957,488 @@ footer {
 
 <!-- Footer -->
 <footer class="footer-section">
-  <div class="container">
-    
-    <h2 class="footer-title">CONTACT</h2>
+  <div class="footer-inner">
 
-    <div class="footer-content">
+    <!-- TOP: Brand -->
+    <div class="footer-brand">
+      <h2 class="footer-logo">INMBA</h2>
+      <p class="footer-tagline">
+        International Network Management &amp; Business Association Chamber<br>
+        <em>"Expand Your Network; Expand Your Net Worth"</em>
+      </p>
+    </div>
 
-      <!-- LEFT -->
-      <div class="footer-left">
+    <div class="footer-divider"></div>
 
-        <p>
-          <a href="tel:+918940369361">
-            <i class="fas fa-phone"></i> +91 8940 369 361
-          </a>
-        </p>
+    <!-- MIDDLE: 3 columns -->
+    <div class="footer-columns">
 
-        <p>
-          <a href="https://www.inmba.org" target="_blank">
-            <i class="fas fa-globe"></i> www.inmba.org
-          </a>
-        </p>
-
-        <p>
-          <a href="mailto:admin@inmba.org">
-            <i class="fas fa-envelope"></i> admin@inmba.org
-          </a>
-        </p>
-
-        <p>
-          <a href="https://linktr.ee/inmba" target="_blank">
-            <i class="fas fa-link"></i> linktr.ee/inmba
-          </a>
-        </p>
-
+      <!-- Contact -->
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <ul>
+          <li>
+            <a href="tel:+918940369361">
+              <i class="fas fa-phone-alt"></i> +91 8940 369 361
+            </a>
+          </li>
+          <li>
+            <a href="mailto:admin@inmba.org">
+              <i class="fas fa-envelope"></i> admin@inmba.org
+            </a>
+          </li>
+          <li>
+            <a href="https://www.inmba.org" target="_blank">
+              <i class="fas fa-globe"></i> www.inmba.org
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/918940369361" target="_blank">
+              <i class="fab fa-whatsapp"></i> WhatsApp Us
+            </a>
+          </li>
+        </ul>
       </div>
 
-      <!-- RIGHT -->
-      <div class="footer-right">
-        <a href="https://linktr.ee/inmba" target="_blank">
-          <img src="{{ url_for('static', filename='images/qr.png') }}" alt="QR Code">
+      <!-- Quick Links -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="/membership"><i class="fas fa-chevron-right"></i> Membership</a></li>
+          <li><a href="/programs"><i class="fas fa-chevron-right"></i> Programs</a></li>
+          <li><a href="/events"><i class="fas fa-chevron-right"></i> Events</a></li>
+          <li><a href="/contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- QR + Social -->
+      <div class="footer-col footer-col-right">
+        <h4>Connect With Us</h4>
+
+        <!-- Social Icons -->
+        <div class="social-icons">
+  <a href="https://www.instagram.com/inmba_org/" target="_blank" title="Instagram" class="instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="https://www.facebook.com/Robertson%20Rajah" target="_blank" title="Facebook" class="facebook">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a href="https://www.threads.com/@INMBA.org" target="_blank" title="Threads" class="threads">
+    <span style="font-size:0.85rem; font-weight:800;">T</span>
+  </a>
+  <a href="https://www.youtube.com/@inmba-org" target="_blank" title="YouTube" class="youtube">
+    <i class="fab fa-youtube"></i>
+  </a>
+  <a href="https://linktr.ee/inmba" target="_blank" title="Linktree" class="linktree">
+    <i class="fas fa-link"></i>
+  </a>
+  <a href="https://wa.me/918940369361" target="_blank" title="WhatsApp" class="whatsapp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
+
+        <!-- QR Code -->
+        <a href="https://linktr.ee/inmba" target="_blank" class="footer-qr">
+          <img src="{{ url_for('static', filename='images/qr.png') }}" alt="Scan QR">
+          <span>Scan to connect</span>
         </a>
       </div>
 
     </div>
 
-    <p class="copyright">© 2026 INMBA</p>
+    <div class="footer-divider"></div>
+
+    <!-- BOTTOM: copyright -->
+    <div class="footer-bottom">
+      <p>© 2026 INMBA. All rights reserved.</p>
+      <p>
+        <a href="https://linktr.ee/inmba" target="_blank">
+          <i class="fas fa-link"></i> linktr.ee/inmba
+        </a>
+      </p>
+    </div>
 
   </div>
 </footer>
+
+
 <style>
 .footer-section {
-  background: #111;
-  color: white;
-  padding: 60px 20px;
+  background: linear-gradient(135deg, #0a2e0a 0%, #0f4d0f 60%, #1a6e1a 100%);
+  color: #e0f2e0;
+  padding: 60px 0 0 0;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
 }
 
-.footer-title {
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* Brand */
+.footer-brand {
   text-align: center;
-  font-size: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+}
+.footer-logo {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+.footer-tagline {
+  font-size: 0.88rem;
+  color: #a8d5a8;
+  line-height: 1.7;
+}
+.footer-tagline em {
+  color: #22c55e;
+  font-style: italic;
 }
 
-.footer-content {
+/* Divider */
+.footer-divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin: 30px 0;
+}
+
+/* 3-column grid */
+.footer-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr;
+  gap: 40px;
+}
+
+.footer-col h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 18px;
+  border-left: 3px solid #22c55e;
+  padding-left: 10px;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-col ul li {
+  margin-bottom: 12px;
+}
+.footer-col ul li a {
+  color: #b8dbb8;
+  text-decoration: none;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s, gap 0.2s;
+}
+.footer-col ul li a:hover {
+  color: #22c55e;
+  gap: 12px;
+}
+.footer-col ul li a i {
+  font-size: 0.8rem;
+  width: 14px;
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.social-icons a {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c8e6c9;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+.social-icons a:hover {
+  background: #22c55e;
+  border-color: #22c55e;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(34,197,94,0.35);
+}
+
+/* QR */
+.footer-qr {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+.footer-qr img {
+  width: 90px;
+  height: 90px;
+  border-radius: 10px;
+  border: 2px solid rgba(255,255,255,0.2);
+  transition: transform 0.2s;
+}
+.footer-qr:hover img {
+  transform: scale(1.05);
+  border-color: #22c55e;
+}
+.footer-qr span {
+  font-size: 0.75rem;
+  color: #a8d5a8;
+}
+
+/* Bottom bar */
+.footer-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* allows items to wrap on small screens */
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px 0;
+  font-size: 0.8rem;
+  color: #7db87d;
 }
-
-.footer-left p {
-  margin: 10px 0;
-}
-
-.footer-left a {
-  color: white;
+.footer-bottom a {
+  color: #a8d5a8;
   text-decoration: none;
-  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.footer-bottom a:hover {
+  color: #22c55e;
 }
 
-.footer-left a:hover {
-  color: #ffc107;
-  transform: translateX(5px);
-}
-
-.footer-left i {
-  margin-right: 10px;
-  color: #ffc107;
-}
-
-.footer-right img {
-  width: 120px;
-  background: white;
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-/* Mobile Responsive */
+/* Responsive */
 @media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column; /* stack left and right vertically */
-    align-items: center; /* center content */
+  .footer-columns {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .footer-bottom {
+    flex-direction: column;
     text-align: center;
   }
-  
-  .footer-left, .footer-right {
-    margin-bottom: 20px; /* spacing between sections */
+  .footer-inner {
+    padding: 0 20px;
   }
+}
+/* Base social icon */
+.social-icons a {
+  width: 42px;
+  height: 42px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
 
-  .footer-right img {
-    width: 100px; /* smaller QR code on mobile */
+/* Each icon gets its own brand color always visible */
+.social-icons a.instagram {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  border-color: transparent;
+  color: #fff;
+}
+.social-icons a.facebook {
+  background: #1877f2;
+  border-color: transparent;
+  color: #fff;
+}
+.social-icons a.threads {
+  background: #000000;
+  border-color: transparent;
+  color: #fff;
+}
+.social-icons a.youtube {
+  background: #ff0000;
+  border-color: transparent;
+  color: #fff;
+}
+.social-icons a.linktree {
+  background: #39e09b;
+  border-color: transparent;
+  color: #fff;
+}
+.social-icons a.whatsapp {
+  background: #25d366;
+  border-color: transparent;
+  color: #fff;
+}
+
+/* Hover — lift effect */
+.social-icons a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  filter: brightness(1.15);
+}
+/* ── Tablet ── */
+@media (max-width: 992px) {
+  .footer-columns {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .footer-col-right {
+    grid-column: 1 / -1;   /* full width on tablet */
+  }
+  .social-icons {
+    justify-content: flex-start;
   }
 }
 
-.copyright {
-  text-align: center;
-  margin-top: 30px;
-  opacity: 0.7;
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .footer-section {
+    padding: 40px 0 0 0;
+  }
+
+  .footer-inner {
+    padding: 0 16px;
+  }
+
+  .footer-brand {
+    margin-bottom: 24px;
+  }
+
+  .footer-logo {
+    font-size: 1.8rem;
+  }
+
+  .footer-tagline {
+    font-size: 0.82rem;
+  }
+
+  .footer-columns {
+    grid-template-columns: 1fr;   /* stack all columns */
+    gap: 24px;
+  }
+
+  .footer-col {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 20px;
+  }
+
+  .footer-col:last-child {
+    border-bottom: none;
+  }
+
+  .footer-col h4 {
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+
+  .footer-col ul li {
+    margin-bottom: 10px;
+  }
+
+  .footer-col ul li a {
+    font-size: 0.85rem;
+  }
+
+  .social-icons {
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .social-icons a {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+
+  .footer-qr {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 14px;
+  }
+
+  .footer-qr img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .footer-qr span {
+    font-size: 0.82rem;
+  }
+
+  .footer-col-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-col-right h4 {
+    text-align: center;
+    border-left: none;
+    border-bottom: 2px solid #22c55e;
+    padding-left: 0;
+    padding-bottom: 6px;
+    width: fit-content;
+    margin: 0 auto 16px auto;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 6px;
+    padding: 16px 0;
+    font-size: 0.75rem;
+  }
+
+  .footer-divider {
+    margin: 20px 0;
+  }
+}
+
+/* ── Small Mobile ── */
+@media (max-width: 400px) {
+  .footer-logo {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+  }
+
+  .social-icons a {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .footer-qr img {
+    width: 60px;
+    height: 60px;
+  }
+}
+   .footer-logo-img {
+  width: 80px;
+  height: auto;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
 }
 </style>
-
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
 AOS.init({

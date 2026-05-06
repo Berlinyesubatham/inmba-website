@@ -2,98 +2,343 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>KYC Submitted</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>KYC Submitted | INMBA Commercial</title>
+
+<!-- Google Fonts + Font Awesome (minimal) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #f5f5f5;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+    * {
         margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
 
-    .container {
+    body {
+        font-family: 'Inter', sans-serif;
+        background: #f0f2f5;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    /* Compact card */
+    .card {
+        max-width: 500px;
+        width: 100%;
         background: #ffffff;
-        padding: 30px;
-        border-radius: 10px;
-        width: 400px;
+        border-radius: 28px;
+        box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+        overflow: hidden;
+        transition: transform 0.2s;
+    }
+
+    /* Header - compact, no badge */
+    .card-header {
+        background: #0f4d0f;
+        padding: 1.2rem 1.5rem;
         text-align: center;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        color: white;
     }
 
-    h2 {
-        color: green;
-        margin-bottom: 20px;
+    .card-header i {
+        font-size: 2.2rem;
+        background: rgba(255,255,255,0.15);
+        width: 55px;
+        height: 55px;
+        line-height: 55px;
+        border-radius: 50%;
+        margin-bottom: 0.5rem;
     }
 
-    p {
-        font-size: 16px;
-        margin: 10px 0;
+    .card-header h2 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin: 0.3rem 0;
     }
 
-    .status {
-        margin-top: 15px;
-        color: orange;
-        font-weight: bold;
+    /* Body */
+    .card-body {
+        padding: 1.3rem 1.5rem 1.5rem;
+    }
+
+    /* Info rows - compact */
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #f8faf6;
+        padding: 0.7rem 1rem;
+        border-radius: 16px;
+        margin-bottom: 0.7rem;
+    }
+
+    .info-label {
+        font-weight: 600;
+        font-size: 0.8rem;
+        color: #2c4a2c;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .info-label i {
+        font-size: 0.85rem;
+        color: #6b8e23;
+    }
+
+    .info-value {
+        font-weight: 700;
+        font-size: 0.8rem;
+        background: white;
+        padding: 3px 12px;
+        border-radius: 40px;
+        font-family: monospace;
+        letter-spacing: 0.3px;
+    }
+
+    /* Progress bar - slim */
+    .progress-area {
+        margin: 1rem 0;
+    }
+
+    .step-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 6px;
+    }
+
+    .step {
+        font-size: 0.65rem;
+        font-weight: 600;
+        color: #9aa99a;
+        text-align: center;
+        flex: 1;
+    }
+
+    .step.active {
+        color: #6b8e23;
+    }
+
+    .step.completed {
+        color: #2e7d32;
+    }
+
+    .progress-bar {
+        background: #e2e8dd;
+        height: 5px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        width: 66%;
+        background: #6b8e23;
+        height: 100%;
+    }
+
+    /* Alert note - compact */
+    .alert-note {
+        background: #fef9e6;
+        border-radius: 16px;
+        padding: 0.8rem 1rem;
+        margin: 1rem 0;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-size: 0.75rem;
+        border-left: 3px solid #ffb347;
+    }
+
+    .alert-note i {
+        font-size: 1.2rem;
+        color: #e68a2e;
+    }
+
+    /* Buttons - compact */
+    .btn-group {
+        display: flex;
+        gap: 12px;
+        margin: 1.2rem 0 0.8rem;
     }
 
     .btn {
-        margin-top: 20px;
-        display: inline-block;
-        padding: 10px 20px;
-        background: green;
-        color: white;
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 600;
         text-decoration: none;
-        border-radius: 5px;
+        transition: 0.2s;
+        cursor: pointer;
+        border: none;
     }
 
-    .btn:hover {
-        background: darkgreen;
+    .btn-primary {
+        background: #0f4d0f;
+        color: white;
     }
 
-    .note {
+    .btn-primary:hover {
+        background: #1a6e1a;
+        transform: translateY(-1px);
+    }
+
+    .btn-outline {
+        background: white;
+        border: 1px solid #cbdcc0;
+        color: #2a572a;
+    }
+
+    .btn-outline:hover {
+        background: #eef5e6;
+    }
+
+    /* Collapsible - minimal */
+    .toggle-link {
+        background: none;
+        border: none;
+        font-size: 0.7rem;
+        color: #4c7a34;
+        font-weight: 500;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    .docs-content {
+        display: none;
+        background: #f9fbf7;
+        padding: 0.8rem;
+        border-radius: 16px;
+        font-size: 0.7rem;
         margin-top: 10px;
-        font-size: 14px;
-        color: gray;
+        border: 1px solid #e0ecce;
+    }
+
+    .docs-content ul {
+        margin-left: 1.2rem;
+        margin-top: 5px;
+    }
+
+    .footer-text {
+        text-align: center;
+        font-size: 0.6rem;
+        color: #8d9c8d;
+        margin-top: 1rem;
+        padding-top: 0.8rem;
+        border-top: 1px solid #eaeedf;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+        .card-body {
+            padding: 1rem;
+        }
+        .info-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+        }
+        .btn-group {
+            flex-direction: column;
+        }
     }
 </style>
 </head>
-
 <body>
 
-<div class="container">
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-check-circle"></i>
+        <h2>KYC Submitted</h2>
+        <!-- "Under Review" badge removed as requested -->
+    </div>
 
-    <h2>✅ KYC Submitted Successfully</h2>
+    <div class="card-body">
+        <!-- User Info -->
+        <div class="info-row">
+            <span class="info-label"><i class="fas fa-id-card"></i> Login ID</span>
+            <span class="info-value">{{ user.login_id }}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label"><i class="fas fa-key"></i> Token</span>
+            <span class="info-value">{{ user.token }}</span>
+        </div>
 
-    <p><strong>Login ID:</strong> {{ user.login_id }}</p>
-    <p><strong>Token:</strong> {{ user.token }}</p>
+        <!-- Progress tracker -->
+        <div class="progress-area">
+            <div class="step-row">
+                <div class="step completed">✓ Submitted</div>
+                <div class="step active">⏳ Verification</div>
+                <div class="step">⌛ Approval</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
 
-    <p class="status">⏳ Verification in progress (within 3 days)</p>
+        <!-- Status note (professional & clean) -->
+        <div class="alert-note">
+            <i class="fas fa-shield-alt"></i>
+            <span><strong>Verification in progress</strong> (within 3 days). You'll receive email confirmation.</span>
+        </div>
 
-    <p class="note">
-        Please download your acknowledgement and keep it safe.
-    </p>
+        <!-- Action Buttons -->
+        <div class="btn-group">
+            <a href="{{ url_for('download_ack', token=user.token) }}" class="btn btn-primary">
+                <i class="fas fa-download"></i> PDF
+            </a>
+            <button class="btn btn-outline" onclick="window.print();">
+                <i class="fas fa-print"></i> Print
+            </button>
+        </div>
 
- <a href="{{ url_for('download_ack', token=user.token) }}" class="btn">
-    Download Acknowledgement PDF
-</a>
-<h2>Application Submitted Successfully ✅</h2>
+        <!-- Compact collapsible -->
+        <button class="toggle-link" onclick="toggleDocs()">
+            <i class="fas fa-chevron-circle-down"></i> What's next?
+        </button>
+        <div class="docs-content" id="docsContent">
+            <i class="fas fa-clipboard-list"></i> <strong>Next steps:</strong>
+            <ul>
+                <li>Verification within 1-3 days</li>
+                <li>Email notification on approval</li>
+                <li>Account fully activated</li>
+            </ul>
+            <small style="color:#6b8e23;">✅ Keep this acknowledgement safe.</small>
+        </div>
 
-
-<br><br>
-
-
+        <div class="footer-text">
+            <i class="fas fa-lock"></i> Secure KYC • INMBA Commercial
+        </div>
+    </div>
+</div>
 
 <script>
-function toggleDocs() {
-    let d = document.getElementById("docs");
-    d.style.display = d.style.display === "none" ? "block" : "none";
-}
+    function toggleDocs() {
+        let docs = document.getElementById("docsContent");
+        let btn = event.currentTarget;
+        if (docs.style.display === "none" || getComputedStyle(docs).display === "none") {
+            docs.style.display = "block";
+            btn.innerHTML = '<i class="fas fa-chevron-circle-up"></i> Hide details';
+        } else {
+            docs.style.display = "none";
+            btn.innerHTML = '<i class="fas fa-chevron-circle-down"></i> What\'s next?';
+        }
+    }
+    // Initially hidden
+    document.getElementById("docsContent").style.display = "none";
 </script>
-</div>
 
 </body>
 </html>

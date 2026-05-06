@@ -1,160 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INMBA Login</title>
 
-<title>INMBA Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(-45deg, #dcedc1, #f0f4e3);
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 90%;
+            max-width: 420px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        .container h2 {
+            color: #0f4d0f;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .container label {
+            display: block;
+            text-align: left;
+            font-weight: 500;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* ── Input wrapper for eye icon ── */
+        .input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .container input {
+            width: 100%;
+            padding: 14px;
+            margin-top: 5px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            outline: none;
+            transition: 0.3s;
+            font-size: 14px;
+
+            /* ✅ Disable browser default eye */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        /* ✅ Hide MS Edge / IE built-in eye */
+        .container input[type="password"]::-ms-reveal,
+        .container input[type="password"]::-ms-clear {
+            display: none !important;
+        }
+
+        /* ✅ Hide Chrome / Safari built-in eye */
+        .container input[type="password"]::-webkit-credentials-auto-fill-button,
+        .container input[type="password"]::-webkit-textfield-decoration-container,
+        .container input[type="password"]::-webkit-strong-password-auto-fill-button {
+            display: none !important;
+        }
+
+        /* Extra right padding only for password field (room for eye icon) */
+        .input-wrap input[type="password"],
+        .input-wrap input[type="text"] {
+            padding-right: 44px;
+        }
+
+        .container input:focus {
+            border-color: #0f4d0f;
+            box-shadow: 0 0 10px rgba(15, 157, 88, 0.2);
+        }
+
+        /* ✅ Custom eye toggle */
+        .eye-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 15px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 50%;
+            transition: color 0.2s, background 0.2s;
+            user-select: none;
+            margin-top: 2px;
+        }
+
+        .eye-toggle:hover {
+            color: #0f4d0f;
+            background: rgba(15, 77, 15, 0.08);
+        }
+
+        .container button , .top-back-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #0f9d58, #34c759);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+        .container button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(15, 157, 88, 0.3);
+        }
+
+        .extra {
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .extra a {
+            color: #0f4d0f;
+            text-decoration: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+ .top-back-btn {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+
+    font-size: 16px;
+    color: #0f4d0f;
+
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    transition: 0.2s ease;
 }
 
-/* 🌿 BACKGROUND */
-body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-      background: linear-gradient(-45deg, #dcedc1,  #f0f4e3);
-
+.top-back-btn:hover {
+    color: #34c759;
+    background: rgba(52, 199, 89, 0.1);
 }
-
-
-/* MAIN CARD */
-.container{
-    position:relative;
-    z-index:1;
-    width:90%;
-    max-width:420px;
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    box-shadow:0 20px 60px rgba(0,0,0,0.1);
-    text-align:center;
-    animation:fadeIn 1s ease;
-}
-
-/* TITLE */
-.container h2{
-    color:#0f4d0f;
-    margin-bottom:10px;
-}
-
-.subtitle{
-    color:#666;
-    font-size:14px;
-    margin-bottom:20px;
-    text-align:left;
-}
-
-/* LABELS */
-.container label{
-    display:block;
-    text-align:left;
-    font-weight:500;
-    margin-top:10px;
-    font-size:14px;
-    color:#333;
-}
-
-/* INPUT */
-.container input{
-    width:100%;
-    padding:14px;
-    margin-top:5px;
-    border-radius:10px;
-    border:1px solid #ddd;
-    outline:none;
-    transition:0.3s;
-}
-
-/* FOCUS EFFECT */
-.container input:focus{
-    border-color:#0f4d0f;
-    box-shadow:0 0 10px rgba(15,157,88,0.2);
-}
-
-/* BUTTON */
-.container button{
-    width:100%;
-    padding:14px;
-    margin-top:20px;
-    border:none;
-    border-radius:10px;
-    background: linear-gradient(135deg, #0f9d58, #34c759);
-    color:white;
-    font-weight:600;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.container button:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 20px rgba(15,157,88,0.3);
-}
-
-/* EXTRA */
-.extra{
-    margin-top:15px;
-    font-size:13px;
-}
-
-.extra a{
-    color:#0f4d0f;
-    text-decoration:none;
-}
-
-/* ANIMATION */
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-</style>
+    </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h2>INMBA Foundation</h2>
-    <div class="subtitle">Secure Member Login</div>
+    <div class="container">
+      <a class="top-back-btn" href="{{ url_for('membership') }}">
+    <i class="fas fa-arrow-left"></i>
+</a>
+        <h2>INMBA Foundation</h2>
+        <div class="subtitle">Secure Member Login</div>
 
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-      <div style="color:#d32f2f;margin-bottom:16px;text-align:left;">
-        {{ messages[0] }}
-      </div>
-      {% endif %}
-    {% endwith %}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div style="color:#d32f2f; margin-bottom:16px; text-align:left;">
+            {{ messages[0] }}
+        </div>
+        {% endif %}
+        {% endwith %}
 
-    {% if error %}
-    <div style="color:#d32f2f;margin-bottom:16px;text-align:left;">{{ error }}</div>
-    {% endif %}
+        {% if error %}
+        <div style="color:#d32f2f; margin-bottom:16px; text-align:left;">{{ error }}</div>
+        {% endif %}
 
-    <form method="POST" action="/login">
-        <label for="login_id">Login ID</label>
-        <input type="text" id="login_id" name="login_id" placeholder="Enter your 7-digit Login ID" required>
+        <form method="POST" action="/login" autocomplete="off">
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <label for="login_id">Login ID</label>
+            <input type="text" name="login_id" id="login_id" placeholder="Enter your Login ID" required
+                value="{{ prefill_id or '' }}">
 
-        <button type="submit">Login</button>
-    </form>
+            <label for="password">Password</label>
+            <!-- ✅ Wrapper for eye icon positioning -->
+            <div class="input-wrap">
+                <input type="password" name="password" id="password" placeholder="Enter your password" required
+                    autocomplete="new-password">
+                <i class="fas fa-eye eye-toggle" id="eyeToggle" onclick="togglePassword()"></i>
+            </div>
 
-  
-</div>
+            <button type="submit">
+                <i class="fas fa-arrow-right-to-bracket" style="margin-right:8px;"></i> Login
+            </button>
+            <a href="{{ url_for('forgot_password') }}" style="margin-top: 50px; color: #34c759;">Forgot Password?</a>
+
+        </form>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeToggle');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                eyeIcon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                eyeIcon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+    </script>
 
 </body>
+
 </html>

@@ -194,7 +194,7 @@ button:hover { transform:scale(1.02); }
 
 <input type="file" name="bank_proof" id="bankInput"
   accept="image/png, image/jpeg"
-  onchange="previewBank(event)" hidden required>
+  onchange="previewBank(event)" hidden >
 <!-- With this new searchable dropdown -->
 <label>Bank Name</label>
 <input type="text" id="bankSearch" placeholder="Type to search bank..." 
@@ -221,13 +221,13 @@ button:hover { transform:scale(1.02); }
 "></div>
 
 <label>Account Number</label>
-<input type="text" name="account_number1" placeholder="Enter Account Number" required pattern="\d{9,18}" title="Account number must be 9-18 digits">
+<input type="text" name="account_number1" placeholder="Enter Account Number">
 
 <label>Confirm Account Number</label>
-<input type="text" name="account_number2" placeholder="Confirm Account Number" required pattern="\d{9,18}" title="Account number must be 9-18 digits">
+<input type="text" name="account_number2" placeholder="Confirm Account Number" >
 
 <label>IFSC code</label>
-<input type="text" name="ifsc" placeholder="Enter IFSC Code" required pattern="[A-Za-z]{4}\d{7}" title="Enter valid 11-character IFSC code">
+<input type="text" name="ifsc" placeholder="Enter IFSC Code">
 
 <label>Branch Name</label>
 <input type="text" name="branch_name" placeholder="Enter Branch Name" required>
@@ -312,15 +312,10 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Validate bank selected on submit
-const acc1 = document.querySelector('[name="account_number1"]');
-const acc2 = document.querySelector('[name="account_number2"]');
-const form = document.getElementById('bankForm');
-const errorMsg = document.getElementById('errorMsg');
-
 form.addEventListener('submit', function(e) {
     errorMsg.textContent = '';
 
+    // Bank selection validation
     if (!document.getElementById('bankNameValue').value) {
         e.preventDefault();
         errorMsg.textContent = "❌ Please select a bank from the list";
@@ -328,31 +323,38 @@ form.addEventListener('submit', function(e) {
         return false;
     }
 
-    if (acc1.value !== acc2.value) {
-        e.preventDefault();
-        errorMsg.textContent = "❌ Account numbers do not match";
-        acc2.focus();
-        return false;
+    // ✅ Only validate account number IF user entered it
+    if (acc1.value || acc2.value) {
+
+        if (!acc1.value || !acc2.value) {
+            e.preventDefault();
+            errorMsg.textContent = "❌ Please enter both account number fields";
+            return false;
+        }
+
+        if (acc1.value !== acc2.value) {
+            e.preventDefault();
+            errorMsg.textContent = "❌ Account numbers do not match";
+            acc2.focus();
+            return false;
+        }
+
+        if (!/^\d{9,18}$/.test(acc1.value)) {
+            e.preventDefault();
+            errorMsg.textContent = "❌ Account number must be 9-18 digits";
+            acc1.focus();
+            return false;
+        }
     }
 
-    if (!/^\d{9,18}$/.test(acc1.value)) {
-        e.preventDefault();
-        errorMsg.textContent = "❌ Account number must be 9-18 digits";
-        acc1.focus();
-        return false;
-    }
-
-    if (!/^[A-Za-z]{4}\d{7}$/.test(document.querySelector('[name="ifsc"]').value)) {
+    // IFSC validation (only if entered)
+    const ifsc = document.querySelector('[name="ifsc"]').value;
+    if (ifsc && !/^[A-Za-z]{4}\d{7}$/.test(ifsc)) {
         e.preventDefault();
         errorMsg.textContent = "❌ IFSC code must be 11 characters like ABCD0123456";
         return false;
     }
 });
-
-acc2.addEventListener('input', function() {
-    acc1.type = acc2.value.length > 0 ? "password" : "text";
-});
-
 function removeBank(event){
     if(event) event.stopPropagation();
     document.getElementById("bankInput").value = "";

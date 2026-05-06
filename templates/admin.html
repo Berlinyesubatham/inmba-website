@@ -123,6 +123,7 @@ body {
         <thead class="table-dark">
 <tr>
   <th>ID</th>
+  <th>Login ID</th>  
   <th>First Name</th>
   <th>Last Name</th>
   <th>DOB</th>
@@ -148,6 +149,7 @@ body {
 {% for user in users %}
 <tr>
   <td>{{ user.id }}</td>
+  <td>{{user.login_id}}</td>
   <td>{{ user.first_name }}</td>
   <td>{{ user.last_name }}</td>
   <td>{{ user.dob }}</td>

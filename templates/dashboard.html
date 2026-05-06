@@ -1,189 +1,608 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>User Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>INMBA Dashboard | Member Portal</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap 5 CSS + Icons + Google Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
 
-<style>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* 🌿 Background same as form */
-body {
-  background: linear-gradient(135deg, #e6f2e6, #f8fbf8);
-  font-family: "Inter", sans-serif;
+    body {
+      background: linear-gradient(145deg, #eef3e8 0%, #e2e9dc 100%);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding-bottom: 2rem;
+    }
+
+    /* 🌿 Navbar refined */
+    .navbar {
+      background: #0a3b0a;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      padding: 0.7rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      font-size: 1.3rem;
+    }
+
+    .btn-logout {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      border-radius: 40px;
+      padding: 5px 18px;
+      font-size: 0.8rem;
+      transition: 0.2s;
+    }
+
+    .btn-logout:hover {
+      background: #dc3545;
+      border-color: #dc3545;
+      transform: translateY(-2px);
+    }
+
+    /* 🌿 Main Glass Card */
+    .dashboard-card {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(0px);
+      border-radius: 28px;
+      padding: 1.8rem;
+      box-shadow: 0 25px 45px -12px rgba(0,0,0,0.2);
+      border: 1px solid rgba(107,142,35,0.2);
+      transition: transform 0.2s;
+    }
+
+    /* Header inside card */
+    .card-header-custom {
+      background: linear-gradient(115deg, #0f4d0f, #1a6e1a);
+      color: white;
+      padding: 1rem 1.2rem;
+      border-radius: 22px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: -0.2px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 5px 12px rgba(15,77,15,0.2);
+    }
+
+    /* Info rows */
+    .section {
+      margin-top: 0.5rem;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 0.5rem;
+      border-bottom: 1px solid #e9efdf;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-row span:first-child {
+      font-weight: 500;
+      color: #3a5a3a;
+      font-size: 0.9rem;
+    }
+
+    .info-row strong,
+    .info-row a {
+      font-weight: 700;
+      color: #1c3a1c;
+      text-decoration: none;
+      background: #f2f7ec;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      word-break: break-all;
+    }
+
+    .info-row a:hover {
+      background: #e1ecce;
+      color: #0f4d0f;
+    }
+
+    /* Badge & button styles */
+    .badge-status {
+      background: #e9ecef;
+      color: #5a6e5a;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .btn-custom {
+      background: linear-gradient(105deg, #0f4d0f, #197419);
+      color: white;
+      border-radius: 50px;
+      padding: 12px 16px;
+      font-weight: 600;
+      border: none;
+      transition: 0.25s;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .btn-custom:hover {
+      background: #0a3a0a;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(15,77,15,0.25);
+    }
+
+    .btn-warning-custom {
+      background: #f5b042;
+      border: none;
+      border-radius: 50px;
+      padding: 12px 16px;
+      font-weight: 600;
+      color: #2c3a1f;
+      transition: 0.25s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-warning-custom:hover {
+      background: #e69a2e;
+      transform: translateY(-2px);
+    }
+
+    .referral-box {
+      background: #f9fcf5;
+      border-radius: 20px;
+      padding: 1rem;
+      margin: 1rem 0 0.5rem;
+      border: 1px solid #dce8cd;
+    }
+
+    .divider-light {
+      height: 1px;
+      background: #e2e8d5;
+      margin: 1rem 0;
+    }
+
+    .network-badge {
+      font-size: 0.75rem;
+      background: #eef3e4;
+      border-radius: 40px;
+      padding: 4px 12px;
+    }
+
+    .network-badge[onclick]:hover {
+      background: #d4edda;
+      color: #0f4d0f;
+    }
+
+    /* Network Members Modal */
+    .network-modal .modal-content {
+      border-radius: 24px;
+      border: none;
+    }
+
+    .network-modal .modal-header {
+      background: linear-gradient(115deg, #0f4d0f, #1a6e1a);
+      border-radius: 24px 24px 0 0;
+      padding: 1rem 1.5rem;
+    }
+
+    .network-modal .modal-header .modal-title {
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .network-modal .modal-header .btn-close {
+      filter: invert(1);
+    }
+
+    .network-modal .modal-body {
+      padding: 1.2rem;
+      max-height: 65vh;
+      overflow-y: auto;
+    }
+
+    .member-card {
+      background: #f9fcf5;
+      border: 1px solid #dce8cd;
+      border-radius: 16px;
+      padding: 0.9rem 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .member-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .member-name {
+      font-weight: 700;
+      color: #1c3a1c;
+      font-size: 0.9rem;
+    }
+
+    .member-meta {
+      font-size: 0.75rem;
+      color: #6f866f;
+      margin-top: 4px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .dashboard-card {
+        padding: 1.2rem;
+      }
+
+      .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .info-row strong,
+      .info-row a {
+        width: 100%;
+        text-align: center;
+      }
+
+      .btn-custom,
+      .btn-warning-custom {
+        width: 100%;
+      }
+    }
+    .top-back-btn {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+
+    font-size: 16px;
+    color: #0f4d0f;
+
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    transition: 0.2s ease;
 }
 
-/* 🌿 Navbar */
-.navbar {
-  background: #0f4d0f;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+.top-back-btn:hover {
+    color: #34c759;
+    background: rgba(52, 199, 89, 0.1);
 }
-
-/* 🌿 Glass Card */
-.dashboard-card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-
-  border-radius: 16px;
-  padding: 25px;
-
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  border: 1px solid rgba(255,255,255,0.3);
-}
-
-/* 🌿 Header */
-.card-header-custom {
-  background: linear-gradient(135deg, #0f4d0f);
-  color: white;
-  padding: 15px;
-  border-radius: 12px;
-  text-align: center;
-  font-weight: 600;
-}
-
-/* 🌿 Info rows */
-.info-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.info-row:last-child {
-  border-bottom: none;
-}
-
-/* 🌿 Buttons */
-
-.btn-custom:hover {
-  background: #145214;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-}
-
-/* 🌿 Secondary button */
-.btn-light-custom {
-  background: #f1f5f1;
-  border-radius: 10px;
-  padding: 8px 12px;
-}
-
-/* 🌿 Section spacing */
-.section {
-  margin-top: 20px;
-}
-
-/* 📱 Mobile */
-@media(max-width:768px){
-  .dashboard-card {
-    padding: 20px;
-  }
-}
-.btn-custom {
-  background: linear-gradient(135deg, #0f4d0f);
-  color: white;
-  border-radius: 10px;
-  padding: 12px;
-  font-weight: 600;
-  border: none;
-  transition: 0.3s;
-}
-
-.btn-custom:hover {
-  background: linear-gradient(135deg, #0f4d0f);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-}
-</style>
+  </style>
 </head>
-
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-dark">
-  <div class="container">
-    <span class="navbar-brand">INMBA Dashboard</span>
-    <a href="{{ url_for('logout') }}" class="btn btn-danger btn-sm">Logout</a>
-  </div>
-</nav>
+  <!-- 🌿 Navbar (clean, professional) -->
+  <nav class="navbar navbar-dark fixed-top">
+    <div class="container">
+      <span class="navbar-brand">
+        <i class="fas fa-chart-line me-2"></i>INMBA | Commercial
+      </span>
+      <a href="{{ url_for('logout') }}" class="btn-logout">
+        <i class="fas fa-sign-out-alt me-1"></i> Logout
+      </a>
+    </div>
+  </nav>
 
-<!-- Main -->
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
+  <!-- Extra spacing for fixed navbar -->
+     <a class="top-back-btn" href="{{ url_for('membership') }}">
+    <i class="fas fa-arrow-left"></i>
+</a>
+  <div style="height: 76px;"></div>
 
-      <div class="dashboard-card">
+  <!-- Main Dashboard -->
+  <div class="container mt-2">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
 
-        <!-- Header -->
-        <div class="card-header-custom">
-          Welcome, {{ user.first_name }}
+        <div class="dashboard-card" data-aos="fade-up">
+
+          <!-- Greeting header -->
+          <div class="card-header-custom">
+            <i class="fas fa-user-circle me-2"></i> Welcome, {{ user.first_name }}
+          </div>
+
+          <!-- Profile information -->
+          <div class="section">
+            <div class="info-row">
+              <span><i class="fas fa-user me-2 text-success"></i> Full Name</span>
+              <strong>{{ user.first_name }} {{ user.last_name if user.last_name else '' }}</strong>
+            </div>
+            <div class="info-row">
+              <span><i class="fas fa-id-card me-2 text-success"></i> Login ID</span>
+              <strong>{{ user.login_id }}</strong>
+            </div>
+            <div class="info-row">
+              <span><i class="fas fa-users me-2 text-success"></i> Network Strength</span>
+              <strong>
+                <span class="network-badge" onclick="showNetworkModal()" title="View direct members"
+                      style="cursor: pointer;">
+                  <i class="fas fa-user-friends"></i> Direct: {{ user.direct_network or 0 }}
+                </span>
+                <span class="network-badge ms-2">
+                  <i class="fas fa-share-alt"></i> Indirect: {{ user.indirect_network or 0 }}
+                </span>
+              </strong>
+            </div>
+            <div class="info-row">
+              <span><i class="fas fa-map-marker-alt me-2 text-success"></i> District</span>
+              <strong>{{ user.district or 'Not specified' }}</strong>
+            </div>
+          </div>
+
+          <div class="divider-light"></div>
+
+          <!-- Referral Section (dynamic & professional) -->
+          <div class="section">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i class="fas fa-link text-success"></i>
+              <span style="font-weight: 600; font-size: 0.9rem;">Referral Program</span>
+            </div>
+
+            {% if user.referral_link and user.referral_id %}
+              <div class="referral-box">
+                <div class="info-row" style="border-bottom: none; padding: 0.3rem 0;">
+                  <span>Referral Code</span>
+                  <strong style="background: #e0ecd2;">{{ user.referral_id }}</strong>
+                </div>
+                <div class="info-row" style="border-bottom: none; padding: 0.3rem 0; flex-wrap: wrap;">
+                  <span>Referral Link</span>
+                  <a href="{{ user.referral_link }}" target="_blank" style="word-break: break-all; max-width: 260px;">
+                    {{ user.referral_link[:50] }}{% if user.referral_link|length > 50 %}...{% endif %}
+                  </a>
+                </div>
+                <div class="mt-2 text-center">
+                  <button class="btn-custom btn-sm" style="padding: 6px 18px; font-size: 0.7rem;" onclick="copyReferralLink('{{ user.referral_link }}')">
+                    <i class="fas fa-copy"></i> Copy Link
+                  </button>
+                </div>
+              </div>
+            {% else %}
+              <div class="alert alert-light border rounded-3 py-2 px-3 mb-2" style="background: #fef8e7;">
+                <i class="fas fa-info-circle text-warning"></i>
+                <span style="font-size: 0.8rem;">Referral program not activated yet. Complete activation to unlock network benefits.</span>
+              </div>
+            {% endif %}
+
+            <!-- Action buttons: Become Networker + Policy (smart condition) -->
+            <div class="mt-3 d-flex flex-column gap-3">
+              {% if not user.referral_link or not user.referral_id %}
+                <!-- Case: user hasn't activated network member -->
+                <button class="btn-custom" onclick="showActivationModal()">
+                  <i class="fas fa-chart-simple"></i> Become Independent Networker
+                </button>
+
+                <a href="{{ url_for('policy') }}" class="btn-warning-custom text-center" style="text-decoration: none;">
+                  <i class="fas fa-file-contract"></i> Activate Network Member Policy
+                </a>
+              {% else %}
+                <!-- If already active, show stats plus extra network tools -->
+                <div class="text-center mt-1">
+                  <span class="badge-status"><i class="fas fa-check-circle text-success"></i> Active Network Member</span>
+                </div>
+                <div class="d-flex justify-content-between gap-2 flex-wrap">
+                  <button class="btn-custom" style="background: #4c7a34;" onclick="copyReferralLink('{{ user.referral_link }}')">
+                    <i class="fas fa-share"></i> Share Link
+                  </button>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- QR Code Section -->
+          <div class="divider-light mt-4"></div>
+          <div style="margin-top: 25px; text-align: center;">
+            <h5><i class="fas fa-qrcode"></i> Your Profile QR</h5>
+
+          <img src="{{ url_for('static', filename=qr) }}" width="160"
+     style="border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+
+            <p style="font-size: 0.8rem; margin-top: 8px;">
+              Scan to view your public profile
+            </p>
+
+            <a href="/{{ qr }}" download class="btn-custom" style="font-size: 0.75rem; padding: 6px 14px;">
+              <i class="fas fa-download"></i> Download QR
+            </a>
+          </div>
+
+          <!-- Additional quick stats / professional footer -->
+          <div class="divider-light mt-4"></div>
+
+          <div class="d-flex justify-content-between align-items-center mt-3 flex-wrap" style="font-size: 0.7rem; color: #6f866f;">
+            <span><i class="fas fa-clock"></i> Member since {{ user.created_at.strftime('%b %Y') if user.created_at else '2025' }}</span>
+            <span><i class="fas fa-shield-alt"></i> KYC: {{ 'Verified' if user.kyc_status == 'approved' else 'Pending' }}</span>
+          </div>
+
         </div>
-
-        <!-- Info -->
-        <div class="section">
-
-          <div class="info-row">
-            <span>Name</span>
-            <strong>{{ user.first_name }}</strong>
-          </div>
-
-          <div class="info-row">
-            <span>Login ID</span>
-            <strong>{{ user.login_id }}</strong>
-          </div>
-
-          <div class="info-row">
-            <span>Network Strength</span>
-            <strong>{{ user.direct_network or 0 }}:{{ user.indirect_network or 0 }}</strong>
-          </div>
-
-          <div class="info-row">
-            <span>District</span>
-            <strong>{{ user.district }}</strong>
-          </div>
-
-        </div>
-
-        <!-- Actions -->
-        <!-- Actions -->
-<div class="section text-center">
-
-  <p class="mt-3 mb-1"><strong>Your Referral</strong></p>
-
-  {% if user.referral_link %}
-    <div class="info-row">
-      <span>Referral Code</span>
-      <strong>{{ user.referral_id }}</strong>
-    </div>
-    <div class="info-row">
-      <span>Referral Link</span>
-      <a href="{{ user.referral_link }}" target="_blank">{{ user.referral_link }}</a>
-    </div>
-  {% else %}
-    <div class="info-row">
-      <span>Referral</span>
-      <strong class="badge bg-secondary">Not Activated</strong>
-    </div>
-  {% endif %}
-
-  {% if not user.referral_link %}
-    <button class="btn btn-custom w-100 mt-3">
-      Become Independent Networker
-    </button>
-
-    <a href="{{ url_for('policy') }}" class="btn btn-warning w-100 mt-2">
-      Activate Direct Referral
-    </a>
-  {% endif %}
-
-</div>
       </div>
-
     </div>
   </div>
-</div>
+
+  <!-- Modal for activation confirmation (enhanced UX) -->
+  <div class="modal fade" id="activationModal" tabindex="-1" aria-labelledby="activationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border-radius: 24px;">
+        <div class="modal-header border-0" style="background: #f4f9ef;">
+          <h5 class="modal-title" id="activationModalLabel">
+            <i class="fas fa-rocket text-success"></i> Activate Networker Status
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>To become an Independent Networker, you need to review and accept the <strong>Network Member Policy</strong>. After activation you'll get:</p>
+          <ul class="small">
+            <li><i class="fas fa-check-circle text-success"></i> Personal referral code & link</li>
+            <li><i class="fas fa-chart-line"></i> Access to network dashboard</li>
+            <li><i class="fas fa-gift"></i> Earn incentives on network growth</li>
+          </ul>
+          <div class="alert alert-warning py-2 small">
+            <i class="fas fa-exclamation-triangle"></i> Please read the policy agreement carefully.
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <a href="{{ url_for('policy') }}" class="btn btn-custom">Proceed to Policy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Direct Network Members Modal -->
+  <div class="modal fade network-modal" id="networkModal" tabindex="-1" aria-labelledby="networkModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="networkModalLabel">
+            <i class="fas fa-user-friends me-2"></i> Direct Network Members
+            {% if direct_members %}
+              <span style="background: rgba(255,255,255,0.25); border-radius: 40px; padding: 2px 10px; font-size: 0.78rem; margin-left: 6px;">
+                {{ direct_members|length }}
+              </span>
+            {% endif %}
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          {% if direct_members and direct_members|length > 0 %}
+
+            {% for member in direct_members %}
+              <div class="member-card">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="member-name">
+                      <i class="fas fa-user-circle text-success me-1"></i>
+                      {{ member.first_name }} {{ member.last_name if member.last_name else '' }}
+                    </div>
+                    <div class="member-meta">
+                      <i class="fas fa-id-card me-1"></i> {{ member.login_id }}
+                      &nbsp;·&nbsp;
+                      <i class="fas fa-map-marker-alt me-1"></i> {{ member.district or 'N/A' }}
+                      &nbsp;·&nbsp;
+                      <i class="fas fa-calendar me-1"></i> {{ member.created_at.strftime('%d %b %Y') if member.created_at else '—' }}
+                    </div>
+                  </div>
+                  <div>
+                    {% if member.kyc_status == 'approved' %}
+                      <span class="badge-status" style="background: #d4edda; color: #155724;">
+                        <i class="fas fa-check-circle"></i> Verified
+                      </span>
+                    {% else %}
+                      <span class="badge-status" style="background: #fff3cd; color: #856404;">
+                        <i class="fas fa-clock"></i> Pending
+                      </span>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+
+            <div class="text-end mt-2" style="font-size: 0.75rem; color: #6f866f;">
+              <i class="fas fa-users"></i> Total: {{ direct_members|length }} member{{ 's' if direct_members|length != 1 else '' }}
+            </div>
+
+          {% else %}
+            <div class="text-center py-4">
+              <i class="fas fa-user-slash fa-2x text-warning mb-3 d-block"></i>
+              <p style="font-size: 0.85rem; color: #856404;">No direct network members yet.</p>
+              <p style="font-size: 0.8rem; color: #6f866f;">Share your referral link to grow your network.</p>
+            </div>
+          {% endif %}
+
+        </div>
+        <div class="modal-footer border-0" style="background: #f9fcf5; border-radius: 0 0 24px 24px;">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" style="border-radius: 40px; font-size: 0.85rem;">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS + AOS (for smooth entrance) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    // Initialize AOS (optional animation)
+    AOS.init({ duration: 500, once: true, offset: 20 });
+
+    // Function to copy referral link to clipboard (professional feedback)
+    function copyReferralLink(link) {
+      if (!link) {
+        alert("Referral link not available. Please activate your membership.");
+        return;
+      }
+      navigator.clipboard.writeText(link).then(() => {
+        const toastMsg = document.createElement('div');
+        toastMsg.innerText = '✓ Link copied to clipboard';
+        toastMsg.style.position = 'fixed';
+        toastMsg.style.bottom = '20px';
+        toastMsg.style.left = '50%';
+        toastMsg.style.transform = 'translateX(-50%)';
+        toastMsg.style.backgroundColor = '#0f4d0f';
+        toastMsg.style.color = 'white';
+        toastMsg.style.padding = '10px 20px';
+        toastMsg.style.borderRadius = '50px';
+        toastMsg.style.fontSize = '0.8rem';
+        toastMsg.style.zIndex = '9999';
+        toastMsg.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+        document.body.appendChild(toastMsg);
+        setTimeout(() => { toastMsg.remove(); }, 2000);
+      }).catch(() => {
+        alert("Press Ctrl+C to copy link: " + link);
+      });
+    }
+
+    // Show activation modal if needed
+    function showActivationModal() {
+      var modalEl = document.getElementById('activationModal');
+      var modal = new bootstrap.Modal(modalEl);
+      modal.show();
+    }
+
+    // Show direct network members modal
+    function showNetworkModal() {
+      var modalEl = document.getElementById('networkModal');
+      var modal = new bootstrap.Modal(modalEl);
+      modal.show();
+    }
+
+    console.log("Dashboard ready");
+  </script>
 
 </body>
 </html>

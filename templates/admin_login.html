@@ -17,7 +17,6 @@
     font-family: 'Inter', 'Segoe UI', sans-serif;
 }
 
-/* BACKGROUND - Premium gradient + abstract pattern */
 body {
     height: 100vh;
     display: flex;
@@ -28,7 +27,6 @@ body {
     overflow: hidden;
 }
 
-/* Animated background particles/glow effect */
 body::before {
     content: "";
     position: absolute;
@@ -46,7 +44,6 @@ body::before {
     100% { transform: rotate(360deg); }
 }
 
-/* Floating orbs decoration */
 body::after {
     content: "";
     position: absolute;
@@ -59,7 +56,6 @@ body::after {
     pointer-events: none;
 }
 
-/* LOGIN BOX - Enhanced glassmorphism + modern card */
 .login-box {
     position: relative;
     width: 420px;
@@ -69,7 +65,7 @@ body::after {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(74, 222, 128, 0.25);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(74, 222, 128, 0.1) inset;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(74,222,128,0.1) inset;
     text-align: center;
     animation: fadeSlideUp 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
     transition: transform 0.2s ease, box-shadow 0.3s ease;
@@ -77,12 +73,10 @@ body::after {
 
 .login-box:hover {
     transform: translateY(-4px);
-    box-shadow: 0 30px 55px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(74, 222, 128, 0.3) inset;
+    box-shadow: 0 30px 55px -12px rgba(0,0,0,0.6), 0 0 0 1px rgba(74,222,128,0.3) inset;
 }
 
-/* TITLE with icon */
 .login-box h2 {
-    color: white;
     margin-bottom: 28px;
     font-size: 28px;
     font-weight: 600;
@@ -95,7 +89,6 @@ body::after {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .login-box h2 i {
@@ -104,10 +97,8 @@ body::after {
     background-clip: unset;
     color: #4ade80;
     font-size: 28px;
-    text-shadow: none;
 }
 
-/* INPUT GROUP wrapper for better spacing */
 .input-group {
     margin-bottom: 20px;
     text-align: left;
@@ -129,21 +120,40 @@ body::after {
     align-items: center;
 }
 
-.input-icon i {
+.input-icon .left-icon {
     position: absolute;
     left: 15px;
     color: #6ee7b7;
     font-size: 16px;
     pointer-events: none;
-    transition: 0.2s;
+    z-index: 2;
 }
 
-/* INPUTS - modern, clean */
+/* ── Password toggle eye ── */
+.eye-toggle {
+    position: absolute;
+    right: 15px;
+    color: #6ee7b7;
+    font-size: 15px;
+    cursor: pointer;
+    z-index: 2;
+    padding: 4px;
+    border-radius: 50%;
+    transition: color 0.2s, background 0.2s;
+    user-select: none;
+}
+
+.eye-toggle:hover {
+    color: #4ade80;
+    background: rgba(74,222,128,0.12);
+}
+
+/* INPUTS */
 .login-box input {
     width: 100%;
-    padding: 14px 16px 14px 44px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(74, 222, 128, 0.35);
+    padding: 14px 44px 14px 44px;  /* right padding for eye icon */
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(74,222,128,0.35);
     border-radius: 18px;
     outline: none;
     font-size: 14px;
@@ -151,22 +161,40 @@ body::after {
     color: white;
     transition: all 0.25s ease;
     backdrop-filter: blur(4px);
+
+    /* ✅ Disable browser default eye icon */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* ✅ Hide MS Edge/IE built-in eye */
+.login-box input[type="password"]::-ms-reveal,
+.login-box input[type="password"]::-ms-clear {
+    display: none !important;
+}
+
+/* ✅ Hide Chrome/Safari built-in eye */
+.login-box input[type="password"]::-webkit-credentials-auto-fill-button,
+.login-box input[type="password"]::-webkit-textfield-decoration-container,
+.login-box input[type="password"]::-webkit-strong-password-auto-fill-button {
+    display: none !important;
 }
 
 .login-box input:focus {
     border-color: #4ade80;
-    background: rgba(255, 255, 255, 0.12);
-    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2);
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 0 3px rgba(74,222,128,0.2);
 }
 
 .login-box input::placeholder {
-    color: rgba(209, 250, 229, 0.5);
+    color: rgba(209,250,229,0.5);
     font-weight: 400;
     font-size: 13px;
 }
 
-/* BUTTON - premium gradient + subtle shine */
-.login-box button {
+/* BUTTON */
+.login-box button[type="submit"] {
     width: 100%;
     padding: 14px;
     margin-top: 18px;
@@ -184,7 +212,7 @@ body::after {
     box-shadow: 0 8px 20px rgba(34,197,94,0.25);
 }
 
-.login-box button::before {
+.login-box button[type="submit"]::before {
     content: '';
     position: absolute;
     top: 0;
@@ -195,28 +223,27 @@ body::after {
     transition: left 0.5s ease;
 }
 
-.login-box button:hover {
+.login-box button[type="submit"]:hover {
     transform: translateY(-2px);
     background: linear-gradient(105deg, #166534, #16a34a);
     box-shadow: 0 12px 28px rgba(34,197,94,0.4);
 }
 
-.login-box button:hover::before {
+.login-box button[type="submit"]:hover::before {
     left: 100%;
 }
 
-.login-box button:active {
+.login-box button[type="submit"]:active {
     transform: translateY(1px);
 }
 
-/* TEXT footer */
 .login-box p {
     margin-top: 24px;
     color: #bbf0d0;
     font-size: 12px;
     font-weight: 400;
     letter-spacing: 0.3px;
-    border-top: 1px solid rgba(74, 222, 128, 0.2);
+    border-top: 1px solid rgba(74,222,128,0.2);
     padding-top: 18px;
     display: inline-flex;
     align-items: center;
@@ -229,36 +256,25 @@ body::after {
     opacity: 0.8;
 }
 
-/* ANIMATION */
 @keyframes fadeSlideUp {
-    0% {
-        opacity: 0;
-        transform: translateY(30px) scale(0.96);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+    0%   { opacity: 0; transform: translateY(30px) scale(0.96); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Responsive adjustments */
 @media (max-width: 480px) {
     .login-box {
         width: 90%;
         padding: 32px 24px;
         margin: 0 16px;
     }
-    
     .login-box h2 {
         font-size: 24px;
     }
-    
     .login-box input {
-        padding: 12px 16px 12px 42px;
+        padding: 12px 42px 12px 42px;
     }
 }
 
-/* subtle decorative line */
 .deco-line {
     width: 60px;
     height: 3px;
@@ -273,38 +289,59 @@ body::after {
 
 <div class="login-box">
     <h2>
-        <i class="fas fa-shield-alt"></i> 
+        <i class="fas fa-shield-alt"></i>
         Admin Login
     </h2>
     <div class="deco-line"></div>
-    
-    <form method="POST" action="/admin_login">
+
+    <form method="POST" action="/admin_login" autocomplete="off">
+
         <div class="input-group">
-            <label><i class="fas fa-user-circle" style="margin-right: 6px;"></i> Username</label>
+            <label><i class="fas fa-user-circle" style="margin-right:6px;"></i> Username</label>
             <div class="input-icon">
-                <i class="fas fa-user"></i>
-                <input type="text" name="username" placeholder="Admin Username" required>
+                <i class="fas fa-user left-icon"></i>
+                <input type="text" name="username" placeholder="Admin Username" required autocomplete="off">
             </div>
         </div>
-        
+
         <div class="input-group">
-            <label><i class="fas fa-lock"></i> Password</label>
+            <label><i class="fas fa-lock" style="margin-right:6px;"></i> Password</label>
             <div class="input-icon">
-                <i class="fas fa-key"></i>
-                <input type="password" name="password" placeholder="Password" required>
+                <i class="fas fa-key left-icon"></i>
+                <input type="password" name="password" id="adminPassword"
+                       placeholder="Password" required autocomplete="new-password">
+                <!-- ✅ Custom eye toggle -->
+                <i class="fas fa-eye eye-toggle" id="eyeToggle" onclick="togglePassword()"></i>
             </div>
         </div>
-        
+
         <button type="submit">
-            <i class="fas fa-arrow-right-to-bracket" style="margin-right: 8px;"></i> Login
+            <i class="fas fa-arrow-right-to-bracket" style="margin-right:8px;"></i> Login
         </button>
+
     </form>
-    
+
     <p>
-        <i class="fas fa-fingerprint"></i> INMBA Admin Panel • Secure Access Only
+        <i class="fas fa-fingerprint"></i>
+        INMBA Admin Panel • Secure Access Only
         <i class="fas fa-shield-heart"></i>
     </p>
 </div>
+
+<script>
+    function togglePassword() {
+        const input    = document.getElementById('adminPassword');
+        const eyeIcon  = document.getElementById('eyeToggle');
+
+        if (input.type === 'password') {
+            input.type      = 'text';
+            eyeIcon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            input.type      = 'password';
+            eyeIcon.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    }
+</script>
 
 </body>
 </html>

@@ -1,1463 +1,2045 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>INMBA Foundation</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<!-- AOS CSS -->
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-<!-- AOS JS -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>INMBA Foundation</title>
+  <!-- Font Awesome 6 with Brands -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- AOS JS -->
 
 </head>
+
 <body>
-    <style>
+  <style>
+    /* Navbar Background & Shadow */
+    .navbar-custom {
+      background: #0f4d0f, #a2daa2;
+      /* Semi-transparent dark blue */
+      backdrop-filter: blur(10px);
+      /* Blur behind navbar */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 0.8rem 1rem;
+      border-radius: 0 0 15px 15px;
+      /* Slight rounded bottom corners */
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
 
-/* Navbar Background & Shadow */
-  .navbar-custom {
-  background: #0f4d0f, #a2daa2; /* Semi-transparent dark blue */
-  backdrop-filter: blur(10px); /* Blur behind navbar */
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  padding: 0.8rem 1rem;
-  border-radius: 0 0 15px 15px; /* Slight rounded bottom corners */
-  transition: all 0.3s ease;
-  z-index: 999;
-}
+    /* Brand Name */
+    .navbar-custom .brand-name {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #fff;
+    }
 
-/* Brand Name */
-.navbar-custom .brand-name {
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: #fff;
-}
+    /* Nav links hover animation */
+    .navbar-custom .nav-link {
+      color: #fff;
+      position: relative;
+      margin-right: 1rem;
+      transition: color 0.3s;
+    }
 
-/* Nav links hover animation */
-.navbar-custom .nav-link {
-  color: #fff;
-  position: relative;
-  margin-right: 1rem;
-  transition: color 0.3s;
-}
+    .navbar-custom .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #ffc107;
+      /* Yellow underline */
+      transition: 0.3s;
+    }
 
-.navbar-custom .nav-link::after {
-  content: '';
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: #ffc107; /* Yellow underline */
-  transition: 0.3s;
-}
+    .navbar-custom .nav-link:hover::after {
+      width: 100%;
+    }
 
-.navbar-custom .nav-link:hover::after {
-  width: 100%;
-}
+    .navbar-custom .nav-link:hover {
+      color: #ffc107;
+    }
 
-.navbar-custom .nav-link:hover {
-  color: #ffc107;
-}
+    /* Join Now Button */
+    .navbar-custom .btn-warning {
+      border-radius: 50px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-/* Join Now Button */
-.navbar-custom .btn-warning {
-  border-radius: 50px;
-  font-weight: bold;
-  transition: 0.3s;
-}
+    .navbar-custom .btn-warning:hover {
+      background-color: #e6b800;
+      transform: translateY(-2px);
+    }
 
-.navbar-custom .btn-warning:hover {
-  background-color: #e6b800;
-  transform: translateY(-2px);
-}
+    /* Navbar sticky effect on scroll */
+    .navbar-custom.scrolled {
+      background: #0f4d0f, #a2daa2;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
 
-/* Navbar sticky effect on scroll */
-.navbar-custom.scrolled {
-  background:#0f4d0f, #a2daa2;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-}
-        .carousel-item img {
-  transition: transform 8s ease;
-}
+    .carousel-item img {
+      transition: transform 8s ease;
+    }
 
-.carousel-item.active img {
-  transform: scale(1.05) translateX(10px);
-}
-.carousel-caption{
-    margin-bottom: 100px;
- 
-}
-/* Make brand image responsive */
-.navbar-brand img {
-  width: 50px;
-  height: 50px;
-  max-width: 100%;
-  height: auto;
-}
+    .carousel-item.active img {
+      transform: scale(1.05) translateX(10px);
+    }
 
-/* Adjust navbar padding for smaller screens */
-@media (max-width: 767px) {
-  .navbar-custom {
-    padding: 0.5rem 1rem;
-    border-radius: 0;
-  }
-  .navbar-custom .brand-name {
-    font-size: 0.9rem;
-  }
-  .navbar-custom .nav-link {
-    margin-right: 0.5rem;
-  }
-  .navbar-custom .btn-warning {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
-  }
-}
-/* Keep everything in one line */
-.navbar .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+    .carousel-caption {
+      margin-bottom: 100px;
 
-/* Prevent brand from wrapping */
-.navbar-brand {
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-}
+    }
 
-/* Reduce logo size on mobile */
-@media (max-width: 576px) {
-  .navbar-brand img {
-    width: 35px;
-    height: 35px;
-  }
+    /* Make brand image responsive */
+    .navbar-brand img {
+      width: 50px;
+      height: 50px;
+      max-width: 100%;
+      height: auto;
+    }
 
-  .navbar-custom .brand-name {
-    font-size: 0.8rem;
-  }
-}
-.navbar-custom {
-  background-color: #0f4d0f; /* Semi-transparent dark blue */
-  backdrop-filter: blur(10px); /* Blur behind navbar */
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  padding: 0.8rem 1rem;
-  border-radius: 0 0 15px 15px; /* Slight rounded bottom corners */
-  transition: all 0.3s ease;
-  z-index: 999;
-}
+    /* Adjust navbar padding for smaller screens */
+    @media (max-width: 767px) {
+      .navbar-custom {
+        padding: 0.5rem 1rem;
+        border-radius: 0;
+      }
 
-/* Brand Name */
-.navbar-custom .brand-name {
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: #fff;
-}
+      .navbar-custom .brand-name {
+        font-size: 0.9rem;
+      }
 
-/* Nav links hover animation */
-.navbar-custom .nav-link {
-  color: #fff;
-  position: relative;
-  margin-right: 1rem;
-  transition: color 0.3s;
-}
+      .navbar-custom .nav-link {
+        margin-right: 0.5rem;
+      }
 
-.navbar-custom .nav-link::after {
-  content: '';
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: #ffc107; /* Yellow underline */
-  transition: 0.3s;
-}
+      .navbar-custom .btn-warning {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+      }
+    }
 
-.navbar-custom .nav-link:hover::after {
-  width: 100%;
-}
+    /* Keep everything in one line */
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-.navbar-custom .nav-link:hover {
-  color: #ffc107;
-}
+    /* Prevent brand from wrapping */
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
 
-/* Join Now Button */
-.navbar-custom .btn-warning {
-  border-radius: 50px;
-  font-weight: bold;
-  transition: 0.3s;
-}
+    /* Reduce logo size on mobile */
+    @media (max-width: 576px) {
+      .navbar-brand img {
+        width: 35px;
+        height: 35px;
+      }
 
-.navbar-custom .btn-warning:hover {
-  background-color: #e6b800;
-  transform: translateY(-2px);
-}
+      .navbar-custom .brand-name {
+        font-size: 0.8rem;
+      }
+    }
 
-/* Navbar sticky effect on scroll */
-.navbar-custom.scrolled {
-  background:  #0f4d0f;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-}
-        .carousel-item img {
-  transition: transform 8s ease;
-}
+    .navbar-custom {
+      background-color: #0f4d0f;
+      /* Semi-transparent dark blue */
+      backdrop-filter: blur(10px);
+      /* Blur behind navbar */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 0.8rem 1rem;
+      border-radius: 0 0 15px 15px;
+      /* Slight rounded bottom corners */
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
 
-.carousel-item.active img {
-  transform: scale(1.05) translateX(10px);
-}
-.carousel-caption{
-    margin-bottom: 100px;
- 
-}
-/* Make brand image responsive */
-.navbar-brand img {
-  width: 50px;
-  height: 50px;
-  max-width: 100%;
-  height: auto;
-}
+    /* Brand Name */
+    .navbar-custom .brand-name {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #fff;
+    }
 
-/* Adjust navbar padding for smaller screens */
-@media (max-width: 767px) {
-  .navbar-custom {
-    padding: 0.5rem 1rem;
-    border-radius: 0;
-  }
-  .navbar-custom .brand-name {
-    font-size: 0.9rem;
-  }
-  .navbar-custom .nav-link {
-    margin-right: 0.5rem;
-  }
-  .navbar-custom .btn-warning {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
-  }
-}
-/* Chat Icon */
-.chat-icon{
-position:fixed;
-bottom:20px;
-right:20px;
-background: #0f4d0f;
-color:white;
-width:60px;
-height:60px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:26px;
-cursor:pointer;
-box-shadow:0 5px 15px rgba(0,0,0,0.3);
-z-index: 9999;
-}
+    /* Nav links hover animation */
+    .navbar-custom .nav-link {
+      color: #fff;
+      position: relative;
+      margin-right: 1rem;
+      transition: color 0.3s;
+    }
 
-/* Chatbox */
-.chat-container{
-position:fixed;
-bottom:90px;
-right:20px;
-width:300px;
-background:white;
-border-radius:10px;
-box-shadow:0 10px 25px rgba(0,0,0,0.3);
-display:none;
-flex-direction:column;
-overflow:hidden;
-z-index: 9999;
-}
+    .navbar-custom .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #ffc107;
+      /* Yellow underline */
+      transition: 0.3s;
+    }
 
-/* Header */
-.chat-header{
-background: #0f4d0f;
-color:white;
-padding:10px;
-display:flex;
-justify-content:space-between;
-}
+    .navbar-custom .nav-link:hover::after {
+      width: 100%;
+    }
 
-/* Body */
-.chat-body{
-height:220px;
-overflow-y:auto;
-padding:10px;
-background:#f2f2f2;
-}
+    .navbar-custom .nav-link:hover {
+      color: #ffc107;
+    }
 
-/* Messages */
-.bot-msg{
-background:#dbe6ff;
-padding:6px;
-margin:5px;
-border-radius:5px;
-}
+    /* Join Now Button */
+    .navbar-custom .btn-warning {
+      border-radius: 50px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-.user-msg{
-background:#d6ffd9;
-padding:6px;
-margin:5px;
-border-radius:5px;
-text-align:right;
-}
+    .navbar-custom .btn-warning:hover {
+      background-color: #e6b800;
+      transform: translateY(-2px);
+    }
 
-/* Input */
-.chat-input{
-display:flex;
-}
+    /* Navbar sticky effect on scroll */
+    .navbar-custom.scrolled {
+      background: #0f4d0f;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
 
-.chat-input input{
-flex:1;
-padding:8px;
-border:none;
-border-top:1px solid #ddd;
-}
+    .carousel-item img {
+      transition: transform 8s ease;
+    }
 
-.chat-input button{
-background: #0f4d0f;
-color:white;
-border:none;
-padding:8px 12px;
-}
-.options{
-margin-top:10px;
-display:flex;
-flex-wrap:wrap;
-gap:5px;
-}
+    .carousel-item.active img {
+      transform: scale(1.05) translateX(10px);
+    }
 
-.options button{
-background: #0f4d0f;
-color:white;
-border:none;
-padding:5px 10px;
-border-radius:15px;
-font-size:12px;
-cursor:pointer;
-}
+    .carousel-caption {
+      margin-bottom: 100px;
 
-.options button:hover{
-background: #0f4d0f;
-}
-/* Keep everything in one line */
+    }
 
-.division-icon i {
-  font-size: 1.8rem;
-  color: gold;
-}
-.typing-text::after {
-  content: "|";
-  animation: blink 1s infinite;
-}
+    /* Make brand image responsive */
+    .navbar-brand img {
+      width: 50px;
+      height: 50px;
+      max-width: 100%;
+      height: auto;
+    }
 
-@keyframes blink {
-  0%,100%{opacity:1;}
-  50%{opacity:0;}
-}
-.typing-text{
-  font-size: 48px;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-.hero-img{
-  height:100vh;
-  object-fit:cover;
-  filter: brightness(65%);
-}
+    /* Adjust navbar padding for smaller screens */
+    @media (max-width: 767px) {
+      .navbar-custom {
+        padding: 0.5rem 1rem;
+        border-radius: 0;
+      }
 
-/* Smooth sliding speed */
-.carousel-item{
-  transition: transform 1s ease-in-out;
-}
+      .navbar-custom .brand-name {
+        font-size: 0.9rem;
+      }
 
-/* Overlay */
-.hero-overlay{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  color:white;
-  z-index:2;
-}
+      .navbar-custom .nav-link {
+        margin-right: 0.5rem;
+      }
 
-/* Gradient overlay */
-#heroCarousel::after{
-  content:"";
-  position:absolute;
-  width:100%;
-  height:100%;
-  top:0;
-  left:0;
-  background:linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.2));
-  z-index:1;
-}
-.division-3d-section{
-  background:#0f172a;
-  padding:80px 0;
-}
+      .navbar-custom .btn-warning {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+      }
+    }
 
-/* Card base */
-.card3d{
-  height:250px;
-  border-radius:20px;
-  background:linear-gradient(145deg,#1e293b,#0f172a);
-  box-shadow:0 10px 30px rgba(0,0,0,0.5);
-  transition:transform 0.2s ease;
-  transform-style:preserve-3d;
-  perspective:1000px;
-}
+    /* Chat Icon */
+    .chat-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0f4d0f;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      z-index: 9999;
+    }
 
-/* Content */
-.card-content{
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  color:white;
-  text-align:center;
-  padding:20px;
-}
+    /* Chatbox */
+    .chat-container {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 300px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 9999;
+    }
 
-/* Icon */
-.card-content i{
-  font-size:40px;
-  margin-bottom:10px;
-  color:#facc15;
-}
+    /* Header */
+    .chat-header {
+      background: #0f4d0f;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
 
-/* Text */
-.card-content h4{
-  font-weight:600;
-}
+    /* Body */
+    .chat-body {
+      height: 220px;
+      overflow-y: auto;
+      padding: 10px;
+      background: #f2f2f2;
+    }
 
-.card-content p{
-  font-size:14px;
-  opacity:0.8;
-}
+    /* Messages */
+    .bot-msg {
+      background: #dbe6ff;
+      padding: 6px;
+      margin: 5px;
+      border-radius: 5px;
+    }
 
-/* Link */
-.card-content a{
-  margin-top:10px;
-  color:#facc15;
-  text-decoration:none;
-}
+    .user-msg {
+      background: #d6ffd9;
+      padding: 6px;
+      margin: 5px;
+      border-radius: 5px;
+      text-align: right;
+    }
 
-/* Hover glow */
-.card3d:hover{
-  box-shadow:0 20px 50px rgba(250,204,21,0.3);
-}
-/* Logo and text adjustment */
+    /* Input */
+    .chat-input {
+      display: flex;
+    }
 
-/* Stats Section */
-.stats-section {
-  background: #f6f8f4;
-  position: relative;
-}
+    .chat-input input {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      border-top: 1px solid #ddd;
+    }
 
-.timeline {
-  position: relative;
-}
+    .chat-input button {
+      background: #0f4d0f;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+    }
 
-.timeline::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 5%;
-  right: 5%;
-  height: 4px;
-  background: #556b2f;
-  z-index: 0;
-}
+    .options {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
 
-.stat-box {
-  background: #fff;
-  padding: 30px 15px;
-  border-radius: 15px;
-  transition: transform 0.3s, box-shadow 0.3s;
-  position: relative;
-  overflow: hidden;
-  border: 2px solid #556b2f;
-  z-index: 1;
-}
+    .options button {
+      background: #0f4d0f;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 12px;
+      cursor: pointer;
+    }
 
-.stat-box:hover {
-  transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-  border-color: #3f5a1f;
-}
+    .options button:hover {
+      background: #0f4d0f;
+    }
 
-/* Icon circle behind number */
-.stat-icon {
-  width: 60px;
-  height: 60px;
-  background: rgba(85, 107, 47, 0.1);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 10px auto;
-  font-size: 1.8rem;
-  color: #556b2f;
-  transition: transform 0.3s;
-}
+    /* Keep everything in one line */
 
-.stat-box:hover .stat-icon {
-  transform: scale(1.2);
-}
+    .division-icon i {
+      font-size: 1.8rem;
+      color: gold;
+    }
 
-.stat-box h2 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #556b2f;
-  margin-bottom: 10px;
-  transition: color 0.3s, transform 0.3s;
-}
+    .typing-text::after {
+      content: "|";
+      animation: blink 1s infinite;
+    }
 
-.stat-box:hover h2 {
-  color: #3f5a1f;
-  transform: translateY(-3px);
-}
+    @keyframes blink {
 
-.stat-box p {
-  font-size: 14px;
-  color: #6b7280;
-  margin: 0;
-}
+      0%,
+      100% {
+        opacity: 1;
+      }
 
-/* Responsive */
-@media(max-width:767px){
-  .stat-box {
-    margin: 10px 0;
-  }
-  .stat-box h2 {
-    font-size: 2rem;
-  }
-  .stat-box p {
-    font-size: 13px;
-  }
-}
-/* Force carousel images to fill container */
+      50% {
+        opacity: 0;
+      }
+    }
 
-    </style>
+    .typing-text {
+      font-size: 48px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
 
-<!-- Navbar -->
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg fixed-top navbar-custom py-2">
-  <div class="container">
-    <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}">
-      <!-- Navbar logo -->
-      <img src="{{ url_for('static', filename='images/inmba_logo.jpg') }}" 
-           class="rounded-circle img-fluid me-3" alt="INMBA Logo" style="width:50px; height:50px;">
-      <span class="brand-name">INMBA</span>
-    </a>
+    .hero-img {
+      height: 100vh;
+      object-fit: cover;
+      filter: brightness(65%);
+    }
 
-    <!-- Mobile toggle -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
+    /* Smooth sliding speed */
+    .carousel-item {
+      transition: transform 1s ease-in-out;
+    }
+
+    /* Overlay */
+    .hero-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      z-index: 2;
+    }
+
+    /* Gradient overlay */
+    #heroCarousel::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
+      z-index: 1;
+    }
+
+    .division-3d-section {
+      background: #0f172a;
+      padding: 80px 0;
+    }
+
+    /* Card base */
+    .card3d {
+      height: 250px;
+      border-radius: 20px;
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s ease;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+    /* Content */
+    .card-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Icon */
+    .card-content i {
+      font-size: 40px;
+      margin-bottom: 10px;
+      color: #facc15;
+    }
+
+    /* Text */
+    .card-content h4 {
+      font-weight: 600;
+    }
+
+    .card-content p {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    /* Link */
+    .card-content a {
+      margin-top: 10px;
+      color: #facc15;
+      text-decoration: none;
+    }
+
+    /* Hover glow */
+    .card3d:hover {
+      box-shadow: 0 20px 50px rgba(250, 204, 21, 0.3);
+    }
+
+    /* Logo and text adjustment */
+
+    /* Stats Section */
+    .stats-section {
+      background: #f6f8f4;
+      position: relative;
+    }
+
+    .timeline {
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 5%;
+      right: 5%;
+      height: 4px;
+      background: #556b2f;
+      z-index: 0;
+    }
+
+    .stat-box {
+      background: #fff;
+      padding: 30px 15px;
+      border-radius: 15px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid #556b2f;
+      z-index: 1;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      border-color: #3f5a1f;
+    }
+
+    /* Icon circle behind number */
+    .stat-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(85, 107, 47, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px auto;
+      font-size: 1.8rem;
+      color: #556b2f;
+      transition: transform 0.3s;
+    }
+
+    .stat-box:hover .stat-icon {
+      transform: scale(1.2);
+    }
+
+    .stat-box h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #556b2f;
+      margin-bottom: 10px;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .stat-box:hover h2 {
+      color: #3f5a1f;
+      transform: translateY(-3px);
+    }
+
+    .stat-box p {
+      font-size: 14px;
+      color: #6b7280;
+      margin: 0;
+    }
+
+    /* Responsive */
+    @media(max-width:767px) {
+      .stat-box {
+        margin: 10px 0;
+      }
+
+      .stat-box h2 {
+        font-size: 2rem;
+      }
+
+      .stat-box p {
+        font-size: 13px;
+      }
+    }
+
+    .division-icon img {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+      margin-bottom: 15px;
+    }
+
+    html,
+    body {
+      overflow-x: hidden;
+    }
+
+    /* Force carousel images to fill container */
+  </style>
+
+  <!-- Navbar -->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-custom py-2">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}">
+        <!-- Navbar logo -->
+        <img src="{{ url_for('static', filename='images/inmba_logo.jpg') }}" class="rounded-circle img-fluid me-3"
+          alt="INMBA Logo" style="width:50px; height:50px;">
+        <span class="brand-name">INMBA.org</span>
+      </a>
+
+      <!-- Mobile toggle -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('programs') }}">Programs</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('events') }}">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
+          {% if session.get('user') %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link text-danger" href="{{ url_for('logout') }}">Logout</a></li>
+          {% else %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('membership') }}">Membership</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+          {% endif %}
+        </ul>
+
+        {% if not session.get('user') %}
+        <a href="{{ url_for('membership') }}" class="btn btn-warning ms-3">Join Now</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+
+    <div class="carousel-inner">
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <img src="https://i.pinimg.com/1200x/9b/de/7b/9bde7be3fcffc7a513521841fccae09e.jpg"
+          class="d-block w-100 hero-img">
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <img src="https://i.pinimg.com/736x/e8/7e/c4/e87ec4c9d80e8e3da206a9c67e368226.jpg"
+          class="d-block w-100 hero-img">
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item">
+        <img src="https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg" class="d-block w-100 hero-img">
+      </div>
+
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
     </button>
 
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-  <ul class="navbar-nav">
-    <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
-    <li class="nav-item"><a class="nav-link" href="{{ url_for('programs') }}">Programs</a></li>
-    <li class="nav-item"><a class="nav-link" href="{{ url_for('events') }}">Events</a></li>
-    <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
-               <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
-    {% if session.get('user') %}
-      <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
-      <li class="nav-item"><a class="nav-link text-danger" href="{{ url_for('logout') }}">Logout</a></li>
-    {% else %}
-      <li class="nav-item"><a class="nav-link" href="{{ url_for('membership') }}">Membership</a></li>
-      <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
-    {% endif %}
-  </ul>
-  
-  {% if not session.get('user') %}
-    <a href="{{ url_for('membership') }}" class="btn btn-warning ms-3">Join Now</a>
-  {% endif %}
-</div>
-  </div>
-</nav>
-
-<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-
-  <div class="carousel-inner">
-
-    <!-- Slide 1 -->
-    <div class="carousel-item active">
-      <img src="https://i.pinimg.com/1200x/9b/de/7b/9bde7be3fcffc7a513521841fccae09e.jpg" class="d-block w-100 hero-img">
-    </div>
-
-    <!-- Slide 2 -->
-    <div class="carousel-item">
-      <img src="https://i.pinimg.com/736x/e8/7e/c4/e87ec4c9d80e8e3da206a9c67e368226.jpg" class="d-block w-100 hero-img">
-    </div>
-
-    <!-- Slide 3 -->
-    <div class="carousel-item">
-      <img src="https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg" class="d-block w-100 hero-img">
+    <!-- Overlay -->
+    <div class="hero-overlay text-center">
+      <h1 class="typing-text"></h1>
+      <p> Network Management and Business Association</p>
+      <a href="{{ url_for('membership') }}" class="btn btn-warning">Join Now</a>
     </div>
 
   </div>
+  <!-- Divisions -->
+  <!-- Divisions - Modern Design -->
+  <!-- Divisions - Modern Animated Cards -->
+  <!-- Divisions - Premium Animated Cards -->
+  <!-- Divisions - Minimal Green Border Cards -->
+  <section class="container my-5">
+    <h2 class="text-center section-title" data-aos="fade-down">Our Divisions</h2>
 
-  <!-- Controls -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </button>
+    <div class="row g-4 mt-4">
 
-  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </button>
-
-  <!-- Overlay -->
-  <div class="hero-overlay text-center">
-    <h1 class="typing-text"></h1>
-    <p> International Network of Modern Business Achievers</p>
-    <a href="{{ url_for('membership') }}" class="btn btn-warning">Join Now</a>
-  </div>
-
-</div>
-<!-- Divisions -->
-<!-- Divisions - Modern Design -->
-<!-- Divisions - Modern Animated Cards -->
-<!-- Divisions - Premium Animated Cards -->
-<!-- Divisions - Minimal Green Border Cards -->
-<section class="container my-5">
-  <h2 class="text-center section-title" data-aos="fade-down">Our Divisions</h2>
-
-  <div class="row g-4 mt-4">
-
-    <div class="col-md-4">
-      <div class="division-card card3d" data-aos="fade-up" data-aos-delay="100">
-        <div class="card-content">
-          <div class="division-icon"><i class="bi bi-building"></i></div>
-          <h4>INMBA Organization</h4>
-          <p>Leadership programs and structured community engagement.</p>
-          <a href="{{ url_for('organization') }}">Learn More →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="division-card card3d" data-aos="fade-up" data-aos-delay="200">
-        <div class="card-content">
-          <div class="division-icon"><i class="bi bi-briefcase"></i></div>
-          <h4>INMBA Commercial</h4>
-          <p>Business consulting and strategic growth solutions.</p>
-          <a href="{{ url_for('commercial') }}">Learn More →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="division-card card3d" data-aos="fade-up" data-aos-delay="300">
-        <div class="card-content">
-          <div class="division-icon"><i class="bi bi-heart-fill"></i></div>
-          <h4>INMBA Foundation</h4>
-          <p>Social initiatives focused on empowerment and impact.</p>
-          <a href="{{ url_for('foundation') }}">Learn More →</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<style>
-/* Section Title */
-.section-title{
-  font-weight:700;
-  color:#1f2937;
-  position:relative;
-  margin-bottom:50px;
-}
-.section-title::after{
-  content:"";
-  width:60px;
-  height:3px;
-  background: #0f4d0f; /* olive green accent */
-  display:block;
-  margin:10px auto 0;
-  border-radius:3px;
-}
-
-/* Minimal Cards with Green Border */
-.card3d{
-  background: #fff; /* White card */
-  border: 2px solid  #0f4d0f; /* Olive green border */
-  border-radius:20px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.08);
-  overflow:hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
-  cursor:pointer;
-  position:relative;
-}
-
-.card3d:hover{
-  transform: translateY(-10px) scale(1.03);
-  box-shadow:0 15px 35px rgba(0,0,0,0.15);
-  border-color: gold; /* Darker green on hover */
-}
-
-/* Card Content */
-.card-content{
-  padding:30px 20px;
-  text-align:center;
-  color:#1f2937;
-  position:relative;
-}
-
-.division-icon i{
-  font-size:3rem;
-  margin-bottom:15px;
-  color: #0f4d0f; /* Green icon */
-  transition: transform 0.3s;
-}
-
-.card3d:hover .division-icon i{
-  transform: translateY(-5px) scale(1.1);
-}
-
-.card-content h4{
-  font-weight:700;
-  margin-bottom:10px;
-  transition: color 0.3s;
-}
-
-.card3d:hover h4{
-  color: #0f4d0f; /* Darker green on hover */
-}
-
-.card-content p{
-  font-size:14px;
-  opacity:0.8;
-  margin-bottom:15px;
-}
-
-.card-content a{
-  color: #0f4d0f;
-  text-decoration:none;
-  font-weight:600;
-  transition: color 0.3s, transform 0.3s;
-}
-
-.card-content a:hover{
-  color:gold;
-  transform: translateX(5px);
-}
-
-/* Responsive */
-@media(max-width:768px){
-  .division-icon i{ font-size:2.5rem; }
-}
-</style>
-
-<script>
-document.querySelectorAll('.card3d').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const rect=card.getBoundingClientRect();
-    const x=e.clientX-rect.left;
-    const y=e.clientY-rect.top;
-    const centerX=rect.width/2;
-    const centerY=rect.height/2;
-    const rotateX=-(y-centerY)/12;
-    const rotateY=(x-centerX)/12;
-    card.style.transform=`rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-  });
-  card.addEventListener('mouseleave',()=>{
-    card.style.transform="rotateX(0deg) rotateY(0deg) scale(1)";
-  });
-});
-</script>
-
-
-
-
-
-<!-- Stats -->
-<!-- Stats Section -->
-<section class="stats-section py-5">
-  <div class="container">
-    <h2 class="text-center mb-5">Our Journey at a Glance</h2>
-    <div class="row text-center g-4 timeline">
-
-      <div class="col-sm-6 col-md-3">
-        <div class="stat-box">
-          <div class="stat-icon"><i class="bi bi-calendar-event"></i></div>
-          <h2 class="counter" data-target="2024">0</h2>
-          <p>Year of Establishment</p>
+      <div class="col-md-4">
+        <div class="division-card card3d" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-content">
+            <div class="division-icon">
+              <img src="{{ url_for('static', filename='images/commerci.png') }}" alt="Organization Logo">
+            </div>
+            <h4>INMBA Organization</h4>
+            <p>Leadership programs and structured community engagement.</p>
+            <a href="{{ url_for('organization') }}">Learn More →</a>
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-6 col-md-3">
-        <div class="stat-box">
-          <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
-          <h2 class="counter" data-target="1000">0</h2>
-          <p>Active Members</p>
+      <div class="col-md-4">
+        <div class="division-card card3d" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-content">
+            <div class="division-icon">
+              <img src="{{ url_for('static', filename='images/chamber.png') }}" alt="Organization Logo">
+            </div>
+            <h4>INMBA Commercial</h4>
+            <p>Business consulting and strategic growth solutions.</p>
+            <a href="{{ url_for('commercial') }}">Learn More →</a>
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-6 col-md-3">
-        <div class="stat-box">
-          <div class="stat-icon"><i class="bi bi-award"></i></div>
-          <h2 class="counter" data-target="50">0</h2>
-          <p>Programs Conducted</p>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-md-3">
-        <div class="stat-box">
-          <div class="stat-icon"><i class="bi bi-globe"></i></div>
-          <h2>India</h2>
-          <p>Presence</p>
+      <div class="col-md-4">
+        <div class="division-card card3d" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-content">
+            <div class="division-icon">
+              <img src="{{ url_for('static', filename='images/foundation.png') }}" alt="Organization Logo">
+            </div>
+            <h4>INMBA Foundation</h4>
+            <p>Social initiatives focused on empowerment and impact.</p>
+            <a href="{{ url_for('foundation') }}">Learn More →</a>
+          </div>
         </div>
       </div>
 
     </div>
-  </div>
-</section>
-<!-- Why Join -->
-<section class="container my-5 why-join-slider">
-  <h2 class="section-title text-center" data-aos="fade-down">Why Join INMBA</h2>
+  </section>
 
-  <div class="slider-wrapper position-relative">
-    <button class="slide-arrow left" onclick="slideCards(-1)">&#10094;</button>
-    <div class="slider" id="joinSlider">
+  <style>
+    .division-card a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #28a745;
+      /* green theme */
+      font-weight: 600;
+      text-decoration: none;
+    }
 
-      <!-- Leadership -->
-      <div class="join-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="icon mb-3"><i class="bi bi-trophy-fill"></i></div>
-        <h5>Leadership</h5>
-        <p>Develop leadership skills through real projects.</p>
-      </div>
+    .division-card a:hover {
+      text-decoration: underline;
+    }
 
-      <!-- Networking -->
-      <div class="join-card" data-aos="fade-up" data-aos-delay="150">
-        <div class="icon mb-3"><i class="bi bi-people-fill"></i></div>
-        <h5>Networking</h5>
-        <p>Connect with entrepreneurs and professionals.</p>
-      </div>
+    /* Section Title */
+    .section-title {
+      font-weight: 700;
+      color: #1f2937;
+      position: relative;
+      margin-bottom: 50px;
+    }
 
-      <!-- Skills -->
-      <div class="join-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="icon mb-3"><i class="bi bi-lightbulb-fill"></i></div>
-        <h5>Skills</h5>
-        <p>Improve communication and management skills.</p>
-      </div>
+    .section-title::after {
+      content: "";
+      width: 60px;
+      height: 3px;
+      background: #0f4d0f;
+      /* olive green accent */
+      display: block;
+      margin: 10px auto 0;
+      border-radius: 3px;
+    }
 
-      <!-- Community -->
-      <div class="join-card" data-aos="fade-up" data-aos-delay="250">
-        <div class="icon mb-3"><i class="bi bi-globe-central-south-asia"></i></div>
-        <h5>Community</h5>
-        <p>Work on social impact projects.</p>
-      </div>
+    /* Minimal Cards with Green Border */
+    .card3d {
+      background: #fff;
+      /* White card */
+      border: 2px solid #0f4d0f;
+      /* Olive green border */
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+      cursor: pointer;
+      position: relative;
+    }
 
-      <!-- Mentorship -->
-      <div class="join-card" data-aos="fade-up" data-aos-delay="300">
-        <div class="icon mb-3"><i class="bi bi-person-check-fill"></i></div>
-        <h5>Mentorship</h5>
-        <p>Get guidance from experienced leaders.</p>
-      </div>
+    .card3d:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      border-color: gold;
+      /* Darker green on hover */
+    }
 
-      <!-- Entrepreneurship -->
-      <div class="join-card" data-aos="fade-up" data-aos-delay="350">
-        <div class="icon mb-3"><i class="bi bi-briefcase-fill"></i></div>
-        <h5>Entrepreneurship</h5>
-        <p>Learn to launch and manage business ventures.</p>
-      </div>
+    /* Card Content */
+    .card-content {
+      padding: 30px 20px;
+      text-align: center;
+      color: #1f2937;
+      position: relative;
+    }
 
-      <!-- Impact Projects -->
-      <div class="join-card" data-aos="fade-up" data-aos-delay="400">
-        <div class="icon mb-3"><i class="bi bi-heart-fill"></i></div>
-        <h5>Impact Projects</h5>
-        <p>Participate in initiatives that create social change.</p>
-      </div>
+    .division-icon i {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: #0f4d0f;
+      /* Green icon */
+      transition: transform 0.3s;
+    }
 
-    </div>
-    <button class="slide-arrow right" onclick="slideCards(1)">&#10095;</button>
-  </div>
-</section>
+    .card3d:hover .division-icon i {
+      transform: translateY(-5px) scale(1.1);
+    }
 
-<style>
-/* Section Title */
-.section-title {
-  font-weight: 700;
-  color: #0f4d0f;
-  margin-bottom: 30px;
-  position: relative;
-}
-.section-title::after {
-  content: "";
-  width: 60px;
-  height: 3px;
-  background: #556b2f;
-  display: block;
-  margin: 10px auto 0;
-}
+    .card-content h4 {
+      font-weight: 700;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+    }
 
-/* Slider */
-.slider-wrapper { overflow: hidden; }
-.slider {
-  display: flex;
-  gap: 20px;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
-  padding-bottom: 10px;
-  cursor: grab;
-}
-.slider::-webkit-scrollbar { display: none; }
+    .card3d:hover h4 {
+      color: #0f4d0f;
+      /* Darker green on hover */
+    }
 
-/* Cards */
-.join-card {
-  flex: 0 0 250px;
-  background: #0f4d0f;
-  border-radius: 20px;
-  padding: 30px 20px;
-  color: #fff;
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.join-card:hover {
-  transform: translateY(-15px) scale(1.05) rotateX(2deg) rotateY(2deg);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
+    .card-content p {
+      font-size: 14px;
+      opacity: 0.8;
+      margin-bottom: 15px;
+    }
 
-/* Icon animation */
-.join-card .icon i { 
-  font-size: 3rem; 
-  color: #ffd700; 
-  transition: transform 0.4s, color 0.4s; 
-}
-.join-card:hover .icon i { 
-  transform: rotate(15deg) scale(1.2); 
-  color: #fff176; 
-}
+    .card-content a {
+      color: #0f4d0f;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s, transform 0.3s;
+    }
 
-/* Arrows */
-.slide-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(15,77,15,0.8);
-  border: none;
-  color: #fff;
-  font-size: 2rem;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 50%;
-  z-index: 10;
-}
-.slide-arrow.left { left: 0; }
-.slide-arrow.right { right: 0; }
+    .card-content a:hover {
+      color: gold;
+      transform: translateX(5px);
+    }
 
-/* Responsive */
-@media(max-width:768px){
-  .join-card { flex: 0 0 200px; padding: 20px 15px; }
-}
+    /* Responsive */
+    @media(max-width:768px) {
+      .division-icon i {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
 
-.footer-section {
-  background: #111;
-  color: white;
-  padding: 60px 20px;
-}
-
-.footer-title {
-  text-align: center;
-  font-size: 30px;
-  margin-bottom: 30px;
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap; /* allows items to wrap on small screens */
-}
-
-.footer-left p {
-  margin: 10px 0;
-}
-
-.footer-left a {
-  color: white;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.footer-left a:hover {
-  color: #ffc107;
-  transform: translateX(5px);
-}
-
-.footer-left i {
-  margin-right: 10px;
-  color: #ffc107;
-}
-
-.footer-right img {
-  width: 120px;
-  background: white;
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column; /* stack left and right vertically */
-    align-items: center; /* center content */
-    text-align: center;
-  }
-  
-  .footer-left, .footer-right {
-    margin-bottom: 20px; /* spacing between sections */
-  }
-
-  .footer-right img {
-    width: 100px; /* smaller QR code on mobile */
-  }
-}
-
-.copyright {
-  text-align: center;
-  margin-top: 30px;
-  opacity: 0.7;
-}
-</style>
-
-<script>
-const slider = document.getElementById('joinSlider');
-const cardWidth = 270; // card width + gap
-
-function slideCards(direction){
-  slider.scrollLeft += direction * cardWidth;
-}
-
-// Drag to scroll
-let isDown = false, startX, scrollLeft;
-
-slider.addEventListener('mousedown', e => {
-  isDown = true;
-  slider.classList.add('active');
-  startX = e.pageX - slider.offsetLeft;
-  scrollLeft = slider.scrollLeft;
-});
-slider.addEventListener('mouseleave', () => isDown = false);
-slider.addEventListener('mouseup', () => isDown = false);
-slider.addEventListener('mousemove', e => {
-  if(!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - slider.offsetLeft;
-  const walk = (x - startX) * 1.2; // drag speed
-  slider.scrollLeft = scrollLeft - walk;
-});
-// Automatic slider
-let autoSlideInterval = 3000; // 3 seconds
-setInterval(() => {
-  slideCards(1); // move to next card every 3 seconds
-}, autoSlideInterval);
-slider.addEventListener('mouseenter', () => clearInterval(autoSlide));
-slider.addEventListener('mouseleave', () => autoSlide = setInterval(() => slideCards(1), autoSlideInterval));
-
-
-// Auto-slide with infinite loop
-function autoSlideLoop() {
-  const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
-  
-  if (slider.scrollLeft >= maxScrollLeft) {
-    // if reached end, jump back to start smoothly
-    slider.scrollTo({ left: 0, behavior: 'smooth' });
-  } else {
-    // else, move next card
-    slider.scrollLeft += cardWidth;
-  }
-}
-
-// run every 3 seconds
-let autoSlide = setInterval(autoSlideLoop, 3000);
-
-// Optional: pause on hover
-slider.addEventListener('mouseenter', () => clearInterval(autoSlide));
-slider.addEventListener('mouseleave', () => autoSlide = setInterval(autoSlideLoop, 3000));
-</script>
-
-<!-- Include AOS library -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({ duration: 1000, once: true });
-
-  // Hover effect
-  document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      card.style.transform = 'translateY(-10px) scale(1.03)';
-      card.style.boxShadow = '0 20px 30px rgba(0,0,0,0.3)';
+  <script>
+    document.querySelectorAll('.card3d').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = -(y - centerY) / 12;
+        const rotateY = (x - centerX) / 12;
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+      });
     });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'translateY(0) scale(1)';
-      card.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
+  </script>
+
+
+
+
+
+  <!-- Stats -->
+  <!-- Stats Section -->
+  <section class="stats-section py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Our Journey at a Glance</h2>
+      <div class="row text-center g-4 timeline">
+
+        <div class="col-sm-6 col-md-3">
+          <div class="stat-box">
+            <div class="stat-icon"><i class="bi bi-calendar-event"></i></div>
+            <h2 class="counter" data-target="2024">0</h2>
+            <p>Year of Establishment</p>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+          <div class="stat-box">
+            <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
+            <h2 class="counter" data-target="1000">0</h2>
+            <p>Active Members</p>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+          <div class="stat-box">
+            <div class="stat-icon"><i class="bi bi-award"></i></div>
+            <h2 class="counter" data-target="50">0</h2>
+            <p>Programs Conducted</p>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+          <div class="stat-box">
+            <div class="stat-icon"><i class="bi bi-globe"></i></div>
+            <h2>India</h2>
+            <p>Presence</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- Why Join -->
+  <section class="container my-5 why-join-slider">
+    <h2 class="section-title text-center" data-aos="fade-down">Why Join INMBA</h2>
+
+    <div class="slider-wrapper position-relative">
+      <button class="slide-arrow left" onclick="slideCards(-1)">&#10094;</button>
+      <div class="slider" id="joinSlider">
+
+        <!-- Leadership -->
+        <div class="join-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon mb-3"><i class="bi bi-trophy-fill"></i></div>
+          <h5>Leadership</h5>
+          <p>Develop leadership skills through real projects.</p>
+        </div>
+
+        <!-- Networking -->
+        <div class="join-card" data-aos="fade-up" data-aos-delay="150">
+          <div class="icon mb-3"><i class="bi bi-people-fill"></i></div>
+          <h5>Networking</h5>
+          <p>Connect with entrepreneurs and professionals.</p>
+        </div>
+
+        <!-- Skills -->
+        <div class="join-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon mb-3"><i class="bi bi-lightbulb-fill"></i></div>
+          <h5>Skills</h5>
+          <p>Improve communication and management skills.</p>
+        </div>
+
+        <!-- Community -->
+        <div class="join-card" data-aos="fade-up" data-aos-delay="250">
+          <div class="icon mb-3"><i class="bi bi-globe-central-south-asia"></i></div>
+          <h5>Community</h5>
+          <p>Work on social impact projects.</p>
+        </div>
+
+        <!-- Mentorship -->
+        <div class="join-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="icon mb-3"><i class="bi bi-person-check-fill"></i></div>
+          <h5>Mentorship</h5>
+          <p>Get guidance from experienced leaders.</p>
+        </div>
+
+        <!-- Entrepreneurship -->
+        <div class="join-card" data-aos="fade-up" data-aos-delay="350">
+          <div class="icon mb-3"><i class="bi bi-briefcase-fill"></i></div>
+          <h5>Entrepreneurship</h5>
+          <p>Learn to launch and manage business ventures.</p>
+        </div>
+
+        <!-- Impact Projects -->
+        <div class="join-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="icon mb-3"><i class="bi bi-heart-fill"></i></div>
+          <h5>Impact Projects</h5>
+          <p>Participate in initiatives that create social change.</p>
+        </div>
+
+      </div>
+      <button class="slide-arrow right" onclick="slideCards(1)">&#10095;</button>
+    </div>
+  </section>
+
+  <style>
+    /* Section Title */
+    .section-title {
+      font-weight: 700;
+      color: #0f4d0f;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: "";
+      width: 60px;
+      height: 3px;
+      background: #556b2f;
+      display: block;
+      margin: 10px auto 0;
+    }
+
+    /* Slider */
+    .slider-wrapper {
+      overflow: hidden;
+    }
+
+    .slider {
+      display: flex;
+      gap: 20px;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      padding-bottom: 10px;
+      cursor: grab;
+    }
+
+    .slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Cards */
+    .join-card {
+      flex: 0 0 250px;
+      background: #0f4d0f;
+      border-radius: 20px;
+      padding: 30px 20px;
+      color: #fff;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .join-card:hover {
+      transform: translateY(-15px) scale(1.05) rotateX(2deg) rotateY(2deg);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Icon animation */
+    .join-card .icon i {
+      font-size: 3rem;
+      color: #ffd700;
+      transition: transform 0.4s, color 0.4s;
+    }
+
+    .join-card:hover .icon i {
+      transform: rotate(15deg) scale(1.2);
+      color: #fff176;
+    }
+
+    /* Arrows */
+    .slide-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15, 77, 15, 0.8);
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 10;
+    }
+
+    .slide-arrow.left {
+      left: 0;
+    }
+
+    .slide-arrow.right {
+      right: 0;
+    }
+
+    /* Responsive */
+    @media(max-width:768px) {
+      .join-card {
+        flex: 0 0 200px;
+        padding: 20px 15px;
+      }
+    }
+
+    .footer-section {
+      background: #111;
+      color: white;
+      padding: 60px 20px;
+    }
+
+    .footer-title {
+      text-align: center;
+      font-size: 30px;
+      margin-bottom: 30px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      /* allows items to wrap on small screens */
+    }
+
+    .footer-left p {
+      margin: 10px 0;
+    }
+
+    .footer-left a {
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .footer-left a:hover {
+      color: #ffc107;
+      transform: translateX(5px);
+    }
+
+    .footer-left i {
+      margin-right: 10px;
+      color: #ffc107;
+    }
+
+    .footer-right img {
+      width: 120px;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .footer-content {
+        flex-direction: column;
+        /* stack left and right vertically */
+        align-items: center;
+        /* center content */
+        text-align: center;
+      }
+
+      .footer-left,
+      .footer-right {
+        margin-bottom: 20px;
+        /* spacing between sections */
+      }
+
+      .footer-right img {
+        width: 100px;
+        /* smaller QR code on mobile */
+      }
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 30px;
+      opacity: 0.7;
+    }
+  </style>
+
+  <script>
+    const slider = document.getElementById('joinSlider');
+    const cardWidth = 270; // card width + gap
+
+    function slideCards(direction) {
+      slider.scrollLeft += direction * cardWidth;
+    }
+
+    // Drag to scroll
+    let isDown = false, startX, scrollLeft;
+
+    slider.addEventListener('mousedown', e => {
+      isDown = true;
+      slider.classList.add('active');
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
     });
-  });
- 
+    slider.addEventListener('mouseleave', () => isDown = false);
+    slider.addEventListener('mouseup', () => isDown = false);
+    slider.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 1.2; // drag speed
+      slider.scrollLeft = scrollLeft - walk;
+    });
+    // Automatic slider
+    let autoSlideInterval = 3000; // 3 seconds
+    setInterval(() => {
+      slideCards(1); // move to next card every 3 seconds
+    }, autoSlideInterval);
+    slider.addEventListener('mouseenter', () => clearInterval(autoSlide));
+    slider.addEventListener('mouseleave', () => autoSlide = setInterval(() => slideCards(1), autoSlideInterval));
 
 
-/* Open Chat */
-function openChat(){
-document.getElementById("chatbot").style.display="flex";
-}
+    // Auto-slide with infinite loop
+    function autoSlideLoop() {
+      const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
 
-/* Close Chat */
-function closeChat(){
-document.getElementById("chatbot").style.display="none";
-}
+      if (slider.scrollLeft >= maxScrollLeft) {
+        // if reached end, jump back to start smoothly
+        slider.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        // else, move next card
+        slider.scrollLeft += cardWidth;
+      }
+    }
 
+    // run every 3 seconds
+    let autoSlide = setInterval(autoSlideLoop, 3000);
 
-/* Send Message */
-function sendMsg(){
+    // Optional: pause on hover
+    slider.addEventListener('mouseenter', () => clearInterval(autoSlide));
+    slider.addEventListener('mouseleave', () => autoSlide = setInterval(autoSlideLoop, 3000));
+  </script>
 
-let input=document.getElementById("userInput");
-let message=input.value.toLowerCase();
+  <!-- Include AOS library -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
 
-if(message==="") return;
-
-let chatBody=document.getElementById("chatBody");
-
-chatBody.innerHTML+=`<div class="user-msg">${message}</div>`;
-
-let reply="Sorry, I didn't understand. Try membership, programs, events or contact.";
-
-if(message.includes("hi") || message.includes("hello")){
-reply="Hello 👋 Welcome to INMBA Foundation.";
-}
-
-else if(message.includes("membership") || message.includes("join")){
-reply="You can join INMBA through the membership page on our website.";
-}
-
-else if(message.includes("program")){
-reply="INMBA offers leadership, entrepreneurship, and skill development programs.";
-}
-
-else if(message.includes("event")){
-reply="INMBA organizes leadership conferences, networking meets, and community programs.";
-}
-
-else if(message.includes("contact")){
-reply="You can contact us through our contact page or email info@inmba.org.";
-}
-
-chatBody.innerHTML+=`<div class="bot-msg">${reply}</div>`;
-
-input.value="";
-
-chatBody.scrollTop=chatBody.scrollHeight;
-
-}
+    // Hover effect
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-10px) scale(1.03)';
+        card.style.boxShadow = '0 20px 30px rgba(0,0,0,0.3)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
+        card.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
+      });
+    });
 
 
-/* Default Button Replies */
-function quickReply(text){
 
-let chatBody=document.getElementById("chatBody");
+    /* Open Chat */
+    function openChat() {
+      document.getElementById("chatbot").style.display = "flex";
+    }
 
-chatBody.innerHTML+=`<div class="user-msg">${text}</div>`;
-
-let reply="";
-
-if(text==="membership"){
-reply="You can join INMBA through the membership page.";
-}
-
-if(text==="programs"){
-reply="INMBA offers leadership development and entrepreneurship programs.";
-}
-
-if(text==="events"){
-reply="INMBA organizes leadership conferences and networking events.";
-}
-
-if(text==="contact"){
-reply="You can contact us through the contact page.";
-}
-
-chatBody.innerHTML+=`<div class="bot-msg">${reply}</div>`;
-
-chatBody.scrollTop=chatBody.scrollHeight;
-
-}
+    /* Close Chat */
+    function closeChat() {
+      document.getElementById("chatbot").style.display = "none";
+    }
 
 
-/* Enter Key Support */
-document.getElementById("userInput").addEventListener("keypress",function(e){
-if(e.key==="Enter"){
-sendMsg();
-}
-});
+    /* Send Message */
+    function sendMsg() {
 
-</script>
+      let input = document.getElementById("userInput");
+      let message = input.value.toLowerCase();
 
-<!-- CTA -->
-<section class="cta-section position-relative">
-  <div class="container d-flex flex-wrap align-items-center justify-content-between py-5">
-    
-    <!-- Text Content -->
-    <div class="cta-text col-md-6" data-aos="fade-right">
-      <h2>Be the Change You Want to See</h2>
-      <p>Join INMBA Foundation and start your leadership journey today. Empower yourself, connect with leaders, and create impact in your community.</p>
-      <a href="{{ url_for('membership') }}" class="btn btn-warning btn-lg">
-  Become a Member
-</a>
+      if (message === "") return;
+
+      let chatBody = document.getElementById("chatBody");
+
+      chatBody.innerHTML += `<div class="user-msg">${message}</div>`;
+
+      let reply = "Sorry, I didn't understand. Try membership, programs, events or contact.";
+
+      if (message.includes("hi") || message.includes("hello")) {
+        reply = "Hello 👋 Welcome to INMBA Foundation.";
+      }
+
+      else if (message.includes("membership") || message.includes("join")) {
+        reply = "You can join INMBA through the membership page on our website.";
+      }
+
+      else if (message.includes("program")) {
+        reply = "INMBA offers leadership, entrepreneurship, and skill development programs.";
+      }
+
+      else if (message.includes("event")) {
+        reply = "INMBA organizes leadership conferences, networking meets, and community programs.";
+      }
+
+      else if (message.includes("contact")) {
+        reply = "You can contact us through our contact page or email info@inmba.org.";
+      }
+
+      chatBody.innerHTML += `<div class="bot-msg">${reply}</div>`;
+
+      input.value = "";
+
+      chatBody.scrollTop = chatBody.scrollHeight;
+
+    }
+
+
+    /* Default Button Replies */
+    function quickReply(text) {
+
+      let chatBody = document.getElementById("chatBody");
+
+      chatBody.innerHTML += `<div class="user-msg">${text}</div>`;
+
+      let reply = "";
+
+      if (text === "membership") {
+        reply = "You can join INMBA through the membership page.";
+      }
+
+      if (text === "programs") {
+        reply = "INMBA offers leadership development and entrepreneurship programs.";
+      }
+
+      if (text === "events") {
+        reply = "INMBA organizes leadership conferences and networking events.";
+      }
+
+      if (text === "contact") {
+        reply = "You can contact us through the contact page.";
+      }
+
+      chatBody.innerHTML += `<div class="bot-msg">${reply}</div>`;
+
+      chatBody.scrollTop = chatBody.scrollHeight;
+
+    }
+
+
+    /* Enter Key Support */
+    document.getElementById("userInput").addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        sendMsg();
+      }
+    });
+
+  </script>
+
+  <!-- CTA -->
+  <section class="cta-section position-relative">
+    <div class="container d-flex flex-wrap align-items-center justify-content-between py-5">
+
+      <!-- Text Content -->
+      <div class="cta-text col-md-6" data-aos="fade-right">
+        <h2>Be the Change You Want to See</h2>
+        <p>Join INMBA Foundation and start your leadership journey today. Empower yourself, connect with leaders, and
+          create impact in your community.</p>
+        <a href="{{ url_for('membership') }}" class="btn btn-warning btn-lg">
+          Become a Member
+        </a>
+      </div>
+
+      <!-- Image -->
+      <div class="cta-img col-md-5 text-center" data-aos="fade-left">
+        <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg" alt="Leadership"
+          class="img-fluid rounded shadow-lg">
+      </div>
+
     </div>
+  </section>
 
-    <!-- Image -->
-    <div class="cta-img col-md-5 text-center" data-aos="fade-left">
-      <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg" alt="Leadership" class="img-fluid rounded shadow-lg">
-    </div>
+  <style>
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(rgba(15, 77, 15, 0.85), rgba(15, 77, 15, 0.85)), url('https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg') center/cover no-repeat;
+      border-radius: 25px;
+      margin: 50px 0;
+      overflow: hidden;
+      position: relative;
+      color: #fff;
+    }
 
-  </div>
-</section>
+    .cta-text h2 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
 
-<style>
-/* CTA Section */
-.cta-section {
-  background: linear-gradient(rgba(15,77,15,0.85), rgba(15,77,15,0.85)), url('https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg') center/cover no-repeat;
-  border-radius: 25px;
-  margin: 50px 0;
-  overflow: hidden;
-  position: relative;
-  color: #fff;
-}
+    .cta-text p {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
 
-.cta-text h2 {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
+    .btn-cta {
+      background-color: #ffd700;
+      color: #0f4d0f;
+      font-weight: 600;
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+    }
 
-.cta-text p {
-  font-size: 1.1rem;
-  margin-bottom: 25px;
-  line-height: 1.6;
-}
+    .btn-cta:hover {
+      background-color: #fff176;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      color: #0f4d0f;
+    }
 
-.btn-cta {
-  background-color: #ffd700;
-  color: #0f4d0f;
-  font-weight: 600;
-  padding: 12px 25px;
-  border-radius: 50px;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-}
+    .cta-img img {
+      max-width: 100%;
+      border-radius: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-.btn-cta:hover {
-  background-color: #fff176;
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-  color: #0f4d0f;
-}
+    .cta-img img:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    }
 
-.cta-img img {
-  max-width: 100%;
-  border-radius: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    /* Responsive */
+    @media(max-width: 991px) {
+      .cta-section {
+        text-align: center;
+        padding: 40px 20px;
+      }
 
-.cta-img img:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-}
+      .cta-text,
+      .cta-img {
+        margin-bottom: 25px;
+      }
 
-/* Responsive */
-@media(max-width: 991px){
-  .cta-section {
-    text-align: center;
-    padding: 40px 20px;
-  }
-  .cta-text, .cta-img { margin-bottom: 25px; }
-  .cta-text h2 { font-size: 2.2rem; }
-}
-.typing-text {
-  font-size: 48px;
-  font-weight: bold;
-  white-space: nowrap;
-  border-right: 3px solid white;
-  display: inline-block;
-  overflow: hidden;
-}
-</style>
-<!-- Footer -->
-<footer class="footer-section">
-  <div class="container">
-    
-    <h2 class="footer-title">CONTACT</h2>
+      .cta-text h2 {
+        font-size: 2.2rem;
+      }
+    }
 
-    <div class="footer-content">
+    .typing-text {
+      font-size: 48px;
+      font-weight: bold;
+      white-space: nowrap;
+      border-right: 3px solid white;
+      display: inline-block;
+      overflow: hidden;
+    }
+  </style>
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="footer-inner">
 
-      <!-- LEFT -->
-      <div class="footer-left">
-
-        <p>
-          <a href="tel:+918940369361">
-            <i class="fas fa-phone"></i> +91 8940 369 361
-          </a>
+      <!-- TOP: Brand -->
+      <div class="footer-brand">
+          <img src="{{ url_for('static', filename='images/inmba_logo.jpg') }}" 
+       alt="INMBA Logo" class="footer-logo-img">
+        <h2 class="footer-logo">INMBA</h2>
+        <p class="footer-tagline">
+          International Network Management &amp; Business Association Chamber<br>
+          <em>"Expand Your Network; Expand Your Net Worth"</em>
         </p>
+      </div>
 
-        <p>
-          <a href="https://www.inmba.org" target="_blank">
-            <i class="fas fa-globe"></i> www.inmba.org
+      <div class="footer-divider"></div>
+
+      <!-- MIDDLE: 3 columns -->
+      <div class="footer-columns">
+
+        <!-- Contact -->
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <ul>
+            <li>
+              <a href="tel:+918940369361">
+                <i class="fas fa-phone-alt"></i> +91 8940 369 361
+              </a>
+            </li>
+            <li>
+              <a href="mailto:admin@inmba.org">
+                <i class="fas fa-envelope"></i> admin@inmba.org
+              </a>
+            </li>
+            <li>
+              <a href="https://www.inmba.org" target="_blank">
+                <i class="fas fa-globe"></i> www.inmba.org
+              </a>
+            </li>
+            <li>
+              <a href="https://wa.me/918940369361" target="_blank">
+                <i class="fab fa-whatsapp"></i> WhatsApp Us
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="/membership"><i class="fas fa-chevron-right"></i> Membership</a></li>
+            <li><a href="/programs"><i class="fas fa-chevron-right"></i> Programs</a></li>
+            <li><a href="/events"><i class="fas fa-chevron-right"></i> Events</a></li>
+            <li><a href="/contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- QR + Social -->
+        <div class="footer-col footer-col-right">
+          <h4>Connect With Us</h4>
+
+          <!-- Social Icons -->
+          <div class="social-icons">
+            <a href="https://www.instagram.com/inmba_org/" target="_blank" title="Instagram" class="instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/Robertson%20Rajah" target="_blank" title="Facebook" class="facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.threads.com/@INMBA.org" target="_blank" title="Threads" class="threads">
+              <span style="font-size:0.85rem; font-weight:800;">T</span>
+            </a>
+            <a href="https://www.youtube.com/@inmba-org" target="_blank" title="YouTube" class="youtube">
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://linktr.ee/inmba" target="_blank" title="Linktree" class="linktree">
+              <i class="fas fa-link"></i>
+            </a>
+            <a href="https://wa.me/918940369361" target="_blank" title="WhatsApp" class="whatsapp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+
+          <!-- QR Code -->
+          <a href="https://linktr.ee/inmba" target="_blank" class="footer-qr">
+            <img src="{{ url_for('static', filename='images/qr.png') }}" alt="Scan QR">
+            <span>Scan to connect</span>
           </a>
-        </p>
+        </div>
 
-        <p>
-          <a href="mailto:admin@inmba.org">
-            <i class="fas fa-envelope"></i> admin@inmba.org
-          </a>
-        </p>
+      </div>
 
+      <div class="footer-divider"></div>
+
+      <!-- BOTTOM: copyright -->
+      <div class="footer-bottom">
+        <p>© 2026 INMBA. All rights reserved.</p>
         <p>
           <a href="https://linktr.ee/inmba" target="_blank">
             <i class="fas fa-link"></i> linktr.ee/inmba
           </a>
         </p>
-
-      </div>
-
-      <!-- RIGHT -->
-      <div class="footer-right">
-        <a href="https://linktr.ee/inmba" target="_blank">
-          <img src="{{ url_for('static', filename='images/qr.png') }}" alt="QR Code">
-        </a>
       </div>
 
     </div>
+  </footer>
 
-    <p class="copyright">© 2026 INMBA</p>
 
-  </div>
-</footer>
-<script>
-const words = [
-  "INMBA",
-  "Empowering Leaders",
-  "Building Future Entrepreneurs",
-  "Connecting Communities"
-];
-
-let i = 0;
-let j = 0;
-let current = "";
-let isDeleting = false;
-
-function typeEffect() {
-  let fullText = words[i];
-
-  if (isDeleting) {
-    j--;
-    current = fullText.substring(0, j);
-  } else {
-    j++;
-    current = fullText.substring(0, j);
-  }
-
-  document.querySelector(".typing-text").innerHTML = current;
-
-  if (!isDeleting && j === fullText.length) {
-    isDeleting = true;
-    setTimeout(typeEffect, 1200);
-  } 
-  else if (isDeleting && j === 0) {
-    isDeleting = false;
-    i = (i + 1) % words.length;
-    setTimeout(typeEffect, 300);
-  } 
-  else {
-    setTimeout(typeEffect, isDeleting ? 80 : 150);
-  }
-}
-typeEffect();
-
-const cards = document.querySelectorAll(".card3d");
-
-cards.forEach(card => {
-  card.addEventListener("mousemove", (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = -(y - centerY) / 10;
-    const rotateY = (x - centerX) / 10;
-
-    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  });
-
-  card.addEventListener("mouseleave", () => {
-    card.style.transform = "rotateX(0) rotateY(0)";
-  });
-});
- AOS.init({
-    duration: 1200,
-    once: true
-  });
-
-cards.forEach(card => {
-  card.addEventListener("mousemove", (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = -(y - centerY) / 12;
-    const rotateY = (x - centerX) / 12;
-    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-  });
-
-  card.addEventListener("mouseleave", () => {
-    card.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
-  });
-});
-const counters = document.querySelectorAll(".counter");
-
-const startCounter = (counter) => {
-  const target = +counter.getAttribute("data-target");
-  let count = 0;
-  const increment = Math.ceil(target / 100);
-
-  const updateCounter = () => {
-    count += increment;
-    if(count < target){
-      counter.innerText = count + "+";
-      requestAnimationFrame(updateCounter);
-    } else {
-      counter.innerText = target + "+";
+  <style>
+    .footer-section {
+      background: linear-gradient(135deg, #0a2e0a 0%, #0f4d0f 60%, #1a6e1a 100%);
+      color: #e0f2e0;
+      padding: 60px 0 0 0;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
     }
-  }
-  updateCounter();
-}
 
-// Trigger counters when visible
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      startCounter(entry.target);
-      observer.unobserve(entry.target);
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
     }
-  });
-}, { threshold: 0.5 });
 
-counters.forEach(counter => observer.observe(counter));
-</script>
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    /* Brand */
+    .footer-brand {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 3px;
+      margin-bottom: 10px;
+    }
+
+    .footer-tagline {
+      font-size: 0.88rem;
+      color: #a8d5a8;
+      line-height: 1.7;
+    }
+
+    .footer-tagline em {
+      color: #22c55e;
+      font-style: italic;
+    }
+
+    /* Divider */
+    .footer-divider {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin: 30px 0;
+    }
+
+    /* 3-column grid */
+    .footer-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.2fr;
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 18px;
+      border-left: 3px solid #22c55e;
+      padding-left: 10px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul li a {
+      color: #b8dbb8;
+      text-decoration: none;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s, gap 0.2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: #22c55e;
+      gap: 12px;
+    }
+
+    .footer-col ul li a i {
+      font-size: 0.8rem;
+      width: 14px;
+    }
+
+    /* Social Icons */
+    .social-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .social-icons a {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #c8e6c9;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .social-icons a:hover {
+      background: #22c55e;
+      border-color: #22c55e;
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(34, 197, 94, 0.35);
+    }
+
+    /* QR */
+    .footer-qr {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .footer-qr img {
+      width: 90px;
+      height: 90px;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.2s;
+    }
+
+    .footer-qr:hover img {
+      transform: scale(1.05);
+      border-color: #22c55e;
+    }
+
+    .footer-qr span {
+      font-size: 0.75rem;
+      color: #a8d5a8;
+    }
+
+    /* Bottom bar */
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 20px 0;
+      font-size: 0.8rem;
+      color: #7db87d;
+    }
+
+    .footer-bottom a {
+      color: #a8d5a8;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-bottom a:hover {
+      color: #22c55e;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .footer-columns {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-inner {
+        padding: 0 20px;
+      }
+    }
+
+    /* Base social icon */
+    .social-icons a {
+      width: 42px;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    /* Each icon gets its own brand color always visible */
+    .social-icons a.instagram {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      border-color: transparent;
+      color: #fff;
+    }
+
+    .social-icons a.facebook {
+      background: #1877f2;
+      border-color: transparent;
+      color: #fff;
+    }
+
+    .social-icons a.threads {
+      background: #000000;
+      border-color: transparent;
+      color: #fff;
+    }
+
+    .social-icons a.youtube {
+      background: #ff0000;
+      border-color: transparent;
+      color: #fff;
+    }
+
+    .social-icons a.linktree {
+      background: #39e09b;
+      border-color: transparent;
+      color: #fff;
+    }
+
+    .social-icons a.whatsapp {
+      background: #25d366;
+      border-color: transparent;
+      color: #fff;
+    }
+
+    /* Hover — lift effect */
+    .social-icons a:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      filter: brightness(1.15);
+    }
+
+    /* ── Tablet ── */
+    @media (max-width: 992px) {
+      .footer-columns {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+
+      .footer-col-right {
+        grid-column: 1 / -1;
+        /* full width on tablet */
+      }
+
+      .social-icons {
+        justify-content: flex-start;
+      }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .footer-section {
+        padding: 40px 0 0 0;
+      }
+
+      .footer-inner {
+        padding: 0 16px;
+      }
+
+      .footer-brand {
+        margin-bottom: 24px;
+      }
+
+      .footer-logo {
+        font-size: 1.8rem;
+      }
+
+      .footer-tagline {
+        font-size: 0.82rem;
+      }
+
+      .footer-columns {
+        grid-template-columns: 1fr;
+        /* stack all columns */
+        gap: 24px;
+      }
+
+      .footer-col {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-bottom: 20px;
+      }
+
+      .footer-col:last-child {
+        border-bottom: none;
+      }
+
+      .footer-col h4 {
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+      }
+
+      .footer-col ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-col ul li a {
+        font-size: 0.85rem;
+      }
+
+      .social-icons {
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .social-icons a {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+      }
+
+      .footer-qr {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 14px;
+      }
+
+      .footer-qr img {
+        width: 70px;
+        height: 70px;
+      }
+
+      .footer-qr span {
+        font-size: 0.82rem;
+      }
+
+      .footer-col-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .footer-col-right h4 {
+        text-align: center;
+        border-left: none;
+        border-bottom: 2px solid #22c55e;
+        padding-left: 0;
+        padding-bottom: 6px;
+        width: fit-content;
+        margin: 0 auto 16px auto;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 6px;
+        padding: 16px 0;
+        font-size: 0.75rem;
+      }
+
+      .footer-divider {
+        margin: 20px 0;
+      }
+    }
+
+    /* ── Small Mobile ── */
+    @media (max-width: 400px) {
+      .footer-logo {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+      }
+
+      .social-icons a {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+
+      .footer-qr img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+    .footer-logo-img {
+  width: 80px;
+  height: auto;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+}
+  </style>
+  <script>
+    const words = [
+      "INMBA",
+      "Empowering Leaders",
+      "Building Future Entrepreneurs",
+      "Connecting Communities"
+    ];
+
+    let i = 0;
+    let j = 0;
+    let current = "";
+    let isDeleting = false;
+
+    function typeEffect() {
+      let fullText = words[i];
+
+      if (isDeleting) {
+        j--;
+        current = fullText.substring(0, j);
+      } else {
+        j++;
+        current = fullText.substring(0, j);
+      }
+
+      document.querySelector(".typing-text").innerHTML = current;
+
+      if (!isDeleting && j === fullText.length) {
+        isDeleting = true;
+        setTimeout(typeEffect, 1200);
+      }
+      else if (isDeleting && j === 0) {
+        isDeleting = false;
+        i = (i + 1) % words.length;
+        setTimeout(typeEffect, 300);
+      }
+      else {
+        setTimeout(typeEffect, isDeleting ? 80 : 150);
+      }
+    }
+    typeEffect();
+
+    const cards = document.querySelectorAll(".card3d");
+
+    cards.forEach(card => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = -(y - centerY) / 10;
+        const rotateY = (x - centerX) / 10;
+
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "rotateX(0) rotateY(0)";
+      });
+    });
+    AOS.init({
+      duration: 1200,
+      once: true
+    });
+
+    cards.forEach(card => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = -(y - centerY) / 12;
+        const rotateY = (x - centerX) / 12;
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+      });
+    });
+    const counters = document.querySelectorAll(".counter");
+
+    const startCounter = (counter) => {
+      const target = +counter.getAttribute("data-target");
+      let count = 0;
+      const increment = Math.ceil(target / 100);
+
+      const updateCounter = () => {
+        count += increment;
+        if (count < target) {
+          counter.innerText = count + "+";
+          requestAnimationFrame(updateCounter);
+        } else {
+          counter.innerText = target + "+";
+        }
+      }
+      updateCounter();
+    }
+
+    // Trigger counters when visible
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          startCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => observer.observe(counter));
+  </script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css"/>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
 <style>
 /* Reset & font */
 /* =========================
@@ -409,6 +411,67 @@ h1 {
   text-decoration: underline;
 }
 
+/* Add this CSS */
+.iti {
+  width: 100%;
+  display: block;
+}
+
+.iti input#phone {
+  width: 100%;
+  padding: 11px 12px 11px 90px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+.iti input#phone:focus {
+  border-color: #0f4d0f;
+  box-shadow: 0 0 8px #0f4d0f40;
+  outline: none;
+}
+.password-box {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.password-box input {
+  width: 100%;
+  padding: 11px 40px 11px 38px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+.password-box input:focus {
+  border-color: #0f4d0f;
+  box-shadow: 0 0 8px #0f4d0f40;
+  outline: none;
+}
+
+.password-box .icon-left {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #0f4d0f;
+}
+.password-box .eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #0f4d0f;
+  cursor: pointer;
+  font-size: 15px;
+  /* Force only one icon to show */
+  width: 16px;
+  text-align: center;
+}
 .popup {
   display: none;
   position: fixed;
@@ -417,6 +480,7 @@ h1 {
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.6);
+  z-index: 9999;
 }
 
 .popup-content {
@@ -428,7 +492,89 @@ h1 {
   max-height: 70vh;
   overflow-y: auto;
 }
+/* Hide browser default password eye */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-contacts-auto-fill-button,
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+  visibility: hidden;
+  pointer-events: none;
+}
+/* FINAL - only one rule for name-with-title */
+.input-box.name-with-title {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  margin-bottom: 18px;
+  height: 46px;
+  padding: 0;
+}
 
+.title-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #0f4d0f;
+  height: 100%;
+  border-right: 2px solid #0a3a0a;
+  min-width: 68px;
+}
+
+.title-select {
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  color: #fff;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 20px 0 8px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.title-select option {
+  background: #fff;
+  color: #333;
+  font-weight: normal;
+}
+
+.title-arrow {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.input-box.name-with-title i {
+  padding: 0 10px;
+  color: #0f4d0f;
+  font-size: 14px;
+}
+
+.input-box.name-with-title input {
+  border: none;
+  outline: none;
+  padding: 11px 8px;
+  flex: 1;
+  font-size: 14px;
+  background: transparent;
+}
+
+.input-box.name-with-title:focus-within {
+  border-color: #0f4d0f;
+  box-shadow: 0 0 8px #0f4d0f40;
+}
 </style>
 </head>
 <body>
@@ -438,7 +584,7 @@ h1 {
       <!-- Navbar logo -->
       <img src="{{ url_for('static', filename='images/inmba_logo.jpg') }}" 
            class="rounded-circle img-fluid me-3" alt="INMBA Logo" style="width:50px; height:50px;">
-      <span class="brand-name">INMBA</span>
+      <span class="brand-name">INMBA.ORG</span>
     </a>
 
     <!-- Mobile toggle -->
@@ -479,52 +625,58 @@ h1 {
 <form id="kycForm" method="POST" action="/register" enctype="multipart/form-data">
   <!-- Step 1: Account Info -->
   <div class="step active">
-    <div class="input-box"><i class="fas fa-user"></i><input type="text" placeholder="First Name" required name="first_name"></div>
+   <!-- Add a specific class to only the first name input-box -->
+<div class="input-box name-with-title">
+  <div class="prefix-dropdown">
+    <select name="title">
+      <option value="Mr">Mr.</option>
+      <option value="Mrs">Mrs.</option>
+      <option value="Ms">Ms.</option>
+      <option value="Dr">Dr.</option>
+    </select>
+  </div>
+  <i class="fas fa-user"></i>
+  <input type="text" placeholder="First Name" required name="first_name">
+</div>
     <div class="input-box"><i class="fas fa-user"></i><input type="text" placeholder="Last Name (optional)" name="last_name"></div>
+    <div class="input-box"><i class="fas fa-user"></i><input type="text" placeholder="Father's Name" name="father_name"></div>
+    <div class="input-box"><i class="fas fa-id-card"></i><input type="aadhar" placeholder="Aadhar Number(optional)" name="aadhar" pattern="[0-9]{12}" maxlength="12"></div>
     <div class="input-box"><i class="fas fa-calendar"></i><input type="date" placeholder="Date of Birth" required name="dob"></div>
-    <div class="input-box"><i class="fas fa-id-card"></i><input type="aadhar" placeholder="Aadhar Number(optional)" name="aadhar" pattern="[0-11]{12}" maxlength="12"></div>
+    
     <div class="input-box"><i class="fas fa-envelope"></i><input type="email" placeholder="Email" required name="email"></div>
-<div class="input-box d-flex">
-  
-  <!-- Country Code Dropdown -->
-  <select name="country_code" style="width:30%; margin-right:5px;" required>
-    <option value="+91">🇮🇳 +91</option>
-    <option value="+1">🇺🇸 +1</option>
-    <option value="+44">🇬🇧 +44</option>
-    <option value="+61">🇦🇺 +61</option>
-  </select>
-
-  <!-- Phone Number -->
-  <input type="tel" name="phone" id="phoneInput"
+<!-- Phone Number -->
+<!-- Replace your phone section with this -->
+<div class="input-box" style="padding-left: 0; margin-bottom: 18px;">
+  <input type="tel" id="phone" name="phone" required
          placeholder="Enter 10 digit number"
          pattern="[0-9]{10}"
-         maxlength="10"
-         required>
+         maxlength="10">
 </div>
-    <div class="input-box"><i class="fas fa-key"></i><input type="password" placeholder="Password" required name="password" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}' title="At least 8 characters, including upper/lowercase, digit and special character"></div>
-    <div class="input-box"><i class="fas fa-key"></i><input type="password" placeholder="Confirm Password" required name="confirm_password"></div>
-  
- 
-  <div class="input-box">
-    <i class="fas fa-flag"></i>
-    <input type="text" placeholder="State"   name="state">
-  </div>
+    <!-- Password -->
+<!-- Password -->
+<!-- Password -->
+<div class="password-box">
+  <i class="fas fa-key icon-left"></i>
+  <input type="password" id="password" name="password"
+         placeholder="Password"
+         minlength="5"
+         required>
+  <i class="fas fa-eye eye-icon" id="togglePass"></i>
+</div>
 
-  <div class="input-box">
-    <i class="fas fa-city"></i>
-    <input type="text" placeholder="District"  name="district">
-  </div>
-
-  <div class="input-box">
-    <i class="fas fa-city"></i>
-    <input type="text" placeholder="City/Taluk"   name="city">
-  </div>
-
+<div class="password-box">
+  <i class="fas fa-key icon-left"></i>
+  <input type="password" id="confirmPassword" name="confirm_password"
+         placeholder="Confirm Password"
+         minlength="5"
+         required>
+  <i class="fas fa-eye eye-icon" id="toggleConfirm"></i>
+</div>
   <div class="input-box">
     <i class="fas fa-mail-bulk"></i>
-    <input type="number" placeholder="Pincode" required  name="pincode">
+    <input type="number" placeholder="Pincode" name="pincode">
   </div>
-    <div class="input-box"><i class="fas fa-gift"></i><input type="text" placeholder="Referral Token (Optional)" name="referral" value="{{ referral_token or '' }}"></div>
+    <div class="input-box"><i class="fas fa-gift"></i><input type="text" placeholder="Referral ID (Optional)" name="referral" value="{{ referral_token or '' }}"></div>
   </div>
 <br>
 
@@ -533,26 +685,43 @@ h1 {
   <div class="step">
     <div class="input-box"><i class="fas fa-venus-mars"></i>
       <select required  name="gender">
-        <option value="">Select Gender</option><option>Male</option><option>Female</option><option>Other</option>
+        <option value="">Select Gender</option><option>Male</option><option>Female</option><option>Special Gender</option>
       </select>
     </div>
     <div class="input-box"><i class="fas fa-heart"></i>
       <select required name="marital_status">
-        <option value="">Marital Status</option><option>Single</option><option>Married</option><option>Other</option>
+        <option value="">Marital Status</option><option>Unmarried</option><option>Married</option><option>Other</option>
       </select>
     </div>
     <div class="input-box"><i class="fas fa-globe"></i><input type="text" placeholder="Nationality" required name="nationality"></div>
-    <div class="input-box"><i class="fas fa-briefcase"></i><input type="text" placeholder="Occupation" required name="occupation"></div>
-    <div class="input-box"><i class="fas fa-graduation-cap"></i><input type="text" placeholder="Education Qualification" required  name="education"></div>
+    <div class="input-box">
+    <i class="fas fa-briefcase"></i>
+    <select name="occupation" required>
+        <option value="">Select Occupation</option>
+        <option value="student">Student</option>
+        <option value="employee">Private Employee</option>
+        <option value="employee">Government Employee</option>
+        <option value="self-employed">Self Employed</option>
+        <option value="business">Business</option>
+        <option value="unemployed">Unemployed</option>
+    </select>
+</div>
+    <div class="input-box">
+    <i class="fas fa-graduation-cap"></i>
+    <select name="education" required>
+        <option value="">Select Qualification</option>
+        <option value="10th">10th</option>
+        <option value="12th">12th</option>
+        <option value="diploma">Diploma</option>
+        <option value="ug">UG (Bachelor Degree)</option>
+        <option value="pg">PG (Master Degree)</option>
+        <option value="phd">PhD</option>
+    </select>
+</div>
     
   </div>
 
 
-
- 
-
-
-<br>
 
   <!-- Step 6: Membership -->
   <div class="step">
@@ -597,25 +766,11 @@ h1 {
 <script>
 let currentStep = 0;
 const steps = document.querySelectorAll(".step");
-const progressFill = document.getElementById("progressFill");
-const progressSteps = document.querySelectorAll(".progress-step");
 
 function showStep(n){
   steps.forEach((s,i) => s.classList.toggle("active", i===n));
-  document.getElementById("prevBtn").style.display = n===0?'none':'inline';
-  document.getElementById("nextBtn").innerText = n===steps.length-1?'Submit':'Next';
-  updateProgress(n);
-}
-
-function updateProgress(stepIndex){
-  const total = steps.length-1;
-  const percent = (stepIndex/total)*100;
-  progressFill.style.width = percent+'%';
-  progressSteps.forEach((ps,idx)=>{
-    ps.classList.remove("active","completed");
-    if(idx<stepIndex) ps.classList.add("completed");
-    if(idx===stepIndex) ps.classList.add("active");
-  });
+  document.getElementById("prevBtn").style.display = n===0 ? 'none' : 'inline';
+  document.getElementById("nextBtn").innerText = n===steps.length-1 ? 'Submit' : 'Next';
 }
 
 function nextPrev(n){
@@ -633,33 +788,68 @@ function nextPrev(n){
   showStep(currentStep);
 }
 
-// Initialize first step
 showStep(currentStep);
 
-// Popup functions
 function openPopup(){ document.getElementById("popup").style.display="block"; }
 function closePopup(){ document.getElementById("popup").style.display="none"; }
 
-// Phone input validation attempts
-let phoneAttempts = 0;
-const maxAttempts = 3;
-const phoneInput = document.getElementById("phoneInput");
-
-phoneInput.addEventListener("input", ()=>{
+// Phone validation
+const phoneInput = document.getElementById("phone");
+phoneInput.addEventListener("input", () => {
   if(phoneInput.value.length > 10){
     phoneInput.value = phoneInput.value.slice(0,10);
   }
 });
+</script>
 
-phoneInput.addEventListener("blur", ()=>{
-  if(phoneInput.value.length < 10){
-    phoneAttempts++;
-    alert(`Phone number must be 10 digits. Attempts left: ${maxAttempts-phoneAttempts}`);
-    if(phoneAttempts>=maxAttempts){
-      phoneInput.disabled = true;
-      alert("Maximum attempts reached. Please refresh the page to retry.");
-    }
+<script>
+  const input = document.querySelector("#phone");
+  window.intlTelInput(input, {
+    initialCountry: "in",
+    separateDialCode: true,
+    preferredCountries: ["in", "us", "gb"]
+  });
+  document.getElementById('togglePass').addEventListener('click', function(){
+  const pwd = document.getElementById('password');
+  if(pwd.type === 'password'){
+    pwd.type = 'text';
+    this.classList.remove('fa-eye');
+    this.classList.add('fa-eye-slash');
+  } else {
+    pwd.type = 'password';
+    this.classList.remove('fa-eye-slash');
+    this.classList.add('fa-eye');
   }
+});
+
+document.getElementById('toggleConfirm').addEventListener('click', function(){
+  const pwd = document.getElementById('confirmPassword');
+  if(pwd.type === 'password'){
+    pwd.type = 'text';
+    this.classList.remove('fa-eye');
+    this.classList.add('fa-eye-slash');
+  } else {
+    pwd.type = 'password';
+    this.classList.remove('fa-eye-slash');
+    this.classList.add('fa-eye');
+  }
+});
+</script>
+<script>
+document.querySelector("form").addEventListener("submit", function(e) {
+    let pass = document.getElementById("password").value;
+    let confirm = document.getElementById("confirmPassword").value;
+
+    if (pass.length < 5) {
+        alert("Password must be at least 5 characters");
+        e.preventDefault();
+        return;
+    }
+
+    if (pass !== confirm) {
+        alert("Passwords do not match");
+        e.preventDefault();
+    }
 });
 </script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>

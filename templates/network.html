@@ -1,145 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INMBA Network Structure</title>
+  <meta charset="UTF-8">
+  <title>INMBA Rank Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      padding: 20px;
+    }
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
 
-<style>
+    th, td {
+      border: 1px solid #000;
+      padding: 5px 8px;
+      text-align: center;
+    }
 
-body {
-  background: #f4fdf6;
-  font-family: 'Poppins', sans-serif;
-}
+    th {
+      background-color: #dce6f1;
+      font-weight: bold;
+    }
 
-/* HEADER */
-.page-header {
-  background: linear-gradient(135deg, #0f4d0f, #22c55e);
-  color: white;
-  padding: 60px 20px;
-  text-align: center;
-}
+    .title-col {
+      text-align: left;
+    }
 
-/* TABLE */
-.custom-table {
-  border-radius: 20px;
-  overflow: hidden;
-  background: #ffffff;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
-.custom-table thead {
-  background: linear-gradient(45deg, #0f4d0f, #22c55e);
-  color: white;
-}
-
-.custom-table th {
-  padding: 15px;
-  font-size: 13px;
-}
-
-.custom-table td {
-  padding: 12px;
-  font-size: 14px;
-}
-
-.custom-table tbody tr:hover {
-  background: #ecfdf5;
-  transform: scale(1.01);
-  transition: 0.2s;
-}
-
-.custom-table tbody tr:nth-child(even) {
-  background: #f9fafb;
-}
-
-.org-table-wrapper {
-  overflow-x: auto;
-}
-
-/* BACK BUTTON */
-.back-btn {
-  border-radius: 30px;
-}
-
-</style>
+    .red    { color: red; font-weight: bold; }
+    .blue   { color: blue; font-weight: bold; }
+    .green  { color: green; font-weight: bold; }
+    .orange { color: orange; font-weight: bold; }
+  </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
-<div class="page-header">
-  <h1>INMBA Network Structure</h1>
-  <p>Complete Growth & Performance Table</p>
-</div>
-
-<!-- BACK BUTTON -->
-<div class="container text-center my-4">
-  <a href="{{ url_for('index') }}" class="btn btn-success back-btn">
-    ← Back to Home
-  </a>
-</div>
-
-<!-- TABLE -->
-<section class="container my-4">
-
-<div class="org-table-wrapper">
-<table class="table text-center align-middle custom-table">
-
-<thead>
-<tr>
-  <th>Level</th>
-  <th>Designation</th>
-  <th>KYC</th>
-  <th>Status</th>
-  <th>Direct</th>
-  <th>Indirect</th>
-  <th>Total Network</th>
-  <th>Paid Members</th>
-  <th>Level Range</th>
-</tr>
-</thead>
-
-<tbody>
-
-<tr><td>1</td><td>INMBA MEMBER</td><td>✔</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-
-<tr><td>2</td><td>NETWORK MEMBER</td><td>✔</td><td>Active</td><td>30</td><td>0</td><td>30</td><td>-</td><td>NL1</td></tr>
-
-<tr><td>3</td><td>CHAMBER MEMBER</td><td>✔</td><td>Active</td><td>40</td><td>6</td><td>30</td><td>6</td><td>NL1</td></tr>
-
-<tr><td>4</td><td>CHAMBER COMMITTEE</td><td>✔</td><td>Active</td><td>53</td><td>8</td><td>120</td><td>30</td><td>NL3</td></tr>
-
-<tr><td>5</td><td>DISTRICT CHAMBER</td><td>✔</td><td>Active</td><td>71</td><td>11</td><td>360</td><td>120</td><td>NL6</td></tr>
-
-<tr><td>6</td><td>DISTRICT COMMITTEE</td><td>✔</td><td>Active</td><td>95</td><td>14</td><td>1080</td><td>360</td><td>NL9</td></tr>
-
-<tr><td>7</td><td>ZONE MEMBER</td><td>✔</td><td>Active</td><td>126</td><td>19</td><td>3240</td><td>1080</td><td>NL12</td></tr>
-
-<tr><td>8</td><td>ZONE COMMITTEE</td><td>✔</td><td>Active</td><td>169</td><td>25</td><td>9720</td><td>3240</td><td>NL15</td></tr>
-
-<tr><td>9</td><td>ZONE CHAMBER</td><td>✔</td><td>Active</td><td>225</td><td>34</td><td>29160</td><td>9720</td><td>NL18</td></tr>
-
-<tr><td>10</td><td>ZONE COMMITTEE</td><td>✔</td><td>Active</td><td>300</td><td>45</td><td>87480</td><td>29160</td><td>NL21</td></tr>
-
-<tr><td>11</td><td>STATE COMMITTEE</td><td>✔</td><td>Active</td><td>400</td><td>60</td><td>262440</td><td>87480</td><td>NL23</td></tr>
-
-<tr><td>12</td><td>NATIONAL CHAMBER</td><td>✔</td><td>Active</td><td>533</td><td>80</td><td>787320</td><td>262440</td><td>NL27</td></tr>
-
-<tr><td>13</td><td>NATIONAL COMMITTEE</td><td>✔</td><td>Active</td><td>710</td><td>107</td><td>2301900</td><td>787320</td><td>NL30</td></tr>
-
-<tr><td>14</td><td>CONTINENTAL CHAMBER</td><td>✔</td><td>Active</td><td>947</td><td>142</td><td>7085880</td><td>2361960</td><td>NL33</td></tr>
-
-<tr><td>15</td><td>INTERNATIONAL CHAMBER</td><td>✔</td><td>Active</td><td>1684</td><td>253</td><td>63772820</td><td>21257640</td><td>NL39</td></tr>
-
-</tbody>
-
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">LEVELS</th>
+      <th rowspan="2">SIGN</th>
+      <th rowspan="2">TITLE OF RANK</th>
+      <th rowspan="2">Royalty From</th>
+      <th colspan="4">PERCENTAGE</th>
+      <th colspan="5">TNS SCORE</th>
+      <th rowspan="2">RANGE OF TNS</th>
+    </tr>
+    <tr>
+      <th>Direct Network Royalty</th>
+      <th>IN Direct Network Royalty</th>
+      <th>Direct Business Royalty</th>
+      <th>IN Direct Business Royalty</th>
+      <th>PAID DIRECT</th>
+      <th>PAID IN-DIRECT</th>
+      <th>NON PAID DIRECT MEMBER</th>
+      <th>NON PAID IN-DIRECT MEMBER</th>
+      <th>TNS VALUE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>LEVEL 01</td>
+      <td class="blue">IN</td>
+      <td class="title-col">INDEPENDENT NETWORKER</td>
+      <td>level 1</td>
+      <td>-</td>
+      <td>-</td>
+      <td>12%</td>
+      <td>3%</td>
+      <td></td>
+      <td></td>
+      <td>50</td>
+      <td>100</td>
+      <td>50</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <td>LEVEL 02</td>
+      <td class="blue">ICP</td>
+      <td class="title-col">INDEPENDENT CHAMBER PATRON</td>
+      <td>level 1-2</td>
+      <td>12%</td>
+      <td class="red">8%</td>
+      <td>12%</td>
+      <td>2%</td>
+      <td>6</td>
+      <td>24</td>
+      <td>81</td>
+      <td>162</td>
+      <td>135</td>
+      <td>150</td>
+    </tr>
+    <tr>
+      <td>LEVEL 03</td>
+      <td class="blue">ICC</td>
+      <td class="title-col">INDEPENDENT CHAMBER COMMITTEE</td>
+      <td>level 1-3</td>
+      <td>12%</td>
+      <td class="red">7%</td>
+      <td>12%</td>
+      <td>2%</td>
+      <td>10</td>
+      <td>39</td>
+      <td>131</td>
+      <td>262</td>
+      <td>218</td>
+      <td>250</td>
+    </tr>
+    <tr>
+      <td>LEVEL 04</td>
+      <td class="blue">DCP</td>
+      <td class="title-col">DISTRICT CHAMBER PATRON</td>
+      <td>level 1-4</td>
+      <td>12%</td>
+      <td class="red">6%</td>
+      <td>12%</td>
+      <td>2%</td>
+      <td>16</td>
+      <td>63</td>
+      <td>212</td>
+      <td>424</td>
+      <td>353</td>
+      <td>350</td>
+    </tr>
+    <tr>
+      <td>LEVEL 05</td>
+      <td class="blue">DCC</td>
+      <td class="title-col">DISTRICT CHAMBER COMMITTEE</td>
+      <td>level 1-5</td>
+      <td>12%</td>
+      <td class="red">5%</td>
+      <td>12%</td>
+      <td>2%</td>
+      <td>25</td>
+      <td>102</td>
+      <td>343</td>
+      <td>685</td>
+      <td>571</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <td>LEVEL 06</td>
+      <td class="blue">ZCP</td>
+      <td class="title-col">ZONE CHAMBER PATRON</td>
+      <td>level 1-6</td>
+      <td>12%</td>
+      <td class="red">4%</td>
+      <td>12%</td>
+      <td>2%</td>
+      <td>41</td>
+      <td>165</td>
+      <td>555</td>
+      <td>1,109</td>
+      <td>925</td>
+      <td>1000</td>
+    </tr>
+    <tr>
+      <td>LEVEL 07</td>
+      <td class="orange">ZCC</td>
+      <td class="title-col">ZONE CHAMBER COMMITTEE</td>
+      <td>level 1-7</td>
+      <td>12%</td>
+      <td>5%</td>
+      <td>12%</td>
+      <td>3%</td>
+      <td>67</td>
+      <td>266</td>
+      <td>897</td>
+      <td>1,795</td>
+      <td>1,496</td>
+      <td>1500</td>
+    </tr>
+    <tr>
+      <td>LEVEL 08</td>
+      <td class="red">SCP</td>
+      <td class="title-col">STATE CHAMBER PATRON</td>
+      <td>level 1-8</td>
+      <td>12%</td>
+      <td>5%</td>
+      <td>12%</td>
+      <td>3%</td>
+      <td>108</td>
+      <td>431</td>
+      <td>1,452</td>
+      <td>2,904</td>
+      <td>2,421</td>
+      <td>2500</td>
+    </tr>
+    <tr>
+      <td>LEVEL 09</td>
+      <td class="red">SCC</td>
+      <td class="title-col">STATE CHAMBER COMMITTEE</td>
+      <td>level 1-9</td>
+      <td>12%</td>
+      <td>4%</td>
+      <td>12%</td>
+      <td>4%</td>
+      <td>174</td>
+      <td>697</td>
+      <td>2,349</td>
+      <td>4,698</td>
+      <td>3,917</td>
+      <td>5000</td>
+    </tr>
+    <tr>
+      <td>LEVEL 10</td>
+      <td class="red">NCP</td>
+      <td class="title-col">NATIONAL CHAMBER PATRON</td>
+      <td>level 1-10</td>
+      <td>12%</td>
+      <td>4%</td>
+      <td>12%</td>
+      <td>4%</td>
+      <td>282</td>
+      <td>1,128</td>
+      <td>3,801</td>
+      <td>7,602</td>
+      <td>6,338</td>
+      <td>7500</td>
+    </tr>
+    <tr>
+      <td>LEVEL 11</td>
+      <td class="red">NCC</td>
+      <td class="title-col">NATIONAL CHAMBER COMMITTEE</td>
+      <td>level 1-11</td>
+      <td>12%</td>
+      <td>3%</td>
+      <td>12%</td>
+      <td>7%</td>
+      <td>456</td>
+      <td>1,824</td>
+      <td>6,150</td>
+      <td>12,300</td>
+      <td>10,255</td>
+      <td>10000</td>
+    </tr>
+    <tr>
+      <td>LEVEL 12</td>
+      <td class="red">CCP</td>
+      <td class="title-col">CONTINENTAL CHAMBER PATRON</td>
+      <td>level 1-12</td>
+      <td>12%</td>
+      <td>3%</td>
+      <td>12%</td>
+      <td>5%</td>
+      <td>738</td>
+      <td>2,952</td>
+      <td>9,951</td>
+      <td>19,902</td>
+      <td>16,593</td>
+      <td>20000</td>
+    </tr>
+    <tr>
+      <td>LEVEL 13</td>
+      <td class="red">CCC</td>
+      <td class="title-col">CONTINENTAL CHAMBER COMMITTEE</td>
+      <td>level 1-13</td>
+      <td>12%</td>
+      <td>3%</td>
+      <td>12%</td>
+      <td>6%</td>
+      <td>1,194</td>
+      <td>4,777</td>
+      <td>16,101</td>
+      <td>32,203</td>
+      <td>26,849</td>
+      <td>30000</td>
+    </tr>
+    <tr>
+      <td>LEVEL 14</td>
+      <td class="red">INCP</td>
+      <td class="title-col">INTERNATIONAL CHAMBER PATRON</td>
+      <td>level 1-14</td>
+      <td>12%</td>
+      <td>2%</td>
+      <td>12%</td>
+      <td>7%</td>
+      <td>1,932</td>
+      <td>7,729</td>
+      <td>26,053</td>
+      <td>52,106</td>
+      <td>43,442</td>
+      <td>50000</td>
+    </tr>
+    <tr>
+      <td>LEVEL 15</td>
+      <td class="red">INCC</td>
+      <td class="title-col">INTERNATIONAL CHAMBER COMMITTEE</td>
+      <td>level 1-15</td>
+      <td>12%</td>
+      <td>1%</td>
+      <td>12%</td>
+      <td>10%</td>
+      <td>3,126</td>
+      <td>12,505</td>
+      <td>42,155</td>
+      <td>84,309</td>
+      <td>70,292</td>
+      <td>75000</td>
+    </tr>
+    <tr>
+      <td>LEVEL 16</td>
+      <td class="red">IPS</td>
+      <td class="title-col">INMBA PATRON SENATE</td>
+      <td>level 1-16</td>
+      <td>12%</td>
+      <td>1%</td>
+      <td>12%</td>
+      <td>12%</td>
+      <td>5,059</td>
+      <td>20,234</td>
+      <td>68,208</td>
+      <td>136,416</td>
+      <td>113,735</td>
+      <td>100000</td>
+    </tr>
+  </tbody>
 </table>
-</div>
-
-</section>
 
 </body>
 </html>

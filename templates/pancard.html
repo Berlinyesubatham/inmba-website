@@ -177,11 +177,11 @@ button:hover { transform:scale(1.02); }
 
 <form action="{{ url_for('pan_submit', token=token) }}" method="POST" enctype="multipart/form-data">
   <label>PAN Number</label>
-  <input type="text" name="pan_number" placeholder="Enter PAN number" required pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" 
+  <input type="text" name="pan_number" placeholder="Enter PAN number (optional)" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" 
          title="Enter valid PAN number (e.g., ABCDE1234F)">
 
   <label>Name (as on PAN card)</label>
-  <input type="text" name="pan_name" placeholder="Enter Name as per PAN card" required>
+  <input type="text" name="pan_name" placeholder="Enter Name as per PAN card (optional)" >
 <div class="form-group">
   
 <div class="modern-upload">
@@ -193,31 +193,13 @@ button:hover { transform:scale(1.02); }
 
   <input type="file" id="panInput" name="pan_front"
     accept="image/png, image/jpeg"
-    onchange="handleImage(event,'panInput','panFrontPreview','frontBox','panFrontName')" required>
+    onchange="handleImage(event,'panInput','panFrontPreview','frontBox','panFrontName')">
 
   <div class="preview-box" id="frontBox">
     <img id="panFrontPreview">
     <span onclick="removeImage('panInput','frontBox','panFrontPreview','panFrontName')">✖</span>
   </div>
 
-</div>
-<div class="modern-upload">
-
-  <div class="upload-left" onclick="document.getElementById('panBackInput').click()">
-    📄 PAN Back
-    <small id="panBackName">No file selected</small>
-  </div>
-
-  <input type="file" id="panBackInput" name="pan_back"
-    accept="image/png, image/jpeg"
-    onchange="handleImage(event,'panBackInput','panBackPreview','backBox','panBackName')" required>
-
-  <div class="preview-box" id="backBox">
-    <img id="panBackPreview">
-    <span onclick="removeImage('panBackInput','backBox','panBackPreview','panBackName')">✖</span>
-  </div>
-
-</div>
 </div>
 
   <button type="submit">✅ Submit PAN Details</button>
@@ -226,35 +208,39 @@ button:hover { transform:scale(1.02); }
 
 <script>
 
-const panForm = document.querySelector('form');
-
 panForm.addEventListener('submit', function(e) {
-    const panNum = panForm.pan_number.value.toUpperCase();
-    const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+
+    const panNum = panForm.pan_number.value.trim().toUpperCase();
     const panFront = panForm.pan_front.files[0];
-    const panBack = panForm.pan_back.files[0];
+    const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
     const allowedTypes = ['image/jpeg', 'image/png'];
 
-    if (!panRegex.test(panNum)) {
-        e.preventDefault();
-        alert("❌ Enter a valid PAN number (e.g., ABCDE1234F)");
-        panForm.pan_number.focus();
-        return false;
+    // ✅ Only run validation IF user typed PAN or uploaded image
+    if (panNum !== "" || panFront) {
+
+        // ❌ If one is missing
+        if (panNum === "" || !panFront) {
+            e.preventDefault();
+            alert("❌ Please enter PAN number and upload PAN image");
+            return false;
+        }
+
+        // ❌ PAN format check
+        if (!panRegex.test(panNum)) {
+            e.preventDefault();
+            alert("❌ Invalid PAN format (ABCDE1234F)");
+            return false;
+        }
+
+        // ❌ File type check
+        if (!allowedTypes.includes(panFront.type)) {
+            e.preventDefault();
+            alert("❌ Upload only JPG/PNG image");
+            return false;
+        }
     }
 
-    if (!panFront || !allowedTypes.includes(panFront.type)) {
-        e.preventDefault();
-        alert("❌ Upload valid PAN front image (JPG/PNG)");
-        return false;
-    }
-
-    if (!panBack || !allowedTypes.includes(panBack.type)) {
-        e.preventDefault();
-        alert("❌ Upload valid PAN back image (JPG/PNG)");
-        return false;
-    }
 });
-
 function handleImage(event,inputId,imgId,boxId){
     const file = event.target.files[0];
     if(!file) return;
