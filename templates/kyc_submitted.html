@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KYC Submitted</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif;}
@@ -36,9 +37,39 @@ p{margin:10px 0; color:#333;}
 .login-id{font-weight:600; color:#0f4d0f; font-size:20px; margin:15px 0;}
 button{padding:14px 20px; border:none; border-radius:10px; background: linear-gradient(135deg, #0f4d0f, #34c759); color:white; font-weight:600; cursor:pointer; transition:0.3s;}
 button:hover{transform:translateY(-3px); box-shadow:0 10px 20px rgba(15,157,88,0.3);}
+
+ .top-back-btn {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    background: linear-gradient(135deg, #0f9d58, #34c759);
+    font-size: 16px;
+    color: #0f4d0f;
+
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    transition: 0.2s ease;
+}
+
+.top-back-btn:hover {
+    color: #34c759;
+    background: rgba(52, 199, 89, 0.1);
+}
 </style>
 </head>
 <body>
+    <a class="top-back-btn" href="{{ url_for('membership') }}">
+            <i class="fas fa-arrow-left"></i>
+        </a>
 <div class="container">
     <h2>✅ KYC Submitted!</h2>
     <p>Your Login ID:</p>

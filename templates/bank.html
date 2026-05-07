@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <title>INMBA Bank Details</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 * { box-sizing: border-box; margin:0; padding:0; }
 body { font-family:'Segoe UI',sans-serif; background:#e8f5e9; }
@@ -164,11 +167,40 @@ button:hover { transform:scale(1.02); }
   justify-content: center;
   cursor: pointer;
 }
+ .top-back-btn {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+
+    font-size: 16px;
+    color: #0f4d0f;
+
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0f9d58, #34c759);
+    transition: 0.2s ease;
+}
+
+.top-back-btn:hover {
+    color: #34c759;
+    background: rgba(52, 199, 89, 0.1);
+}
 </style>
 </head>
 <body>
-
+ 
 <div class="container">
+   <a class="top-back-btn" href="{{ url_for('payment') }}">
+            <i class="fas fa-arrow-left"></i>
+        </a>
 <h2>🏦 Enter Bank Details</h2>
 
 <form id="bankForm" action="{{ url_for('bank_submit', token=token) }}" method="POST" enctype="multipart/form-data">

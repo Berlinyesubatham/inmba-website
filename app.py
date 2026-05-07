@@ -933,14 +933,21 @@ def pan_submit(token):
     pan_name = request.form.get("pan_name") or None  # optional
 
     # Only check duplicate if pan_number was provided
+   # Only check duplicate if pan_number was provided
     if pan_number:
         cursor.execute(
-            "SELECT id FROM kyc_members WHERE pan_number=%s AND token!=%s",
-            (pan_number, token),
-        )
-        if cursor.fetchone():
-            return "❌ This PAN is already registered!"
+        """
+        SELECT id 
+        FROM kyc_members 
+        WHERE pan_number=%s 
+        AND token!=%s
+        AND (is_deleted=0 OR is_deleted IS NULL)
+        """,
+        (pan_number, token),
+    )
 
+    if cursor.fetchone():
+        return "❌ This PAN is already registered!"
     # PAN front — optional
     pan_front = request.files.get("pan_front")
     front_filename = None
@@ -1792,11 +1799,16 @@ def dashboard():
 
     # ✅ Get direct members
     cursor.execute("""
-        SELECT first_name, last_name, login_id, email
+        SELECT first_name, last_name, login_id, email,
+        phone,pincode,profile_pic,occupation,education,
+        membership_type, created_at
         FROM kyc_members
         WHERE referred_by = %s
     """, (user["referral_id"],))
+    direct = user.get("direct_network") or 0
+    indirect = user.get("indirect_network") or 0
 
+    user["network_strength"] = direct + indirect    
     direct_members = cursor.fetchall()
 
     return render_template(
@@ -1805,7 +1817,24 @@ def dashboard():
     direct_members=direct_members,
     qr="qr/" + qr_filename   # ✅ FIXED
 )
+@app.route("/direct_network")
+def direct_network():
+    if "user" not in session:
+        return redirect(url_for("login"))
 
+    user = session["user"]
+
+    cursor.execute("""
+        SELECT first_name, last_name, login_id, email, phone,
+               profile_pic, occupation, education,
+               direct_network, indirect_network
+        FROM kyc_members
+        WHERE referred_by = %s
+    """, (user["referral_id"],))
+
+    direct_members = cursor.fetchall()
+
+    return render_template("direct_network.html", direct_members=direct_members)
 # -------------------- RUN APP --------------------
 if __name__ == "__main__":
     app.run(debug=True)

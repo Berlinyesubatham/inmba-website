@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>Privacy Policy - INMBA</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 body {
@@ -128,6 +130,32 @@ button:disabled {
         font-size: 24px;
     }
 }
+ .top-back-btn {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+
+    font-size: 16px;
+    color: #0f4d0f;
+
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+     background: linear-gradient(135deg, #0f9d58, #34c759);
+    transition: 0.2s ease;
+}
+
+.top-back-btn:hover {
+    color: #34c759;
+    background: rgba(52, 199, 89, 0.1);
+}
 </style>
 </head>
 
@@ -135,6 +163,9 @@ button:disabled {
 
 <!-- HEADER -->
 <div class="header">
+      <a class="top-back-btn" href="{{ url_for('dashboard') }}">
+            <i class="fas fa-arrow-left"></i>
+        </a>
     <h1>INMBA</h1>
     <p>Expand Your Network • Expand Your Net Worth</p>
     <p>International Network Management and Business Association</p>

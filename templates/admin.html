@@ -129,9 +129,9 @@ body {
   <th>DOB</th>
   <th>Email</th>
   <th>Phone</th>
-  <th>State</th>
+ 
   <th>District</th>
-  <th>City</th>
+  
   <th>Pincode</th>
   <th>Gender</th>
   <th>Marital Status</th>
@@ -155,9 +155,7 @@ body {
   <td>{{ user.dob }}</td>
   <td>{{ user.email }}</td>
   <td>{{ user.phone }}</td>
-  <td>{{ user.state }}</td>
   <td>{{ user.district }}</td>
-  <td>{{ user.city }}</td>
   <td>{{ user.pincode }}</td>
   <td>{{ user.gender }}</td>
   <td>{{ user.marital_status }}</td>
@@ -173,7 +171,7 @@ body {
 
 
 <!-- AFTER (fixed) -->
-<form action="/delete/{{ user.id }}" method="POST" style="display:inline;"
+<form action="/permanent_delete/{{ user.id }}" method="POST" style="display:inline;"
       onsubmit="return confirm('Are you sure you want to delete {{ user.first_name }}?')">
     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
 </form>

@@ -191,8 +191,8 @@
     }
 
     .network-badge[onclick]:hover {
-      background: #d4edda;
-      color: #0f4d0f;
+      background: gold;
+      color: green;
     }
 
     /* Network Members Modal */
@@ -301,6 +301,123 @@
     color: #34c759;
     background: rgba(52, 199, 89, 0.1);
 }
+.network-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.profile-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 15px;
+    transition: 0.3s;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+}
+
+.profile-header {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.profile-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #4CAF50;
+}
+
+.profile-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.role {
+    color: #4CAF50;
+    font-size: 13px;
+}
+
+.id {
+    font-size: 12px;
+    color: gray;
+}
+
+.profile-body p {
+    margin: 6px 0;
+    font-size: 14px;
+}
+
+.section-title {
+    padding: 15px;
+    font-size: 22px;
+    color: #333;
+}
+
+.empty {
+    text-align: center;
+    color: gray;
+}
+ .top-back-btn {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+
+    font-size: 16px;
+    color: #0f4d0f;
+
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0f9d58, #34c759);
+    transition: 0.2s ease;
+}
+
+.top-back-btn:hover {
+    color: #34c759;
+    background: rgba(52, 199, 89, 0.1);
+}
+ .top-back-btn {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+
+    font-size: 16px;
+    color: #0f4d0f;
+
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0f9d58, #34c759);
+    transition: 0.2s ease;
+}
+
+.top-back-btn:hover {
+    color: #34c759;
+    background: rgba(52, 199, 89, 0.1);
+}
   </style>
 </head>
 <body>
@@ -318,7 +435,7 @@
   </nav>
 
   <!-- Extra spacing for fixed navbar -->
-     <a class="top-back-btn" href="{{ url_for('membership') }}">
+     <a class="top-back-btn" href="{{ url_for('login',token=token) }}">
     <i class="fas fa-arrow-left"></i>
 </a>
   <div style="height: 76px;"></div>
@@ -348,10 +465,23 @@
             <div class="info-row">
               <span><i class="fas fa-users me-2 text-success"></i> Network Strength</span>
               <strong>
-                <span class="network-badge" onclick="showNetworkModal()" title="View direct members"
-                      style="cursor: pointer;">
-                  <i class="fas fa-user-friends"></i> Direct: {{ user.direct_network or 0 }}
-                </span>
+ <a href="{{ url_for('direct_network') }}" class="network-badge direct_link" 
+   style="text-decoration:none; display:inline-flex; align-items:center; gap:5px;
+          background: linear-gradient(115deg, #0f4d0f, #197419);
+          color: white;
+          font-weight: 700;
+          padding: 5px 14px;
+          border-radius: 40px;
+          font-size: 0.78rem;
+          cursor: pointer;
+          box-shadow: 0 3px 10px rgba(15,77,15,0.35);
+          transition: all 0.2s ease;
+          border: none;"
+   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(15,77,15,0.45)';"
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(15,77,15,0.35)';">
+  <i class="fas fa-user-friends"></i> Direct: {{ user.direct_network or 0 }}
+</a>
+                 
                 <span class="network-badge ms-2">
                   <i class="fas fa-share-alt"></i> Indirect: {{ user.indirect_network or 0 }}
                 </span>
@@ -501,22 +631,57 @@
           {% if direct_members and direct_members|length > 0 %}
 
             {% for member in direct_members %}
-              <div class="member-card">
-                <div class="d-flex justify-content-between align-items-start">
-                  <div>
-                    <div class="member-name">
-                      <i class="fas fa-user-circle text-success me-1"></i>
-                      {{ member.first_name }} {{ member.last_name if member.last_name else '' }}
-                    </div>
-                    <div class="member-meta">
-                      <i class="fas fa-id-card me-1"></i> {{ member.login_id }}
-                      &nbsp;·&nbsp;
-                      <i class="fas fa-map-marker-alt me-1"></i> {{ member.district or 'N/A' }}
-                      &nbsp;·&nbsp;
-                      <i class="fas fa-calendar me-1"></i> {{ member.created_at.strftime('%d %b %Y') if member.created_at else '—' }}
-                    </div>
-                  </div>
-                  <div>
+             <h2 class="section-title">My Direct Network</h2>
+
+<div class="network-container">
+
+  {% if direct_members %}
+    {% for m in direct_members %}
+
+    <div class="profile-card">
+
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <img src="{{ url_for('static', filename='uploads/profile/' + (m.profile_pic or 'default.png')) }}"
+             class="profile-img">
+
+        <div>
+          <h3>{{ m.first_name }} {{ m.last_name }}</h3>
+          <p class="role">{{ m.occupation or "Member" }}</p>
+          <p class="id">ID: {{ m.login_id }}</p>
+        </div>
+      </div>
+
+      <!-- Details -->
+      <div class="profile-body">
+
+        <p><b>Email:</b> {{ m.email }}</p>
+        <p><b>Phone:</b> {{ m.phone }}</p>
+
+       
+        <p><b>Education:</b> {{ m.education }}</p>
+        <p><b>Membership:</b> {{ m.membership_type }}</p>
+        <p><b>Joined:</b> {{ m.created_at }}</p>
+
+      </div>
+      <div class="network-box">
+    <p>Direct: {{ m.direct_network or 0 }}</p>
+    <p>Indirect: {{ m.indirect_network or 0 }}</p>
+    <hr>
+    <p><b>Total Strength: 
+        {{ (m.direct_network or 0) + (m.indirect_network or 0) }}
+    </b></p>
+</div>
+
+    </div>
+     
+    {% endfor %}
+  {% else %}
+    <p class="empty">No direct members found.<
+      /p>
+  {% endif %}
+
+</div>
                     {% if member.kyc_status == 'approved' %}
                       <span class="badge-status" style="background: #d4edda; color: #155724;">
                         <i class="fas fa-check-circle"></i> Verified

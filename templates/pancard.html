@@ -1,418 +1,505 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>INMBA Legal entity</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-* { box-sizing: border-box; margin:0; padding:0; }
-body { font-family:'Segoe UI',sans-serif; background:#e8f5e9; }
-.container { max-width:400px; margin:50px auto; background:white; padding:25px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
-h2 { text-align:center; color:#0f4d0f; margin-bottom:15px; }
-label { display:block; margin-bottom:5px; font-weight:600; }
-input, select { width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px; }
-button { width:100%; padding:12px; background:linear-gradient(135deg,#0f4d0f,#28a745); color:white; border:none; border-radius:8px; font-size:16px; cursor:pointer; }
-button:hover { transform:scale(1.02); }
-.address-container {
-  max-width: 450px;
-  margin: 30px auto;
-  background: #f0fff4;
-  padding: 25px 20px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  font-family: 'Segoe UI', sans-serif;
-}
+  <meta charset="UTF-8">
+  <title>INMBA Legal entity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.address-container h3 {
-  text-align: center;
-  color: #0f4d0f;
-  margin-bottom: 20px;
-}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-.address-row {
-  position: relative;
-  margin-bottom: 18px;
-}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #e8f5e9;
+    }
 
-.address-row input {
-  width: 100%;
-  padding: 12px 12px 12px 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  outline: none;
-  font-size: 14px;
-  transition: 0.3s;
-}
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
 
-.address-row label {
-  position: absolute;
-  left: 12px;
-  top: 12px;
-  color: gray;
-  font-size: 14px;
-  pointer-events: none;
-  transition: 0.3s;
-}
+    h2 {
+      text-align: center;
+      color: #0f4d0f;
+      margin-bottom: 15px;
+    }
 
-.address-row input:focus + label,
-.address-row input:not(:placeholder-shown) + label {
-  top: -10px;
-  left: 8px;
-  font-size: 12px;
-  color: #0f4d0f;
-  background: #f0fff4;
-  padding: 0 4px;
-}
-.upload-box{
-  margin-bottom:18px;
-}
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
 
-.upload-box label{
-  display:block;
-  margin-bottom:6px;
-  font-weight:600;
-  color:#0f4d0f;
-}
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
 
-.preview{
-  width:120px;
-  height:120px;
-  margin-top:10px;
-  display:none;
-  position:relative;
-  overflow:hidden;   /* 🔥 IMPORTANT */
-  border-radius:10px;
-  border:1px solid #ccc;
-}
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #0f4d0f, #28a745);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
 
-.preview img{
-  width:100%;
-  height:100%;
-  object-fit:cover;  /* 🔥 THIS FIXES FULL SIZE ISSUE */
-  display:block;
-}
-.remove-btn{
-  position:absolute;
-  top:-8px;
-  right:-8px;
-  background:red;
-  color:white;
-  width:22px;
-  height:22px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  font-size:14px;
-  z-index:10;
-}
-.modern-upload{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border:1px solid #e0e0e0;
-  border-radius:10px;
-  padding:10px 12px;
-  background:#fafafa;
-  margin-bottom:15px;
-}
+    button:hover {
+      transform: scale(1.02);
+    }
 
-.upload-left{
-  cursor:pointer;
-  display:flex;
-  flex-direction:column;
-  font-size:14px;
-  color:#0f4d0f;
-}
+    .address-container {
+      max-width: 450px;
+      margin: 30px auto;
+      background: #f0fff4;
+      padding: 25px 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      font-family: 'Segoe UI', sans-serif;
+    }
 
-.upload-left small{
-  font-size:11px;
-  color:gray;
-}
+    .address-container h3 {
+      text-align: center;
+      color: #0f4d0f;
+      margin-bottom: 20px;
+    }
 
-/* hide input */
-.modern-upload input{
-  display:none;
-}
+    .address-row {
+      position: relative;
+      margin-bottom: 18px;
+    }
 
-/* preview */
-.preview-box{
-  width:50px;
-  height:50px;
-  display:none;
-  position:relative;
-}
+    .address-row input {
+      width: 100%;
+      padding: 12px 12px 12px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
 
-.preview-box img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border-radius:6px;
-}
+    .address-row label {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      color: gray;
+      font-size: 14px;
+      pointer-events: none;
+      transition: 0.3s;
+    }
 
-.preview-box span{
-  position:absolute;
-  top:-5px;
-  right:-5px;
-  background:red;
-  color:white;
-  width:16px;
-  height:16px;
-  font-size:10px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-}
-</style>
+    .address-row input:focus+label,
+    .address-row input:not(:placeholder-shown)+label {
+      top: -10px;
+      left: 8px;
+      font-size: 12px;
+      color: #0f4d0f;
+      background: #f0fff4;
+      padding: 0 4px;
+    }
+
+    .upload-box {
+      margin-bottom: 18px;
+    }
+
+    .upload-box label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #0f4d0f;
+    }
+
+    .preview {
+      width: 120px;
+      height: 120px;
+      margin-top: 10px;
+      display: none;
+      position: relative;
+      overflow: hidden;
+      /* 🔥 IMPORTANT */
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* 🔥 THIS FIXES FULL SIZE ISSUE */
+      display: block;
+    }
+
+    .remove-btn {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: red;
+      color: white;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      z-index: 10;
+    }
+
+    .modern-upload {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 10px 12px;
+      background: #fafafa;
+      margin-bottom: 15px;
+    }
+
+    .upload-left {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+      color: #0f4d0f;
+    }
+
+    .upload-left small {
+      font-size: 11px;
+      color: gray;
+    }
+
+    /* hide input */
+    .modern-upload input {
+      display: none;
+    }
+
+    /* preview */
+    .preview-box {
+      width: 50px;
+      height: 50px;
+      display: none;
+      position: relative;
+    }
+
+    .preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .preview-box span {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: red;
+      color: white;
+      width: 16px;
+      height: 16px;
+      font-size: 10px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .top-back-btn {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      background: linear-gradient(135deg, #0f9d58, #34c759);
+      font-size: 16px;
+      color: #0f4d0f;
+
+      text-decoration: none;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 34px;
+      height: 34px;
+
+      border-radius: 50%;
+
+      transition: 0.2s ease;
+    }
+
+    .top-back-btn:hover {
+      color: #34c759;
+      background: rgba(52, 199, 89, 0.1);
+    }
+  </style>
 </head>
+
 <body>
-<div>
+  <div>
 
-</div>
-<div class="container">
-<h2>🪪PAN Information</h2>
+  </div>
+  <div class="container">
 
-<form action="{{ url_for('pan_submit', token=token) }}" method="POST" enctype="multipart/form-data">
-  <label>PAN Number</label>
-  <input type="text" name="pan_number" placeholder="Enter PAN number (optional)" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" 
-         title="Enter valid PAN number (e.g., ABCDE1234F)">
+    <h2>🪪PAN Information</h2>
+    <a class="top-back-btn" href="{{ url_for('legal_entity_submit', token=token) }}">
+      <i class="fas fa-arrow-left"></i>
+    </a>
+    <form action="{{ url_for('pan_submit', token=token) }}" method="POST" enctype="multipart/form-data">
+      <label>PAN Number</label>
+      <input type="text" name="pan_number" placeholder="Enter PAN number (optional)" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
+        title="Enter valid PAN number (e.g., ABCDE1234F)">
 
-  <label>Name (as on PAN card)</label>
-  <input type="text" name="pan_name" placeholder="Enter Name as per PAN card (optional)" >
-<div class="form-group">
-  
-<div class="modern-upload">
+      <label>Name (as on PAN card)</label>
+      <input type="text" name="pan_name" placeholder="Enter Name as per PAN card (optional)">
+      <div class="form-group">
 
-  <div class="upload-left" onclick="document.getElementById('panInput').click()">
-    📄 PAN Front
-    <small id="panFrontName">No file selected</small>
+        <div class="modern-upload">
+
+          <div class="upload-left" onclick="document.getElementById('panInput').click()">
+            📄 PAN Front
+            <small id="panFrontName">No file selected</small>
+          </div>
+
+          <input type="file" id="panInput" name="pan_front" accept="image/png, image/jpeg"
+            onchange="handleImage(event,'panInput','panFrontPreview','frontBox','panFrontName')">
+
+          <div class="preview-box" id="frontBox">
+            <img id="panFrontPreview">
+            <span onclick="removeImage('panInput','frontBox','panFrontPreview','panFrontName')">✖</span>
+          </div>
+
+        </div>
+
+        <button type="submit">✅ Submit PAN Details</button>
+    </form>
   </div>
 
-  <input type="file" id="panInput" name="pan_front"
-    accept="image/png, image/jpeg"
-    onchange="handleImage(event,'panInput','panFrontPreview','frontBox','panFrontName')">
+  <script>
 
-  <div class="preview-box" id="frontBox">
-    <img id="panFrontPreview">
-    <span onclick="removeImage('panInput','frontBox','panFrontPreview','panFrontName')">✖</span>
-  </div>
+    panForm.addEventListener('submit', function (e) {
 
-</div>
+      const panNum = panForm.pan_number.value.trim().toUpperCase();
+      const panFront = panForm.pan_front.files[0];
+      const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+      const allowedTypes = ['image/jpeg', 'image/png'];
 
-  <button type="submit">✅ Submit PAN Details</button>
-</form>
-</div>
-
-<script>
-
-panForm.addEventListener('submit', function(e) {
-
-    const panNum = panForm.pan_number.value.trim().toUpperCase();
-    const panFront = panForm.pan_front.files[0];
-    const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
-    const allowedTypes = ['image/jpeg', 'image/png'];
-
-    // ✅ Only run validation IF user typed PAN or uploaded image
-    if (panNum !== "" || panFront) {
+      // ✅ Only run validation IF user typed PAN or uploaded image
+      if (panNum !== "" || panFront) {
 
         // ❌ If one is missing
         if (panNum === "" || !panFront) {
-            e.preventDefault();
-            alert("❌ Please enter PAN number and upload PAN image");
-            return false;
+          e.preventDefault();
+          alert("❌ Please enter PAN number and upload PAN image");
+          return false;
         }
 
         // ❌ PAN format check
         if (!panRegex.test(panNum)) {
-            e.preventDefault();
-            alert("❌ Invalid PAN format (ABCDE1234F)");
-            return false;
+          e.preventDefault();
+          alert("❌ Invalid PAN format (ABCDE1234F)");
+          return false;
         }
 
         // ❌ File type check
         if (!allowedTypes.includes(panFront.type)) {
-            e.preventDefault();
-            alert("❌ Upload only JPG/PNG image");
-            return false;
+          e.preventDefault();
+          alert("❌ Upload only JPG/PNG image");
+          return false;
         }
-    }
+      }
 
-});
-function handleImage(event,inputId,imgId,boxId){
-    const file = event.target.files[0];
-    if(!file) return;
+    });
+    function handleImage(event, inputId, imgId, boxId) {
+      const file = event.target.files[0];
+      if (!file) return;
 
-    const img = document.getElementById(imgId);
-    const box = document.getElementById(boxId);
+      const img = document.getElementById(imgId);
+      const box = document.getElementById(boxId);
 
-    const reader = new FileReader();
+      const reader = new FileReader();
 
-    reader.onload = function(e){
+      reader.onload = function (e) {
         const image = new Image();
         image.src = e.target.result;
 
-        image.onload = function(){
+        image.onload = function () {
 
-            const canvas = document.createElement("canvas");
-            const ctx = canvas.getContext("2d");
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
 
-            let w = image.width;
-            let h = image.height;
+          let w = image.width;
+          let h = image.height;
 
-            if(w > 600){
-                h = h * (600 / w);
-                w = 600;
-            }
+          if (w > 600) {
+            h = h * (600 / w);
+            w = 600;
+          }
 
-            canvas.width = w;
-            canvas.height = h;
+          canvas.width = w;
+          canvas.height = h;
 
-            ctx.drawImage(image,0,0,w,h);
+          ctx.drawImage(image, 0, 0, w, h);
 
-            const compressed = canvas.toDataURL("image/jpeg",0.7);
+          const compressed = canvas.toDataURL("image/jpeg", 0.7);
 
-            img.src = compressed;
-            box.style.display = "block";
+          img.src = compressed;
+          box.style.display = "block";
 
-            fetch(compressed)
+          fetch(compressed)
             .then(res => res.blob())
             .then(blob => {
-                const newFile = new File([blob], file.name,{type:"image/jpeg"});
-                const dt = new DataTransfer();
-                dt.items.add(newFile);
-                document.getElementById(inputId).files = dt.files;
+              const newFile = new File([blob], file.name, { type: "image/jpeg" });
+              const dt = new DataTransfer();
+              dt.items.add(newFile);
+              document.getElementById(inputId).files = dt.files;
             });
         }
+      }
+
+      reader.readAsDataURL(file);
     }
 
-    reader.readAsDataURL(file);
-}
+    function removeImage(inputId, boxId) {
+      document.getElementById(inputId).value = "";
+      document.getElementById(boxId).style.display = "none";
+    }
+    function handleImage(event, inputId, imgId, boxId) {
+      const file = event.target.files[0];
+      if (!file) return;
 
-function removeImage(inputId,boxId){
-    document.getElementById(inputId).value = "";
-    document.getElementById(boxId).style.display = "none";
-}
-function handleImage(event,inputId,imgId,boxId){
-    const file = event.target.files[0];
-    if(!file) return;
+      const reader = new FileReader();
 
-    const reader = new FileReader();
-
-    reader.onload = function(e){
+      reader.onload = function (e) {
         const image = new Image();
         image.src = e.target.result;
 
-        image.onload = function(){
+        image.onload = function () {
 
-            const canvas = document.createElement("canvas");
-            const ctx = canvas.getContext("2d");
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
 
-            let w = image.width;
-            let h = image.height;
+          let w = image.width;
+          let h = image.height;
 
-            // 🔥 compress resize logic
-            const maxWidth = 600;
+          // 🔥 compress resize logic
+          const maxWidth = 600;
 
-            if(w > maxWidth){
-                h = h * (maxWidth / w);
-                w = maxWidth;
-            }
+          if (w > maxWidth) {
+            h = h * (maxWidth / w);
+            w = maxWidth;
+          }
 
-            canvas.width = w;
-            canvas.height = h;
+          canvas.width = w;
+          canvas.height = h;
 
-            ctx.drawImage(image,0,0,w,h);
+          ctx.drawImage(image, 0, 0, w, h);
 
-            // 🔥 compression (quality reduced)
-            const compressed = canvas.toDataURL("image/jpeg",0.6);
+          // 🔥 compression (quality reduced)
+          const compressed = canvas.toDataURL("image/jpeg", 0.6);
 
-            document.getElementById(imgId).src = compressed;
-            document.getElementById(boxId).style.display = "block";
+          document.getElementById(imgId).src = compressed;
+          document.getElementById(boxId).style.display = "block";
 
-            fetch(compressed)
+          fetch(compressed)
             .then(res => res.blob())
             .then(blob => {
-                const newFile = new File([blob], file.name,{type:"image/jpeg"});
-                const dt = new DataTransfer();
-                dt.items.add(newFile);
-                document.getElementById(inputId).files = dt.files;
+              const newFile = new File([blob], file.name, { type: "image/jpeg" });
+              const dt = new DataTransfer();
+              dt.items.add(newFile);
+              document.getElementById(inputId).files = dt.files;
             });
         }
+      }
+
+      reader.readAsDataURL(file);
     }
 
-    reader.readAsDataURL(file);
-}
+    function removeImage(inputId, boxId) {
+      document.getElementById(inputId).value = "";
+      document.getElementById(boxId).style.display = "none";
+    }
+    function removeImage(inputId, boxId, imgId) {
+      document.getElementById(inputId).value = "";
+      document.getElementById(imgId).src = "";
+      document.getElementById(boxId).style.display = "none";
+    }
+    function handleImage(event, inputId, imgId, boxId, nameId) {
+      const file = event.target.files[0];
+      if (!file) return;
 
-function removeImage(inputId,boxId){
-    document.getElementById(inputId).value = "";
-    document.getElementById(boxId).style.display = "none";
-}
-function removeImage(inputId, boxId, imgId){
-    document.getElementById(inputId).value = "";
-    document.getElementById(imgId).src = "";
-    document.getElementById(boxId).style.display = "none";
-}
-function handleImage(event,inputId,imgId,boxId,nameId){
-    const file = event.target.files[0];
-    if(!file) return;
+      // show file name
+      document.getElementById(nameId).textContent = file.name;
 
-    // show file name
-    document.getElementById(nameId).textContent = file.name;
+      const reader = new FileReader();
 
-    const reader = new FileReader();
-
-    reader.onload = function(e){
+      reader.onload = function (e) {
         const image = new Image();
         image.src = e.target.result;
 
-        image.onload = function(){
+        image.onload = function () {
 
-            const canvas = document.createElement("canvas");
-            const ctx = canvas.getContext("2d");
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
 
-            let w = image.width;
-            let h = image.height;
+          let w = image.width;
+          let h = image.height;
 
-            const maxWidth = 600;
-            if(w > maxWidth){
-                h = h * (maxWidth / w);
-                w = maxWidth;
-            }
+          const maxWidth = 600;
+          if (w > maxWidth) {
+            h = h * (maxWidth / w);
+            w = maxWidth;
+          }
 
-            canvas.width = w;
-            canvas.height = h;
+          canvas.width = w;
+          canvas.height = h;
 
-            ctx.drawImage(image,0,0,w,h);
+          ctx.drawImage(image, 0, 0, w, h);
 
-            const compressed = canvas.toDataURL("image/jpeg",0.6);
+          const compressed = canvas.toDataURL("image/jpeg", 0.6);
 
-            document.getElementById(imgId).src = compressed;
-            document.getElementById(boxId).style.display = "block";
+          document.getElementById(imgId).src = compressed;
+          document.getElementById(boxId).style.display = "block";
 
-            fetch(compressed)
+          fetch(compressed)
             .then(res => res.blob())
             .then(blob => {
-                const newFile = new File([blob], file.name,{type:"image/jpeg"});
-                const dt = new DataTransfer();
-                dt.items.add(newFile);
-                document.getElementById(inputId).files = dt.files;
+              const newFile = new File([blob], file.name, { type: "image/jpeg" });
+              const dt = new DataTransfer();
+              dt.items.add(newFile);
+              document.getElementById(inputId).files = dt.files;
             });
         }
+      }
+
+      reader.readAsDataURL(file);
     }
 
-    reader.readAsDataURL(file);
-}
-
-function removeImage(inputId, boxId, imgId, nameId){
-    document.getElementById(inputId).value = "";
-    document.getElementById(imgId).src = "";
-    document.getElementById(boxId).style.display = "none";
-    document.getElementById(nameId).textContent = "No file selected";
-}
-</script>
+    function removeImage(inputId, boxId, imgId, nameId) {
+      document.getElementById(inputId).value = "";
+      document.getElementById(imgId).src = "";
+      document.getElementById(boxId).style.display = "none";
+      document.getElementById(nameId).textContent = "No file selected";
+    }
+  </script>
 
 </body>
+
 </html>
